@@ -53,7 +53,7 @@ def divide_n_conquer(l):
     if n == 0:
         return 0
     elif n == 1:
-        return max(l[0], 0)
+        return l[0]
 
     left = divide_n_conquer(l[:mid_idx])
     right = divide_n_conquer(l[mid_idx:])
