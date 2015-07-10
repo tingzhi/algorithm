@@ -9,7 +9,7 @@ Date: 7/9/2015
 def enumeration(l):
     n = len(l)
     maximum = l[0]
-    start_idx = end_idx = 0
+    start = end = 0
 
     for i in range(0, n):
         for j in range(i, n):
@@ -22,16 +22,16 @@ def enumeration(l):
 
             if summation > maximum:
                 maximum = summation
-                start_idx = i
-                end_idx = j
+                start = i
+                end = j
 
-    return dict(subarray=l[start_idx:end_idx], maxsum=maximum)
+    return dict(subarray=l[start:end], maxsum=maximum)
 
 
 def better_enumeration(l):
     n = len(l)
     maximum = l[0]
-    start_idx = end_idx = 0
+    start = end = 0
 
     for i in range(0, n):
         summation = 0
@@ -40,10 +40,10 @@ def better_enumeration(l):
 
             if summation > maximum:
                 maximum = summation
-                start_idx = i
-                end_idx = j + 1
+                start = i
+                end = j + 1
 
-    return dict(subarray=l[start_idx:end_idx], maxsum=maximum)
+    return dict(subarray=l[start:end], maxsum=maximum)
 
 
 def divide_n_conquer(l):
@@ -76,7 +76,7 @@ def divide_n_conquer(l):
 
 
 def linear(l):
-    best = cur = cur_idx = start_idx = best_idx = 0
+    best = cur = cur_idx = start = end = 0
 
     for i, val in enumerate(l):
         if cur + val > 0:
@@ -86,11 +86,11 @@ def linear(l):
             cur_idx = i + 1
 
         if cur > best:
-            start_idx = cur_idx
-            best_idx = i + 1
+            start = cur_idx
+            end = i + 1
             best = cur
 
-    return dict(subarray=l[start_idx:best_idx], maxsum=best)
+    return dict(subarray=l[start:end], maxsum=best)
 
 
 # these are just examples for validating that the methods above don't blow up!
