@@ -5,27 +5,49 @@ Name: Tingzhi Li, Nicholas Nelson & Chunyang Zhang
 Date: 7/9/2015
 """
 
+import sys
+import re
+import ast
+
+
+def main():
+    file_name = sys.argv[1]
+    fp = open(file_name)
+    contents = fp.read()
+    fp.close()
+    arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
+
+    for count, array in enumerate(arrays):
+        print (count + 1), ":", array, "\n"
+
+        res = enumeration(array)
+        print "Enumeration:", res['subarray'], ", sum:", res['maxsum'], "\n"
+
+        res = better_enumeration(array)
+        print "Better Enumeration:", res['subarray'], ", sum:", res['maxsum'], "\n"
+
+        print "Divide and Conquer:", "sum:", divide_n_conquer(array), "\n"
+
+        res = linear(array)
+        print "Linear-Time algorithm:", res['subarray'], ", sum:", res['maxsum'], "\n"
+        print "--------------------------------------------"
 
 def enumeration(l):
-    n = len(l)
-    maximum = l[0]
-    start = end = 0
+    if not l:   # list is empty
+        return dict(subarray=l, maxsum="none")
 
+    maxsum = start = end = 0
+    n = len(l)
     for i in range(0, n):
         for j in range(i, n):
-            summation = 0
-            for k in range(i, j):
-                if j > i:
-                    summation += l[k]
-                else:
-                    summation = l[i]
+            ksum = sum(l[i:j+1])
 
-            if summation > maximum:
-                maximum = summation
+            if ksum > maxsum:
+                maxsum = ksum
                 start = i
-                end = j
+                end = j + 1
 
-    return dict(subarray=l[start:end], maxsum=maximum)
+    return dict(subarray=l[start:end], maxsum=maxsum)
 
 
 def better_enumeration(l):
@@ -93,23 +115,5 @@ def linear(l):
     return dict(subarray=l[start:end], maxsum=best)
 
 
-# these are just examples for validating that the methods above don't blow up!
-b = [31, -41, 59, 26, -53, 58, 97, -93, -23, 84, -1]
-
-print "---enumeration---"
-res = enumeration(b)
-print "subarray: ", res['subarray']
-print "max sum: ", res['maxsum']
-
-print "\n---better_enumeration---"
-res = better_enumeration(b)
-print "subarray: ", res['subarray']
-print "max sum: ", res['maxsum']
-
-print "\n---divide_n_conquer---"
-print "max sum: ", divide_n_conquer(b)
-
-print "\n---linear---"
-res = linear(b)
-print "subarray: ", res['subarray']
-print "max sum: ", res['maxsum']
+if __name__ == '__main__':
+    main()
