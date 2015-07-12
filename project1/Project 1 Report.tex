@@ -116,7 +116,7 @@ T(n) 	& = & 2T(n/2)+n\\
 \end{eqnarray*}
 
 
-\textit{1.4 Linear-time}\\
+\textit{1.4 Linear-time Algorithm}\\
 
 \begin{lstlisting}[language=c]
 function linear_time(a[n]) {
@@ -137,6 +137,23 @@ function linear_time(a[n]) {
 In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(n)\\
+\end{eqnarray*}
+
+\textbf{2. Analysis of the Asymptotic Running-times}\\
+
+Accordingly, the list of the running time complexity is shown as follows.
+\begin{eqnarray*}
+Enumeration Algorithm&:& \Theta(n^3)\\
+Better Enumeration Algorithm&:& \Theta(n^2)\\
+Divide And Conquer Algorithm&:& \Theta(nlg(n))\\
+Linear-time Algorithm&:& \Theta(n)
+\end{eqnarray*}
+
+Compare with these four algorithms, we can see that for a large n, the Linear-time algorithm has the best running time complexity which is $\Theta(n)$, while the enumeration algorithm ($\Theta(n^3)$) is the worst.
+
+So the order for these algorithms from the best to the worst could be 
+\begin{eqnarray*}
+Linear-time > Divide And Conquer > Better Enumeration > Enumeration
 \end{eqnarray*}
 
 \chapter{Proof of Correctness}
