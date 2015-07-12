@@ -51,21 +51,24 @@ def enumeration(l):
 
 
 def better_enumeration(l):
+    if not l:   # list is empty
+        return dict(subarray=l, maxsum="none")
+
+    maxsum = l[0]
+    start = 0
+    end = 1
     n = len(l)
-    maximum = l[0]
-    start = end = 0
-
     for i in range(0, n):
-        summation = 0
+        ksum = 0
         for j in range(i, n):
-            summation += l[j]
+            ksum += l[j]
 
-            if summation > maximum:
-                maximum = summation
+            if ksum > maxsum:
+                maxsum = ksum
                 start = i
                 end = j + 1
 
-    return dict(subarray=l[start:end], maxsum=maximum)
+    return dict(subarray=l[start:end], maxsum=maxsum)
 
 
 def divide_n_conquer(l):
