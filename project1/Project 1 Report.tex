@@ -32,7 +32,7 @@
 \chapter{Theoretical Run-time Analysis}
 
 \textbf{1. Pseudo-Code}\\\\
-\textbf{1.1 Enumeration Algorithm}\\
+\textit{1.1 Enumeration Algorithm}\\
 
 \begin{lstlisting}[language=c]
 function enumeration(a[n]) {
@@ -47,12 +47,14 @@ function enumeration(a[n]) {
 }
 \end{lstlisting}
 
-In this algorithm, since sum = sum(a[i:j]) costs $\Theta(n)$ because potentially this sum is a i to j loop. So the running-time complexity is\\
-$T(n) = \Theta(n^3)$\\
+In this algorithm, since sum = sum(a[i:j]) costs $\Theta(n)$ because potentially this sum is an [i to j] loop. So the running-time complexity is
+\begin{eqnarray*}
+T(n) = \Theta(n^3)
+\end{eqnarray*}
 
 
 
-\textbf{1.2 Better Enumeration Algorithm}\\
+\textit{1.2 Better Enumeration Algorithm}\\
 
 \begin{lstlisting}[language=c]
 function beter_enumeration(a[n]) {
@@ -69,10 +71,12 @@ function beter_enumeration(a[n]) {
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is\\
-$T(n) = \Theta(n^2)$\\\\
+In this algorithm, the running-time complexity is
+\begin{eqnarray*}
+T(n) = \Theta(n^2)
+\end{eqnarray*}
 
-\textbf{1.3 Divide and Conquer Algorithm}\\
+\textit{1.3 Divide and Conquer Algorithm}\\
 
 \begin{lstlisting}[language=c]
 function deivde_n_conquer(a[n]) {
@@ -101,15 +105,18 @@ function deivde_n_conquer(a[n]) {
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is\\
-$T(n) 	= 2T(n/2)+n$\\
-$		= 4T(n/4)+2n$\\
-$		= 8T(n/8)+3n$\\
-$		= ......$\\
-$		= nT(1)+nlg(n)$\\
-$		= \Theta(nlg(n))$\\
+In this algorithm, the running-time complexity is
+\begin{eqnarray*}
+T(n) 	& = & 2T(n/2)+n\\
+		& = & 4T(n/4)+2n\\
+		& = & 8T(n/8)+3n\\
+		& = & ......\\
+		& = & nT(1)+nlg(n)\\
+		& = & \Theta(nlg(n))\\\\\\\\\\
+\end{eqnarray*}
 
-\textbf{1.3 Linear-time}\\
+
+\textit{1.4 Linear-time}\\
 
 \begin{lstlisting}[language=c]
 function linear_time(a[n]) {
@@ -127,8 +134,10 @@ function linear_time(a[n]) {
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is\\
-$T(n) = \Theta(n)$\\
+In this algorithm, the running-time complexity is
+\begin{eqnarray*}
+T(n) = \Theta(n)\\
+\end{eqnarray*}
 
 \chapter{Proof of Correctness}
 
