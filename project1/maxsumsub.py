@@ -21,12 +21,12 @@ def main():
         print (count + 1), ":", array, "\n"
 
         res = enumeration(array)
-        print "Enumeration:", res['subarray'], ", sum:", res['maxsum'], "\n"
+        print "Enumeration:", res['subarray'], ", sum:", res['maxsum']
 
         res = better_enumeration(array)
-        print "Better Enumeration:", res['subarray'], ", sum:", res['maxsum'], "\n"
+        print "Better Enumeration:", res['subarray'], ", sum:", res['maxsum']
 
-        print "Divide and Conquer:", "sum:", divide_n_conquer(array), "\n"
+        print "Divide and Conquer:", "sum:", divide_n_conquer(array)
 
         res = linear(array)
         print "Linear-Time algorithm:", res['subarray'], ", sum:", res['maxsum'], "\n"
