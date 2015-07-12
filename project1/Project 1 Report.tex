@@ -8,6 +8,22 @@
 		Nicholas Nelson\\
 		Chunyang Zhang}
 
+\usepackage{listings} %插入代码
+\usepackage{xcolor} %代码高亮
+
+\lstset{numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+}
+
 \date{}
 \begin{document}
 
@@ -19,6 +35,32 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae quam ut est 
 
 Cras vulputate placerat lorem id lacinia. Etiam vulputate ipsum ex. Aenean et neque sodales, consequat tellus et, congue velit. Nunc facilisis aliquet tortor eget consequat. In tincidunt in eros sit amet euismod. Donec quis consequat libero. Nullam et maximus risus. Sed non velit pellentesque, sagittis risus sit amet, rutrum risus. Vestibulum congue eu elit et facilisis. Aliquam at erat sed turpis commodo lobortis. Morbi sed egestas est, sit amet ornare arcu. Morbi vel erat vitae nisi tempus elementum. Etiam sit amet aliquet elit. Aenean at mi eu purus congue congue. Curabitur pulvinar suscipit diam et porttitor. Quisque nec porta ipsum. 
 
+\begin{lstlisting}[language=c]
+/*Pseudo code for min_and_max algorithm (recursive version)*/
+// A is an array. n is the number of elements in the array.
+
+minMax(A[]) {
+if (n==1)
+return A
+array1 = A[1,n/2]
+array2 = A[n/2+1, n]
+
+array1 = minMax(array1[])
+array2 = minMax(array2[])
+
+return mergeFind(array1, array2)
+}
+
+mergeFind(array1, array2) {
+if(array1[1] <= array2[1])
+array3[1] = array1[1]
+if(array1[2] >= array2[2])
+array3[2] = array1[2]
+
+return array3[]
+}
+
+\end{lstlisting}
 
 \chapter{Proof of Correctness}
 
