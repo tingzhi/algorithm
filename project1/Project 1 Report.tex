@@ -141,9 +141,55 @@ T(n) = \Theta(n)\\
 
 \chapter{Proof of Correctness}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae quam ut est luctus pellentesque at a orci. Nam metus nibh, condimentum blandit tellus ut, mollis dapibus ligula. Mauris gravida nulla ac ultrices luctus. Maecenas consectetur ex nulla, euismod tristique nulla interdum vel. Donec lorem quam, tincidunt quis volutpat quis, dignissim suscipit sapien. Ut interdum nunc magna, ultrices consectetur massa efficitur ut. Praesent ante augue, rhoncus nec pellentesque vitae, condimentum ultrices metus. Duis sapien ex, pretium ut magna in, pellentesque ultrices sapien. Sed imperdiet lacus non risus venenatis, vitae convallis nibh eleifend. Nulla ornare odio sit amet dolor efficitur, eu facilisis velit consectetur. Nulla facilisi. Integer nec sem rutrum mauris ornare pellentesque vel commodo ipsum.
+Divide and conquer algorithm
 
-Cras vulputate placerat lorem id lacinia. Etiam vulputate ipsum ex. Aenean et neque sodales, consequat tellus et, congue velit. Nunc facilisis aliquet tortor eget consequat. In tincidunt in eros sit amet euismod. Donec quis consequat libero. Nullam et maximus risus. Sed non velit pellentesque, sagittis risus sit amet, rutrum risus. Vestibulum congue eu elit et facilisis. Aliquam at erat sed turpis commodo lobortis. Morbi sed egestas est, sit amet ornare arcu. Morbi vel erat vitae nisi tempus elementum. Etiam sit amet aliquet elit. Aenean at mi eu purus congue congue. Curabitur pulvinar suscipit diam et porttitor. Quisque nec porta ipsum. 
+\begin{lstlisting}[language=c,mathescape=true]
+/*
+Precondition: 
+Array A has at least one element between indices front and end. (front < end)
+Postcondition: 
+The maximum subarray of n elements is found. 
+*/
+
+divideAndConquer(A[], front, end)
+	if (front < end)
+		mid = $\lfloor$(front+end)/2$\rfloor$
+		left = divideAndConquer(A[], front, mid)
+		right = divideAndConquer(A[], mid+1, end)
+		comb = combination(A[], front, mid, end)		
+		//finding maximum subarray from mid to front and from mid to end.
+		return max(left, right, comb)
+		
+/*
+For combination(A[], front, mid, end) function:
+Precondition: 
+A is an array and front, mid, and end are indices into the array such that front <= mid < end.
+Postcondition: 
+The maximum subarray combining a subarray from mid to front and a subarray from mid to end is found.
+*/
+\end{lstlisting}
+\emph{Base Case:} 
+
+$n = 1$, n represents number of elements in the array A[ ]. A[ ] contains a single element, which will just return the value of the element. \\
+\emph{Inductive Hypothesis:} 
+
+Assume that DivideAndConquer correctly finds the maximum subarray of $n=1, 2,\cdots, k$ elements. \\
+\emph{Inductive Step:} 
+
+Show that DivideAndConquer will correctly finds the maximum subarray of $n= k+1$ elements. 
+
+First recursive call $n_1=(k+1)/2\leq k\Rightarrow $ Maximum subarray of \textit{A[front, mid]} is found.
+
+Second recursive call $n_2=(k+1)/2 \leq k \Rightarrow$ Maximum subarray of \textit{A[mid+1, end]} is found.
+
+Now \textit{A[ ]}, \textit{front}, \textit{mid}, \textit{end} fulfill the precondition of \textit{combination()} function.
+
+The postcondition of \textit{combination()} function guarantees that the maximum subarray from a suffix of the first half(\textit{A[front, mid]}) and a prefix of the second half(\textit{A[mid+1, end]}) is found.
+
+The final return guarantees that the maximum subarray of \textit{A[front, end]} is found. \\
+\emph{Termination:}
+
+We find that array size decreases with every recursive call. For the base case, there is one element in the array. The algorithm terminates in this case without making additional recursive calls.
 
 
 \chapter{Testing}
