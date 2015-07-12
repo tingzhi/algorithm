@@ -29,7 +29,7 @@ def main():
         print "Divide and Conquer:\t", "sum:", divide_n_conquer(array)
 
         res = linear(array)
-        print "Linear-Time algorithm:\t", res['subarray'], ", sum:", res['maxsum'], "\n"
+        print "Linear-Time:\t\t", res['subarray'], ", sum:", res['maxsum'], "\n"
         print "--------------------------------------------"
 
 def enumeration(l):
