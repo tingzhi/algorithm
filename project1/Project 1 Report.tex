@@ -51,9 +51,6 @@ In this algorithm, since sum = sum(a[i:j]) costs $\Theta(n)$ because potentially
 \begin{eqnarray*}
 T(n) = \Theta(n^3)
 \end{eqnarray*}
-
-
-
 \textit{1.2 Better Enumeration Algorithm}\\
 
 \begin{lstlisting}[language=c]
@@ -75,8 +72,7 @@ In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(n^2)
 \end{eqnarray*}
-
-\textit{1.3 Divide and Conquer Algorithm}\\
+\textit{1.3 Divide and Conquer Algorithm}
 
 \begin{lstlisting}[language=c]
 function deivde_n_conquer(a[n]) {
@@ -112,10 +108,9 @@ T(n) 	& = & 2T(n/2)+n\\
 		& = & 8T(n/8)+3n\\
 		& = & ......\\
 		& = & nT(1)+nlg(n)\\
-		& = & \Theta(nlg(n))\\\\\\\\\\
+		& = & \Theta(nlg(n))
 \end{eqnarray*}
-
-
+\newpage
 \textit{1.4 Linear-time Algorithm}\\
 
 \begin{lstlisting}[language=c]
@@ -138,7 +133,6 @@ In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(n)\\
 \end{eqnarray*}
-
 \textbf{2. Analysis of the Asymptotic Running-times}\\
 
 Accordingly, the list of the running time complexity is shown as follows.
