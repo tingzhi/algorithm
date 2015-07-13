@@ -2,7 +2,7 @@
 CS325 - Summer 2015
 Project 1
 Name: Tingzhi Li, Nicholas Nelson & Chunyang Zhang
-Date: 7/9/2015
+Date: 7/12/2015
 """
 
 import maxsumsub
@@ -13,7 +13,7 @@ import csv
 
 def main():
     array_size = [100, 200, 300, 400, 500, 600, 900, 1000, 2000, 3000, 4000, 5000]
-    file_name = time.strftime("%Y-%m-%d-%H:%M:%S") + ".csv"
+    file_name = "project1.csv"
 
     with open(file_name, 'wb') as csvfile:
         writer = csv.writer(csvfile, delimiter=",", quotechar="'", quoting=csv.QUOTE_MINIMAL)

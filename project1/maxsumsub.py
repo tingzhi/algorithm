@@ -2,7 +2,7 @@
 CS325 - Summer 2015
 Project 1
 Name: Tingzhi Li, Nicholas Nelson & Chunyang Zhang
-Date: 7/9/2015
+Date: 7/12/2015
 """
 
 import sys
