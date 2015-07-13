@@ -54,6 +54,21 @@ lines(x, fitted(lm(y~x+I(x))), col="red", type="l")
 dev.copy(png, 'linear_time.png')
 dev.off()
 
-plot(x, y, log="xy", main="Log-Log Plot: Linear-time")
+#plot(x, y, log="xy", main="Log-Log Plot: Linear-time")
 dev.copy(png, 'loglog_linear_time.png')
+dev.off()
+
+# Combined plot graph for all four algorithms (using log-log)
+y1 = data$timing[data$algorithm=="enumeration"]
+y2 = data$timing[data$algorithm=="better_enumeration"]
+y3 = data$timing[data$algorithm=="divide_n_conquer"]
+y4 = data$timing[data$algorithm=="linear_time"]
+
+df <- data.frame(y1, y2, y3, y4, x = data$size[data$algorithm=="enumeration"])
+
+plot(y1 ~ x, data=df, type="l", pch=20, col="blue", ylim=c(0, 300), main="Maximum Sum Subarray algorithms (comparison)", xlab="input size (n)", ylab="running time (milliseconds)")
+lines(y2 ~ x, data=df, pch=20, col="red")
+lines(y3 ~ x, data=df, pch=20, col="green")
+lines(y4 ~ x, data=df, pch=20, col="orange")
+dev.copy(png, 'combined.png')
 dev.off()
