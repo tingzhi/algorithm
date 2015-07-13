@@ -240,19 +240,50 @@ We find that array size decreases with every recursive call. For the base case, 
 	\hline 
 \end{tabular} 
 
+
 \section {Running time plot for all four algorithms}
 
-Following are the figures that we plot for running times as a function of input size n, with all data values included.
+Figure 4.1 is the figures that we plot for running times as a function of input size n, with all data values included, versus the function model as the type of regression. The blue line showed in the graphs is the running time data we collected, and the red line in the graphs is the regression, which is the same as the running time complexity function $\Theta$, of which the result we analyzed previously.
 
 \begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{enumeration.png}
+\caption{Plot for Enumeration v.s. $n^3$}
+\label{figc1}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{better_enumeration.png}
+\caption{Plot for Better Enumeration v.s. $n^2$}
+\label{figc1}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{divide_n_conquer.png}
+\caption{Plot for Divide and Conquer v.s. $nlgn$}
+\label{figc1}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{linear_time.png}
+\caption{Plot for Linear Time v.s. $n$}
+\label{figc1}
+\end{figure}
+
+Figure 4.2 is the graphs that we plot for loglog plot as a function of input size n, with all data values included. In these four plots, the x axis represents the input size n, while the y axis represents the loglog value which represents the slope m for the function $x^m$.
+
+\begin{figure}
 	\captionsetup{singlelinecheck=off}
 	\captionsetup[subfigure]{singlelinecheck=on}
 	%
 	\captionbox{Four algorithms running time plots\label{fig:1}}[0.8\textwidth]{%
-		\includegraphics[width=0.50\textwidth]{runtime_enumeration.png}%
-		\includegraphics[width=0.50\textwidth]{runtime_better_enumeration.png}\\
-		\includegraphics[width=0.50\textwidth]{runtime_divide_n_conquer.png}%
-		\includegraphics[width=0.50\textwidth]{runtime_linear_time.png}%
+		\includegraphics[width=0.50\textwidth]{enumeration.png}%
+		\includegraphics[width=0.50\textwidth]{better_enumeration.png}\\
+		\includegraphics[width=0.50\textwidth]{divide_n_conquer.png}%
+		\includegraphics[width=0.50\textwidth]{linear_time.png}%
 		\phantomsubcaption\label{fig:1a}%
 		\phantomsubcaption\label{fig:1b}%
 		\phantomsubcaption\label{fig:1c}%
@@ -271,6 +302,33 @@ Following are the figures that we plot for running times as a function of input 
 
 \section{Combined algorithms running time plot}
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{loglog_enumeration.png}
+\caption{loglog Plot for Enumeration}
+\label{figc1}
+\end{figure}
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{loglog_better_enumeration.png}
+\caption{loglog Plot for Better Enumeration}
+\label{figc1}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{loglog_divide_n_conquer.png}
+\caption{loglog Divide and Conquer}
+\label{figc1}
+\end{figure}
+
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{loglog_linear_time.png}
+\caption{loglog Plot for Linear Time}
+\label{figc1}
+\end{figure}
 
 \end{document}
