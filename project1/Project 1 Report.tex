@@ -26,6 +26,12 @@
 	showspaces=false %不显示空格
 }
 
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
+
+
 \date{}
 \begin{document}
 
@@ -33,8 +39,8 @@
 
 \chapter{Theoretical Run-time Analysis}
 
-\textbf{1. Pseudo-Code}\\\\
-\textit{1.1 Enumeration Algorithm}\\
+\section{Pseudo-Code}
+\subsection {Enumeration Algorithm}
 
 \begin{lstlisting}[language=c]
 function enumeration(a[n]) {
@@ -53,7 +59,8 @@ In this algorithm, since sum = sum(a[i:j]) costs $\Theta(n)$ because potentially
 \begin{eqnarray*}
 T(n) = \Theta(n^3)
 \end{eqnarray*}
-\textit{1.2 Better Enumeration Algorithm}\\
+
+\subsection{Better Enumeration Algorithm}
 
 \begin{lstlisting}[language=c]
 function beter_enumeration(a[n]) {
@@ -74,7 +81,8 @@ In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(n^2)
 \end{eqnarray*}
-\textit{1.3 Divide and Conquer Algorithm}
+
+\subsection{Divide and Conquer Algorithm}
 
 \begin{lstlisting}[language=c]
 function divide_n_conquer(a[n]) {
@@ -112,7 +120,8 @@ T(n) 	& = & 2T(n/2)+n\\
 		& = & nT(1)+nlg(n)\\
 		& = & \Theta(nlg(n))\\\\\\\\\\\\
 \end{eqnarray*}
-\textit{1.4 Linear-time Algorithm}\\
+
+\subsection{Linear-time Algorithm}
 
 \begin{lstlisting}[language=c]
 function linear_time(a[n]) {
@@ -134,7 +143,8 @@ In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(n)\\
 \end{eqnarray*}
-\textbf{2. Analysis of the Asymptotic Running-times}\\
+
+\section{Analysis of the Asymptotic Running-times}
 
 Accordingly, the list of the running time complexity is shown as follows.
 \begin{eqnarray*}
@@ -210,10 +220,10 @@ We find that array size decreases with every recursive call. For the base case, 
 
 \chapter{Experimental Analysis}
 
-\emph{Part 1}
+\section {Calculated average running time for each input size}
 
 \begin{tabular}{|c|c|c|c|c|}
-	\hline  & Average Time(ms) &  &  &  \\ 
+	\hline  & \multicolumn{4}{|c|}{Average Time(ms)} \\ 
 	\hline Input Size & Enumeration & Better Enumeration & Divide and Conquer & Linear Time \\ 
 	\hline  100 & 6.75 & 0.95 & 0.60 & 0.05 \\ 
 	\hline  200 & 31.56 & 2.94 & 1.08 & 0.07 \\ 
@@ -230,39 +240,37 @@ We find that array size decreases with every recursive call. For the base case, 
 	\hline 
 \end{tabular} 
 
-
-
-
-\emph{Part 2}
+\section {Running time plot for all four algorithms}
 
 Following are the figures that we plot for running times as a function of input size n, with all data values included.
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=8cm]{runtime_enumeration.png}
-\caption{Plot for Enumeration}
-\label{figc1}
-\end{figure}
 
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=8cm]{runtime_better_enumeration.png}
-\caption{Plot for Better Enumeration}
-\label{figc1}
+	\captionsetup{singlelinecheck=off}
+	\captionsetup[subfigure]{singlelinecheck=on}
+	%
+	\captionbox{Four algorithms running time plots\label{fig:1}}[0.8\textwidth]{%
+		\includegraphics[width=0.50\textwidth]{runtime_enumeration.png}%
+		\includegraphics[width=0.50\textwidth]{runtime_better_enumeration.png}\\
+		\includegraphics[width=0.50\textwidth]{runtime_divide_n_conquer.png}%
+		\includegraphics[width=0.50\textwidth]{runtime_linear_time.png}%
+		\phantomsubcaption\label{fig:1a}%
+		\phantomsubcaption\label{fig:1b}%
+		\phantomsubcaption\label{fig:1c}%
+		\phantomsubcaption\label{fig:1d}%	
+	}%
+	\label{figure1}
 \end{figure}
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=8cm]{runtime_divide_n_conquer.png}
-\caption{Plot for Divide and Conquer}
-\label{figc1}
-\end{figure}
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=8cm]{runtime_linear_time.png}
-\caption{Plot for Linear Time}
-\label{figc1}
-\end{figure}
+
+\section{Discussion of discrepancies between experimental and theoretical running times}
+
+\section{Largest input for each algorithm}
+
+\section{Log-log plot}
+
+\section{Combined algorithms running time plot}
+
 
 
 \end{document}
