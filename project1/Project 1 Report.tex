@@ -3,10 +3,10 @@
 
 \title{\textbf{Project 1 Report}}
 \subtitle{CS325 Analysis of Algorithms, Summer 2015}
-\author{\textbf{Project Group 1}\\
-		Tingzhi Li\\
-		Nicholas Nelson\\
-		Chunyang Zhang}
+\author{\textsf{\textbf{Project Group 1}}\\
+		\textsf{Tingzhi Li}\\
+		\textsf{Nicholas Nelson}\\
+		\textsf{Chunyang Zhang}}
 		
 \usepackage{graphicx}
 
@@ -244,7 +244,7 @@ We added our own testing array into MSS\_TestProblems.txt, then use that file as
 
 \section {Running time plot for all four algorithms}
 
-Figure 2.1 is the figures that we plot for running times as a function of input size n, with all data values included, versus the function model as the type of regression. The blue line showed in the graphs is the running time data we collected, and the red line in the graphs is the regression, which is the same as the running time complexity function $\Theta$, of which the result we analyzed previously. Namely, they are
+Figure 2.1 is the figures that we plot for running times as a function of input size n, with all data values included, versus the function model as the type of regression. The blue line showed in the graphs is the running time data we collected, and the red line in the graphs is the regression, which is the same as the running time complexity function $\Theta$, of which the result we analyzed previously. Namely, they are\\
 \begin{eqnarray*}
 Enumeration & v.s. & n^3\\
 Better Enumeration & v.s. & n^2\\
@@ -268,6 +268,7 @@ Linear Time & v.s. & n
 
 \section{Discussion of discrepancies between experimental and theoretical running times}
 
+According to the figures, from comparing the experimental running times and the regression functions, we can see that they almost match each other. However, due to running environment and other certain effects, the running time for every run could be different. For instance, we can see from linear time plot that one run of the data values explodes, which is far higher than other value on the same size n. This condition could happen many times with unknown reason so that the average value of collected data could be variable. In this case, the experimental data would be always different from but around the theoretical running time value. Therefore, the experimental data is technically acceptable in contrast to the regression function theoretical running time. 
 
 \section{Largest input for each algorithm}
 
