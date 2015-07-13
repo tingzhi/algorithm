@@ -1,2 +1,11 @@
-How to use the code
+Algorithm Code
+How to use the maxsumsub.py:
 $ python maxsumsub.py <input file directory>
+
+Random Dataset Generator Code
+How to use the rand_maxsumsub.py:
+$ python rand_maxsumsub.py
+
+Statistical Analysis Code
+How to use the stat.r within R run-time environment:
+$ source(file="stat.r")
