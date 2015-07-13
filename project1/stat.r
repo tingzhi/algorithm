@@ -54,7 +54,7 @@ lines(x, fitted(lm(y~x+I(x))), col="red", type="l")
 dev.copy(png, 'linear_time.png')
 dev.off()
 
-#plot(x, y, log="xy", main="Log-Log Plot: Linear-time")
+plot(x, y, log="xy", main="Log-Log Plot: Linear-time")
 dev.copy(png, 'loglog_linear_time.png')
 dev.off()
 
