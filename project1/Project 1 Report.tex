@@ -161,6 +161,7 @@ So the order for these algorithms from the best to the worst could be
 Linear-time > Divide And Conquer > Better Enumeration > Enumeration
 \end{eqnarray*}
 
+\newpage
 \section{Proof of Correctness}
 
 Divide and conquer algorithm
@@ -252,7 +253,7 @@ Linear Time & v.s. & n
 \end{eqnarray*}
 
 
-\begin{figure}
+\begin{figure}[!htbp]
 	\captionsetup{singlelinecheck=off}
 	\captionsetup[subfigure]{singlelinecheck=on}
 	%
@@ -266,8 +267,6 @@ Linear Time & v.s. & n
 
 
 \section{Discussion of discrepancies between experimental and theoretical running times}
-
-
 
 
 \section{Largest input for each algorithm}
@@ -295,7 +294,7 @@ Linear-time Algorithm&:& n = 6\times10^8
 
 Figure 2.2 is the graphs that we plot for log-log plot as a function of input size n, with all data values included. In these four plots, the x axis represents the input size n, while the y axis represents the loglog value which represents the slope m for the function $x^m$.
 
-\begin{figure}
+\begin{figure}[!htbp]
 	\captionsetup{singlelinecheck=off}
 	\captionsetup[subfigure]{singlelinecheck=on}
 	%
@@ -310,13 +309,13 @@ Figure 2.2 is the graphs that we plot for log-log plot as a function of input si
 
 \section{Combined algorithms running time plot}
 
-Figure 4.3 presents the results of all four algorithms together on a single graph. It perfectly shows how the scale is different from each other. In this graph, the blue line represents Enumeration Algorithm ($\Theta(n^3)$), the red line represents Better Enumeration Algorithm ($\Theta(n^2)$), the green line represents Divide And Conquer Algorithm ($\Theta(nlg(n))$), and the orange line represents Linear-time Algorithm ($\Theta(n)$).
+Figure 2.3 presents the results of all four algorithms together on a single graph. It perfectly shows how the scale is different from each other. In this graph, the blue line represents Enumeration Algorithm ($\Theta(n^3)$), the red line represents Better Enumeration Algorithm ($\Theta(n^2)$), the green line represents Divide And Conquer Algorithm ($\Theta(nlg(n))$), and the orange line represents Linear-time Algorithm ($\Theta(n)$).
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=8cm]{combined.png}
 \caption{Combined algorithms running time}
-\label{figc1}
+\label{fig3}
 \end{figure}
 
 
