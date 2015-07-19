@@ -12,7 +12,7 @@ import os
 
 def main():
     l = [1,10,15,50]
-    A = 16
+    A = 20
     
     print l,"\n",A
     
@@ -86,16 +86,25 @@ def changedp(l, A):
             else:
                 d[j] = d[j-1]
         T[i] = d[0]
-        cc[i][0] = cc[i-1][0] + 1
+        index = 0
         if cc[i][0] == l[1]:
             cc[i][0] = 0
+            cc[i][1] += 1
         for j in range(1,n):
             if d[j] < d[j-1]:
                 T[i] = d[j]
-                k = i - l[j]
-                cc[i][j] = cc[k][j] + 1
-                for a in range (0,j):
-                    cc[i][a] = 0
+                index = j
+        k = i - l[index]
+        cc[i] = cc[k]
+        cc[i][0] += 1
+        sum = 0
+        for count,array in enumerate(cc[i][0:index]):
+            sum += (array)*l[count]
+        if sum == l[index]:
+            for a in range(0,index):
+                cc[i][a] = 0
+            cc[i][index] += 1
+
     return [cc[A], T[A]]
 
 
