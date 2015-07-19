@@ -12,7 +12,7 @@ import os
 
 def main():
     l = [1,10,15,50]
-    A = 21
+    A = 16
     
     print l,"\n",A
     
@@ -23,7 +23,7 @@ def main():
     print "By using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
 
     res = changedp(l, A)
-    print "By using the Brute Force Algorithm, the number of coins costed is:\n", res
+    print "By using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
 
     
 def changeslow(l, A):
@@ -73,21 +73,30 @@ def changegreedy(l, A):
 
 
 def changedp(l, A):
-    m = 0
     n = len(l)
     c = [0]*n
-    T = [0]*A
-    T[0] = 0
-    for i in range (1,A):
+    cc = [[0]*n]*(A+1)
+    T = [0]*(A+1)
+    for i in range (1,A+1):
         d = [0]*n
         for j in range (0,n):
             k = i - l[j]
-            if k > 0:
-                d[j] = T[k-1] + 1
+            if k >= 0:
+                d[j] = T[k] + 1
             else:
                 d[j] = d[j-1]
-        T[i] = min(d)
-    return T[A-1]
+        T[i] = d[0]
+        cc[i][0] = cc[i-1][0] + 1
+        if cc[i][0] == l[1]:
+            cc[i][0] = 0
+        for j in range(1,n):
+            if d[j] < d[j-1]:
+                T[i] = d[j]
+                k = i - l[j]
+                cc[i][j] = cc[k][j] + 1
+                for a in range (0,j):
+                    cc[i][a] = 0
+    return [cc[A], T[A]]
 
 
 if __name__ == '__main__':
