@@ -11,18 +11,18 @@ import ast
 
 def main():
     l = [1,10,15,50]
-    A = 25
+    A = 21
     
-    print l,"\n",A
+    print "The input array is:\n", l,"\nThe amount of change we have to make is:\n",A
     
     res = changegreedy(l, A)
-    print "By using the Greedy Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-    """
+    print "\nBy using the Greedy Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
+    
     res = changeslow(l, A)
-    print "By using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-    """
+    print "\nBy using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
+    
     res = changedp(l, A)
-    print "By using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
+    print "\nBy using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
 
     
 def changeslow(l, A):
@@ -74,10 +74,11 @@ def changegreedy(l, A):
 def changedp(l, A):
     n = len(l)
     c = [0]*n
-    cc = [c]*(A+1)
+    cc = [[0]*n]*(A+1)
     T = [0]*(A+1)
     for i in range (1,A+1):
         d = [0]*n
+        cc[i] = [0]*n
         for j in range (0,n):
             k = i - l[j]
             if k >= 0:
@@ -91,20 +92,11 @@ def changedp(l, A):
                 T[i] = d[x]
                 index = x
         k = i - l[index]
-        cc[i] = cc[k]
-        if index > 0:
-            if i%l[index] == 0:
-                cc[i][index] += 1
-                for b in range (index+1,n):
-                    cc[i][index] += cc[i][b]
-                    cc[i][b] = 0
-                for a in range (0,index):
-                    cc[i][a] = 0
+        for a in range(0,n):
+            if a == index:
+                cc[i][a] = cc[k][a] + 1
             else:
-                cc[i][0] += 1
-        else:
-            cc[i][0] += 1
-
+                cc[i][a] = cc[k][a]
     return [cc[A], T[A]]
 
 
