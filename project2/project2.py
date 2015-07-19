@@ -87,7 +87,7 @@ def changedp(l, A):
             else:
                 d[j] = d[j-1]
         T[i] = min(d)
-    return [T[A-1],c]
+    return T[A-1]
 
 
 if __name__ == '__main__':
