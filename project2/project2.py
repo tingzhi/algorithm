@@ -8,20 +8,19 @@ Date: 7/17/2015
 import sys
 import re
 import ast
-import os
 
 def main():
     l = [1,10,15,50]
-    A = 20
+    A = 25
     
     print l,"\n",A
     
     res = changegreedy(l, A)
     print "By using the Greedy Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-
+    """
     res = changeslow(l, A)
     print "By using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-
+    """
     res = changedp(l, A)
     print "By using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
 
@@ -75,7 +74,7 @@ def changegreedy(l, A):
 def changedp(l, A):
     n = len(l)
     c = [0]*n
-    cc = [[0]*n]*(A+1)
+    cc = [c]*(A+1)
     T = [0]*(A+1)
     for i in range (1,A+1):
         d = [0]*n
@@ -87,23 +86,24 @@ def changedp(l, A):
                 d[j] = d[j-1]
         T[i] = d[0]
         index = 0
-        if cc[i][0] == l[1]:
-            cc[i][0] = 0
-            cc[i][1] += 1
-        for j in range(1,n):
-            if d[j] < d[j-1]:
-                T[i] = d[j]
-                index = j
+        for x in range(1,n):
+            if d[x] < d[x-1]:
+                T[i] = d[x]
+                index = x
         k = i - l[index]
         cc[i] = cc[k]
-        cc[i][0] += 1
-        sum = 0
-        for count,array in enumerate(cc[i][0:index]):
-            sum += (array)*l[count]
-        if sum == l[index]:
-            for a in range(0,index):
-                cc[i][a] = 0
-            cc[i][index] += 1
+        if index > 0:
+            if i%l[index] == 0:
+                cc[i][index] += 1
+                for b in range (index+1,n):
+                    cc[i][index] += cc[i][b]
+                    cc[i][b] = 0
+                for a in range (0,index):
+                    cc[i][a] = 0
+            else:
+                cc[i][0] += 1
+        else:
+            cc[i][0] += 1
 
     return [cc[A], T[A]]
 
