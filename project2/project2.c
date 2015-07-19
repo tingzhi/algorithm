@@ -56,7 +56,7 @@ int main()
 {
 	int v[5] = { 1, 5, 10, 25, 50 };
 	int n = sizeof(v) / sizeof(v[0]);
-	int A = 192;
+	int A = 41;
 	int c[5] = { 0, 0, 0, 0, 0 };
 	int m = changegreedy(v, c, n, A);
 	printf("the result array is:\n");
