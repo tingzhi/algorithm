@@ -11,16 +11,24 @@ import ast
 
 
 def main():
+    lines = []
+    try:
+        with open(sys.argv[1]) as f:
+            lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
+            lines = filter(None, lines)  # remove blank lines from list
+            lines = iter(lines)  # convert list to iterator to allow iterating over two lines at a time
+    except IndexError:
+        print "Error: Missing value for filename. Please use command: python project2.py <filename>"
+
+    for line in lines:
+        coins = ast.literal_eval(line)
+        amount = ast.literal_eval(next(lines))
+        print (coins, amount)
 
     """
     V = [1, 10, 15, 50]
     A = 21
-    """
-    
-    file_name = sys.argv[1]
-    fp = open(file_name)
-    contents = fp.read()
-    fp.close()
+
     arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
     A = [ast.literal_eval(l) for l in re.findall(r'\d+', contents)]
     
@@ -51,6 +59,7 @@ def main():
             print "%d coins of %d value" % (value, V[coin])
         print "count: %d coins\n" % count
         V.reverse()
+    """
     
 
 def changeslow(l, A):
