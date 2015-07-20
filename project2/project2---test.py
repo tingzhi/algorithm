@@ -10,7 +10,7 @@ import re
 import ast
 
 def main():
-    l = [1,10,15,50]
+    l = [1, 10, 15, 50]
     A = 21
     
     print "The input array is:\n", l,"\nThe amount of change we have to make is:\n",A
