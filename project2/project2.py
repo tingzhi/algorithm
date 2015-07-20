@@ -21,34 +21,36 @@ def main():
     fp = open(file_name)
     contents = fp.read()
     fp.close()
-    V = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
-
+    arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
+    A = [ast.literal_eval(l) for l in re.findall(r'\d+', contents)]
     
-    print "coins: %s, amount: %d\n" % (V, A)
+    for number, V in enumerate(arrays):
+        print (number + 1), ":"
+        print "coins: %s, amount: %d\n" % (V, A)
 
-    print "---Greedy Algorithm---"
-    coins, count = changegreedy(V, A)
-    for coin in coins:
-        print "%d coins of %d value" % (coin['count'], coin['value'])
-    print "count: %d coins\n" % count
+        print "---Greedy Algorithm---"
+        coins, count = changegreedy(V, A)
+        for coin in coins:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
+        print "count: %d coins\n" % count
 
-    print "---Brute Force Algorithm---"
-    coins, count = changeslow(V, A)
-    coins.reverse()
-    V.reverse()
-    for coin, value in enumerate(coins):
-        print "%d coins of %d value" % (value, V[coin])
-    print "count: %d coins\n" % count
-    V.reverse()
+        print "---Brute Force Algorithm---"
+        coins, count = changeslow(V, A)
+        coins.reverse()
+        V.reverse()
+        for coin, value in enumerate(coins):
+            print "%d coins of %d value" % (value, V[coin])
+        print "count: %d coins\n" % count
+        V.reverse()
 
-    print "---Dynamic Programming---"
-    coins, count = changedp(V, A)
-    coins.reverse()
-    V.reverse()
-    for coin, value in enumerate(coins):
-        print "%d coins of %d value" % (value, V[coin])
-    print "count: %d coins\n" % count
-    V.reverse()
+        print "---Dynamic Programming---"
+        coins, count = changedp(V, A)
+        coins.reverse()
+        V.reverse()
+        for coin, value in enumerate(coins):
+            print "%d coins of %d value" % (value, V[coin])
+        print "count: %d coins\n" % count
+        V.reverse()
     
 
 def changeslow(l, A):
