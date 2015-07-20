@@ -80,6 +80,7 @@ def changegreedy(coins, amount):
         amount = amount%i
         change.append({'count':count, 'value':i})
 
+    coins.reverse()
     return change, total
 
 
