@@ -11,31 +11,46 @@ import ast
 
 
 def main():
-    file_name = sys.argv[1]
-    fp = open(file_name)
-    contents = fp.read()
-    fp.close()
-    arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
+    #file_name = sys.argv[1]
+    #fp = open(file_name)
+    #contents = fp.read()
+    #fp.close()
+    #arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
 
-    for count, array in enumerate(arrays):
-        print (count + 1), ":", array, "\n"
+    #for count, array in enumerate(arrays):
+     #   print (count + 1), ":", array, "\n"
 
-        res = enumeration(array)
-        print "Enumeration:\t\t", res['subarray'], ", sum:", res['maxsum']
+     ret = changeGreedy()
+     print "Greedy algorithm: for change of 75 need " + str(ret) + "coins"
 
-        res = better_enumeration(array)
-        print "Better Enumeration:\t", res['subarray'], ", sum:", res['maxsum']
+     #   res = enumeration(array)
+      #  print "Enumeration:\t\t", res['subarray'], ", sum:", res['maxsum']
 
-        print "Divide and Conquer:\t", "sum:", divide_n_conquer(array)
+       # res = better_enumeration(array)
+        #print "Better Enumeration:\t", res['subarray'], ", sum:", res['maxsum']
 
-        res = linear(array)
-        print "Linear-Time:\t\t", res['subarray'], ", sum:", res['maxsum'], "\n"
-        print "--------------------------------------------"
+        #print "Divide and Conquer:\t", "sum:", divide_n_conquer(array)
 
-def changeGreedy(l):
+        #res = linear(array)
+        #print "Linear-Time:\t\t", res['subarray'], ", sum:", res['maxsum'], "\n"
+        #print "--------------------------------------------"
+
+def changeGreedy2():
     numOfCoin = 0
     change = 75
-    array[] = [1, 5, 10, 25, 50]
+    array = [1, 5, 10, 25, 50]
+    c = [0,0,0,0,0]
+
+    for i in range(4, 0, -1):
+        temp = change
+        while temp > 0:
+            temp = temp - array[i]
+            if temp >= 0 :
+                change = temp
+                c[i] = c[i] + 1
+                numOfCoin = numOfCoin + 1
+    return numOfCoin
+
 
 
 def enumeration(l):
