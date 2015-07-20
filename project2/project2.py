@@ -20,46 +20,30 @@ def main():
     except IndexError:
         print "Error: Missing value for filename. Please use command: python project2.py <filename>"
 
-    for line in lines:
+    for i, line in enumerate(lines):
         coins = ast.literal_eval(line)
         amount = ast.literal_eval(next(lines))
-        print (coins, amount)
 
-    """
-    V = [1, 10, 15, 50]
-    A = 21
-
-    arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
-    A = [ast.literal_eval(l) for l in re.findall(r'\d+', contents)]
-    
-    for number, V in enumerate(arrays):
-        print (number + 1), ":"
-        print "coins: %s, amount: %d\n" % (V, A)
+        print "Test: %d" % (i + 1)
+        print "coins: %s, amount: %d\n" % (coins, amount)
 
         print "---Greedy Algorithm---"
-        coins, count = changegreedy(V, A)
+        coins, count = changegreedy(coins, amount)
         for coin in coins:
             print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
 
         print "---Brute Force Algorithm---"
-        coins, count = changeslow(V, A)
-        coins.reverse()
-        V.reverse()
-        for coin, value in enumerate(coins):
-            print "%d coins of %d value" % (value, V[coin])
+        coins, count = changeslow(coins, amount)
+        for coin in coins:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
-        V.reverse()
 
         print "---Dynamic Programming---"
-        coins, count = changedp(V, A)
-        coins.reverse()
-        V.reverse()
-        for coin, value in enumerate(coins):
-            print "%d coins of %d value" % (value, V[coin])
+        coins, count = changedp(coins, amount)
+        for coin in coins:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
-        V.reverse()
-    """
     
 
 def changeslow(l, A):
