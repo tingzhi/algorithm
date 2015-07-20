@@ -11,9 +11,17 @@ import ast
 
 
 def main():
- 
+
+    """
     V = [1, 10, 15, 50]
     A = 21
+    """
+    
+    file_name = sys.argv[1]
+    fp = open(file_name)
+    contents = fp.read()
+    fp.close()
+    V = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
 
     
     print "coins: %s, amount: %d\n" % (V, A)
@@ -42,20 +50,6 @@ def main():
     print "count: %d coins\n" % count
     V.reverse()
     
-    """
-    print "The input array is:\n", V,"\nThe amount of change we have to make is:\n",A
-    
-    
-    res = changegreedy(V, A)
-    print "\nBy using the Greedy Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-    
-    
-    res = changeslow(V, A)
-    print "\nBy using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
-    
-    res = changedp(V, A)
-    print "\nBy using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
-    """
 
 def changeslow(l, A):
 
