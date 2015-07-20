@@ -23,19 +23,39 @@ def main():
     for coin in coins:
         print "%d coins of %d value" % (coin['count'], coin['value'])
     print "count: %d coins\n" % count
+
+    print "---Brute Force Algorithm---"
+    coins, count = changeslow(V, A)
+    coins.reverse()
+    V.reverse()
+    for coin, value in enumerate(coins):
+        print "%d coins of %d value" % (value, V[coin])
+    print "count: %d coins\n" % count
+    V.reverse()
+
+    print "---Dynamic Programming---"
+    coins, count = changedp(V, A)
+    coins.reverse()
+    V.reverse()
+    for coin, value in enumerate(coins):
+        print "%d coins of %d value" % (value, V[coin])
+    print "count: %d coins\n" % count
+    V.reverse()
     
-    
+    """
     print "The input array is:\n", V,"\nThe amount of change we have to make is:\n",A
+    
     
     res = changegreedy(V, A)
     print "\nBy using the Greedy Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
+    
     
     res = changeslow(V, A)
     print "\nBy using the Brute Force Algorithm, the result array is:\n", res[0], "\nThe number of coins costed is:\n", res[1]
     
     res = changedp(V, A)
     print "\nBy using the Dynamic Programming Method, the result array is:\n", res[0], "\nthe number of coins costed is:\n", res[1]
-    
+    """
 
 def changeslow(l, A):
 
@@ -65,7 +85,7 @@ def changeslow(l, A):
             if minm > m:
                 minm = m
                 c = d
-    return [c,minm]
+    return c, minm
 
 
 def changegreedy(coins, amount):
@@ -110,7 +130,7 @@ def changedp(l, A):
                 cc[i][a] = cc[k][a] + 1
             else:
                 cc[i][a] = cc[k][a]
-    return [cc[A], T[A]]
+    return cc[A], T[A]
 
 
 if __name__ == '__main__':
