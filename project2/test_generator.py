@@ -2,13 +2,14 @@
 CS325 - Summer 2015
 Project 2
 Name: Tingzhi Li, Nicholas Nelson & Chunyang Zhang
-Date: 7/17/2015
+Date: 7/20/2015
 """
 
+import project2
 import sys
-import re
 import ast
-import os
+import time
+import csv
 
 
 def main():
@@ -19,14 +20,18 @@ def main():
         min = int(sys.argv[1])
         max = int(sys.argv[2])
         inc = int(sys.argv[3])
-        coins = sys.argv[4]
         coins = ast.literal_eval(sys.argv[4])
 
-        f = open('test.txt', 'w')
+        filename = "test" + time.strftime("%Y%m%d%-H%M%S") + ".txt"
+        f = open(filename, 'w')
+
         for i in range(min, (max + inc), inc):
             f.write(str(coins) + "\n")
             f.write(str(i) + "\n")
+
         f.close()
+
+        print "Successfully written to file:", filename
 
     except Exception as inst:
         if len(inst.args) > 0:
