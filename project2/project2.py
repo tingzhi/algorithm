@@ -29,16 +29,12 @@ def main():
 
         print "---Greedy Algorithm---"
         change, count = changegreedy(coins, amount)
-        for coin in change:
-            print "%d coins of %d value" % (coin['count'], coin['value'])
-        print "count: %d coins\n" % count
+        print "coins: %s, amount %d\n" % (change, count)
 
 
         print "---Dynamic Programming---"
         change, count = changedp(coins, amount)
-        for coin in change:
-            print "%d coins of %d value" % (coin['count'], coin['value'])
-        print "count: %d coins\n" % count
+        print "coins: %s, amount %d\n" % (change, count)
 
         """
         print "---Brute Force Algorithm---"
@@ -103,62 +99,51 @@ def changeslow(coins, amount):
 
 
 def changegreedy(coins, amount):
-    coins.sort()
-    coins.reverse()
     change = []
     total = 0
 
-    for i in coins:
-        count = amount/i
+    for i in reversed(coins):
+        count = amount / i
         total += count
-        amount = amount%i
-        change.append({'count': count, 'value': i})
+        amount = amount % i
+        change.append(count)
 
     return change, total
 
 def changedp(coins, amount):
-    coins.sort()
-    coins.reverse()
-    cache = {0: []}
+    size = len(coins)
+    sub_coins = [[0] * size] * (amount + 1)
+    sub_counts = [0] * (amount + 1)
 
-    print "cache[0]: %s, %d" % (cache[0], sum(cache[0]))
+    for sub_amount in range(1, amount + 1):
+        d = [0] * size
+        sub_coins[sub_amount] = [0] * size  # reset number of coins
 
-    for i in range(1, amount):
-        print i
-
-    for i in coins:
-        print i
-
-    """
-    n = len(l)
-    c = [0]*n
-    cc = [[0]*n]*(A+1)
-    T = [0]*(A+1)
-    for i in range (1,A+1):
-        d = [0]*n
-        cc[i] = [0]*n
-        for j in range (0,n):
-            k = i - l[j]
+        for i in range(size):
+            k = sub_amount - coins[i]
             if k >= 0:
-                d[j] = T[k] + 1
+                d[i] = sub_counts[k] + 1
             else:
-                d[j] = d[j-1]
-        T[i] = d[0]
-        index = 0
-        for x in range(1,n):
-            if d[x] < d[x-1]:
-                T[i] = d[x]
-                index = x
-        k = i - l[index]
-        for a in range(0,n):
-            if a == index:
-                cc[i][a] = cc[k][a] + 1
-            else:
-                cc[i][a] = cc[k][a]
-    return cc[A], T[A]
-    """
+                d[i] = d[i - 1]
 
-    return [], 0
+        sub_counts[sub_amount] = d[0]
+        index = 0
+
+        for i in range(1, size):
+            if d[i] < d[i - 1]:
+                sub_counts[sub_amount] = d[i]
+                index = i
+
+        k = sub_amount - coins[index]
+
+        for i in range(size):
+            if i == index:
+                sub_coins[sub_amount][i] = sub_coins[k][i] + 1
+            else:
+                sub_coins[sub_amount][i] = sub_coins[k][i]
+
+    return sub_coins[amount], sub_counts[amount]
+
 
 
 if __name__ == '__main__':
