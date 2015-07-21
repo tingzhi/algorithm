@@ -109,7 +109,6 @@ def main():
             writer = csv.writer(csvfile, delimiter=",", quotechar="'", quoting=csv.QUOTE_MINIMAL)
             writer.writerow(['set'] + ['size'] + ['algorithm'] + ['timing'])
 
-
             for i, amount in enumerate(amounts1):
                 print "\nProblem 4"
                 print "coins: %s, amount: %d\n" % (coins1, amount)
@@ -118,21 +117,21 @@ def main():
                 project2.changegreedy(coins1, amount)
                 t1 = time.time()
                 writer.writerow([i] + [amount] + ['changegreedy'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Brute Force Algorithm---"
                 t0 = time.time()
                 project2.changeslow(coins1, amount)
                 t1 = time.time()
                 writer.writerow([i] + ['changeslow'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Dynamic Programming---"
                 t0 = time.time()
                 project2.changedp(coins1, amount)
                 t1 = time.time()
-                writer.writerow([i] + ['changedp'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                writer.writerow([i] + [amount] + ['changedp'] + [(t1 - t0)*1000])
+                print "Time: %e\n" % (t1 - t0)*1000
 
             for i, amount in enumerate(amounts2):
                 print "\nProblem 5, V1"
@@ -142,21 +141,21 @@ def main():
                 project2.changegreedy(coins2, amount)
                 t1 = time.time()
                 writer.writerow([i] + [amount] + ['changegreedy'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Brute Force Algorithm---"
                 t0 = time.time()
                 project2.changeslow(coins2, amount)
                 t1 = time.time()
                 writer.writerow([i] + ['changeslow'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Dynamic Programming---"
                 t0 = time.time()
                 project2.changedp(coins2, amount)
                 t1 = time.time()
-                writer.writerow([i] + ['changedp'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                writer.writerow([i] + [amount] + ['changedp'] + [(t1 - t0)*1000])
+                print "Time: %e\n" % (t1 - t0)*1000
 
             for i, amount in enumerate(amounts2):
                 print "\nProblem 5, V2"
@@ -166,21 +165,21 @@ def main():
                 project2.changegreedy(coins3, amount)
                 t1 = time.time()
                 writer.writerow([i] + [amount] + ['changegreedy'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Brute Force Algorithm---"
                 t0 = time.time()
                 project2.changeslow(coins3, amount)
                 t1 = time.time()
                 writer.writerow([i] + ['changeslow'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Dynamic Programming---"
                 t0 = time.time()
                 project2.changedp(coins3, amount)
                 t1 = time.time()
-                writer.writerow([i] + ['changedp'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                writer.writerow([i] + [amount] + ['changedp'] + [(t1 - t0)*1000])
+                print "Time: %e\n" % (t1 - t0)*1000
 
             for i, amount in enumerate(amounts2):
                 print "\nProblem 6"
@@ -190,21 +189,21 @@ def main():
                 project2.changegreedy(coins4, amount)
                 t1 = time.time()
                 writer.writerow([i] + [amount] + ['changegreedy'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Brute Force Algorithm---"
                 t0 = time.time()
                 project2.changeslow(coins4, amount)
                 t1 = time.time()
                 writer.writerow([i] + ['changeslow'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                print "Time: %e\n" % (t1 - t0)*1000
                 """
                 print "---Dynamic Programming---"
                 t0 = time.time()
                 project2.changedp(coins4, amount)
                 t1 = time.time()
-                writer.writerow([i] + ['changedp'] + [(t1 - t0)*1000])
-                print "Time: %d" % (t1 - t0)*1000
+                writer.writerow([i] + [amount] + ['changedp'] + [(t1 - t0)*1000])
+                print "Time: %e\n" % (t1 - t0)*1000
 
         print "Timings successfully written to file: timings.csv"
 
@@ -213,7 +212,9 @@ def main():
             writer = csv.writer(csvfile, delimiter=",", quotechar="'", quoting=csv.QUOTE_MINIMAL)
             writer.writerow(['set'] + ['size'] + ['algorithm'] + ['coins'])
 
+            print "Problem 4:",
             for i, amount in enumerate(amounts1):
+                print ".",
                 change, count = project2.changegreedy(coins1, amount)
                 writer.writerow([i] + [amount] + ['changegreedy'] + [count])
                 """
@@ -222,8 +223,11 @@ def main():
                 """
                 change, count = project2.changedp(coins1, amount)
                 writer.writerow([i] + [amount] + ['changedp'] + [count])
+            print ""
 
+            print "Problem 5, V1:",
             for i, amount in enumerate(amounts2):
+                print ".",
                 change, count = project2.changegreedy(coins2, amount)
                 writer.writerow([i] + [amount] + ['changegreedy'] + [count])
                 """
@@ -232,8 +236,11 @@ def main():
                 """
                 change, count = project2.changedp(coins2, amount)
                 writer.writerow([i] + [amount] + ['changedp'] + [count])
+            print ""
 
+            print "Problem 5, V2:",
             for i, amount in enumerate(amounts2):
+                print ".",
                 change, count = project2.changegreedy(coins3, amount)
                 writer.writerow([i] + [amount] + ['changegreedy'] + [count])
                 """
@@ -242,8 +249,11 @@ def main():
                 """
                 change, count = project2.changedp(coins3, amount)
                 writer.writerow([i] + [amount] + ['changedp'] + [count])
+            print ""
 
+            print "Problem 6",
             for i, amount in enumerate(amounts2):
+                print ".",
                 change, count = project2.changegreedy(coins4, amount)
                 writer.writerow([i] + [amount] + ['changegreedy'] + [count])
                 """
@@ -252,6 +262,7 @@ def main():
                 """
                 change, count = project2.changedp(coins4, amount)
                 writer.writerow([i] + [amount] + ['changedp'] + [count])
+            print ""
 
         print "Results successfully written to file: results.csv"
 
