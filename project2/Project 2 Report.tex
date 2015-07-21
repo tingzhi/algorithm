@@ -90,9 +90,7 @@ function changeslow(V[n],A){
 }
 \end{lstlisting}
 
-
 In this algorithm, the running-time complexity is
-
 \begin{eqnarray*}
 T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
 		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
@@ -160,6 +158,7 @@ In this algorithm, the running-time complexity is
 \begin{eqnarray*}
 T(n) = \Theta(nA)
 \end{eqnarray*}
+
 where n is the number of different coins and A is the amount needed to be changed.
 
 
@@ -169,10 +168,11 @@ where n is the number of different coins and A is the amount needed to be change
 The pseudo-code for Dynamic Programming is shown above in Section 1.2.3.\\
 
 As proved before, the running time for this method is
-
 \begin{eqnarray*}
-T(n)  =  \Theta(2^n)\\
+T(n)  =  \Theta(nA)
 \end{eqnarray*}
+
+where n is the number of different coins and A is the amount needed to be changed.
 
 In this programming method,\\
 
