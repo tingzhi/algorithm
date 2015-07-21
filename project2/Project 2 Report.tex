@@ -44,7 +44,7 @@
 
 \begin{lstlisting}[language=c]
 function changeslow(V[n],A){
-	C[n] = 0
+	C[n] = [0,...,0]
 	for (j = 0; j < n; j++){
 		if (A == V[j]){
 			m = 1
@@ -83,6 +83,7 @@ T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
 		& = & (2^n-2)c\\
 		& = & \Theta(2^n)\\
 \end{eqnarray*}
+Note that the n is the value of the amount needed to be changed, but not the index number of the list.
 
 
 
@@ -90,21 +91,49 @@ T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
 
 \begin{lstlisting}[language=c]
 function changegreedy(V[n],A) {
+	reverse(V[n])
+	c[n] = [0,...,0]
 	for (i = 0; i < n; i++){
-		
-
+		temp = A - V[i]
+		while (temp >= 0){
+		    A = temp
+		    c[i] += 1
+		    m += 1
+		    temp = A - V[i]
+		}
+	}
+	return c, m
 }
 \end{lstlisting}
 
-
+In this algorithm, the running-time complexity is
+\begin{eqnarray*}
+T(n) = \Theta(n), where n is the amount needed to be changed.
+\end{eqnarray*}
 
 \subsection{Dynamic Programming}
 
+\begin{lstlisting}[language=c]
+function changedp(V[n], A){
+	c[A][n] = [[0,...,0],...,[0,...,0]]
+	T[A] = [0,...,0]
+	temp[n] = [0,...,0]
+	for (i = 1; i <= A; i++){
+		for (j = 0; j < n; j++){
+			k = j - V[j]
+			if (k >= 0){
+				temp[j] = T[k] + 1
+		T[i] = min(temp[j])				\\The index of the minimum value of array temp is j.
+		c[i][j] = c[k][j] + 1
+	}
+	return c[A], T[A]
+}
+\end{lstlisting}
 
-
-
-
-
+In this algorithm, the running-time complexity is
+\begin{eqnarray*}
+T(n) = \Theta(nA)
+\end{eqnarray*}
 
 
 
