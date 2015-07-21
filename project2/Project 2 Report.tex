@@ -156,10 +156,10 @@ function changedp(V[n], A){
 
 In this algorithm, the running-time complexity is:
 \begin{eqnarray*}
-T(n) = \Theta(nA)
+T(n) = \Theta(Cn)
 \end{eqnarray*}
 
-where $n$ is the number of different coins and $A$ is the target change amount.
+where $C$ is the number of different kinds of coins and $n$ is the target change amount.
 
 
 \section{Proof for Dynamic Programming}
@@ -169,10 +169,10 @@ The pseudo-code for Dynamic Programming is shown above in Section 1.2.3.\\
 
 As proved before, the running time for this method is
 \begin{eqnarray*}
-T(n)  =  \Theta(nA)
+T(n)  =  \Theta(Cn)
 \end{eqnarray*}
 
-where $n$ is the number of different coins and $A$ is the target change amount.\\
+where $C$ is the number of different kinds of coins and $n$ is the target change amount.\\
 
 In this programming method,\\
 
@@ -180,7 +180,7 @@ In this programming method,\\
 
 1. Array $V[n]$ is sorted, of which the minimum value is always 1.
  
-2. Number $A$ that needed to be turned into change is a positive integer which is greater than 0.\\
+2. Number $v$ that needed to be turned into change is a positive integer which is greater than 0.\\
 
 \emph{Postcondition:}
 
@@ -232,9 +232,15 @@ At termination, $T[v] = T [v - V[i]]$. Set $T[k] = T[v - V[i]]$, Then $T[k] = T[
 
 \section{Situation 1}
 
+
 \section{Situation 2}
 
+
+
 \section{Situation 3}
+
+
+
 
 \section{Running Time Comparison}
 
@@ -242,7 +248,16 @@ At termination, $T[v] = T [v - V[i]]$. Set $T[k] = T[v - V[i]]$, Then $T[k] = T[
 
 \section{Special Coins' Value Case}
 
+\ \ \ If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
 
+The reason is that every larger coin is a multiple of its lower level coin, so that when the number of lower level coin satisfy a number of p, it will count to the larger one. For instance, consider $p^2 = p*p$. If there are $(p-1)*p$ amount of money that needed to be changed, the result will be $p-1$ $p^1$ coins, which is the minimum cost. But when there are $p^2$ amount of money, the result will be 1 of $p^2$ coin. The same idea satisfy all of the larger coins. Therefore, if we use Dynamic Programming Method, it will choose the minimum number when the change approaches $p^i$. If we use Greedy Algorithm, we will consider the largest power of p, and then calculate the lower level power of p and so on. In this case, although the order of this algorithm is reversed from Dynamic Programming Method but the result would be the same because they all depend on the power of p. In this case, the result of coins cost will be the same.
 
+However, if we consider the running-time complexity, the Greedy Algorithm would be faster than Dynamic Programming Method. As we proved before, the running time for these two approaches are:
+\begin{eqnarray*}
+Dynamic Programming&:& \Theta(Cn)\\
+Greedy Algorithm&:& \Theta(n)\\
+\end{eqnarray*}
 
-\end{document}
+From this we can see that the Greedy Algorithm only depends on the amount of money needed to be changed, yet the Dynamic Programming depends on not only the amount, but also how many kinds of coins there are. Accordingly, the Greedy Algorithm would be faster in contrast to Dynamic Programming, especially when the amount of money is very large.
+
+\end{document} 
