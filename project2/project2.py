@@ -33,6 +33,7 @@ def main():
             print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
 
+
         print "---Dynamic Programming---"
         change, count = changedp(coins, amount)
         for coin in change:
