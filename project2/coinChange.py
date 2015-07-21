@@ -11,132 +11,76 @@ import ast
 
 
 def main():
-    #file_name = sys.argv[1]
-    #fp = open(file_name)
-    #contents = fp.read()
-    #fp.close()
-    #arrays = [ast.literal_eval(l) for l in re.findall(r'\[.*\]', contents)]
+    lines = []
+    try:
+        with open(sys.argv[1]) as f:
+            lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
+            lines = filter(None, lines)  # remove blank lines from list
+            lines = iter(lines)  # convert list to iterator to allow iterating over two lines at a time
+    except IndexError:
+        print "Error: Missing value for filename. Please use command: python project2.py <filename>"
 
-    #for count, array in enumerate(arrays):
-     #   print (count + 1), ":", array, "\n"
-
-     ret = changeGreedy()
-     print "Greedy algorithm: for change of 75 need " + str(ret) + "coins"
-
-     #   res = enumeration(array)
-      #  print "Enumeration:\t\t", res['subarray'], ", sum:", res['maxsum']
-
-       # res = better_enumeration(array)
-        #print "Better Enumeration:\t", res['subarray'], ", sum:", res['maxsum']
-
-        #print "Divide and Conquer:\t", "sum:", divide_n_conquer(array)
-
-        #res = linear(array)
-        #print "Linear-Time:\t\t", res['subarray'], ", sum:", res['maxsum'], "\n"
-        #print "--------------------------------------------"
-
-def changeGreedy2():
-    numOfCoin = 0
-    change = 75
-    array = [1, 5, 10, 25, 50]
-    c = [0,0,0,0,0]
-
-    for i in range(4, 0, -1):
-        temp = change
-        while temp > 0:
-            temp = temp - array[i]
-            if temp >= 0 :
-                change = temp
-                c[i] = c[i] + 1
-                numOfCoin = numOfCoin + 1
-    return numOfCoin
+    for i, line in enumerate(lines):
+        coins = ast.literal_eval(line)
+        amount = ast.literal_eval(next(lines))
+        
+        print "Test: %d" % (i + 1)
+        print "coins: %s, amount: %d\n" % (coins, amount)
+        
+        print "---Greedy Algorithm---"
+        change, count = changegreedy(coins, amount)
+        for coin in change:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
+        print "count: %d coins\n" % count
 
 
+        print "---Dynamic Programming---"
+        change, count = changedp(coins, amount)
+        for coin in change:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
+        print "count: %d coins\n" % count
+        
+        """
+            print "---Brute Force Algorithm---"
+            change, count = changeslow(coins, amount)
+            for coin in change:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
+            print "count: %d coins\n" % count
+            """
+        
+        print "---Brute Force Algorithm---"
+        change, count = changeslow(coins, amount)
+        print change
+        print count
 
-def enumeration(l):
-    if not l:   # list is empty
-        return dict(subarray=l, maxsum="none")
+def changeGreedy():
+    change = []
+    total = 0
+    
+    for i in range(len(coins)-1 , -1 , -1):
+        count = amount/coins[i]
+        total += count
+        amount = amount % coins[i]
+        change.append({'count': count, 'value': i})
+    
+    return change, total
 
-    maxsum = start = end = 0
-    n = len(l)
-    for i in range(0, n):
-        for j in range(i, n):
-            ksum = sum(l[i:j+1])
-
-            if ksum > maxsum:
-                maxsum = ksum
-                start = i
-                end = j + 1
-
-    return dict(subarray=l[start:end], maxsum=maxsum)
-
-
-def better_enumeration(l):
-    if not l:   # list is empty
-        return dict(subarray=l, maxsum="none")
-
-    maxsum = l[0]
-    start = 0
-    end = 1
-    n = len(l)
-    for i in range(0, n):
-        ksum = 0
-        for j in range(i, n):
-            ksum += l[j]
-
-            if ksum > maxsum:
-                maxsum = ksum
-                start = i
-                end = j + 1
-
-    return dict(subarray=l[start:end], maxsum=maxsum)
-
-
-def divide_n_conquer(l):
-    n = len(l)
-    mid_idx = n/2
-
-    if n == 0:
-        return 0
-    elif n == 1:
-        return l[0]
-
-    left = divide_n_conquer(l[:mid_idx])
-    right = divide_n_conquer(l[mid_idx:])
-
-    left_half = right_half = 0
-
-    # left-side evaluation
-    accum = 0
-    for x in l[mid_idx-1::-1]:
-        accum += x
-        left_half = max(left_half, accum)
-
-    # right-side evaluation
-    accum = 0
-    for x in l[mid_idx:]:
-        accum += x
-        right_half = max(right_half, accum)
-
-    return max(left, right, left_half + right_half)
-
-
-def linear(l):
-    best = cur = cur_idx = start = end = 0
-
-    for i, val in enumerate(l):
-        if cur + val > 0:
-            cur += val
-        else:
-            cur = 0
-            cur_idx = i + 1
-
-        if cur > best:
-            start = cur_idx
-            end = i + 1
-            best = cur
-
-    return dict(subarray=l[start:end], maxsum=best)
+def changeslow(coins, amount):
+    min = amount
+    change = [0] * len(coins)
+    if amount in coins:
+        change[coins.index(amount)] += 1
+        return change, 1
+    else:
+        for i in range(1,amount):
+            change1, result1 = changeslow(coins, i)
+            change2, result2 = changeslow(coins, amount - i)
+            result = result1 + result2
+            for i in range(0,len(coins)):
+                change[i] = change1[i] + change2[i]
+            if min > result:
+                min = result
+    return change, min
 
 
 if __name__ == '__main__':

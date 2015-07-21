@@ -47,10 +47,31 @@ def main():
             print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
         """
-    
 
-def changeslow(l, A):
+        print "---Brute Force Algorithm---"
+        change, count = changeslow(coins, amount)
+        print change
+        print count
 
+
+def changeslow(coins, amount):
+    min = amount
+    change = [0] * len(coins)
+    if amount in coins:
+        change[coins.index(amount)] += 1
+        return change, 1
+    else:
+        for i in range(1,amount):
+            change1, result1 = changeslow(coins, i)
+            change2, result2 = changeslow(coins, amount - i)
+            result = result1 + result2
+            for i in range(0,len(coins)):
+                change[i] = change1[i] + change2[i]
+            if min > result:
+                min = result
+    return change, min
+
+'''
     m = 0
     n = len(l)
     c = [0]*n
@@ -78,6 +99,7 @@ def changeslow(l, A):
                 minm = m
                 c = d
     return c, minm
+'''
 
 
 def changegreedy(coins, amount):
@@ -93,7 +115,6 @@ def changegreedy(coins, amount):
         change.append({'count': count, 'value': i})
 
     return change, total
-
 
 def changedp(coins, amount):
     coins.sort()
