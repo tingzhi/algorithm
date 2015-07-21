@@ -52,8 +52,7 @@ def main():
         print change
         print count
 
-        f.write(str(change) + "\n")
-        f.write(str(count) + "\n")
+        f.write(str(amount) + ":" + str(count) + "\n")
 
     f.close()
 
