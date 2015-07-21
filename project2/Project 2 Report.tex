@@ -38,7 +38,7 @@
 \maketitle
 
 
-\chapter{Theoretical Run-time Analysis}
+\chapter{Theoretical Analysis}
 
 \section{Dynamic Programming Table Filling Logic}
 
@@ -60,27 +60,8 @@ For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would l
 
 Since we start to fill in the table from base case, for each step we could guarantee that the optimal number of coins we need for that particular change is found. So in the end, we could be sure that the number of coins we need for our target change is optimal as well.
 
-\section{Pseudo-Code}
+\section {Pseudo-Code and Theoretical Running-Time Analysis}
 \subsection {Brute Force Algorithm}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\chapter{Pseudo-Code and Theoretical Run-time Analysis}
-
-\section {Brute Force Algorithm}
 
 \begin{lstlisting}[language=c]
 function changeslow(V[n],A){
@@ -127,7 +108,7 @@ Note that the n is the value of the amount needed to be changed, but not the ind
 
 
 
-\section{Greedy Algorithm}
+\subsection{Greedy Algorithm}
 
 \begin{lstlisting}[language=c]
 function changegreedy(V[n],A) {
@@ -151,7 +132,7 @@ In this algorithm, the running-time complexity is
 T(n) = \Theta(n), where n is the amount needed to be changed.
 \end{eqnarray*}
 
-\section{Dynamic Programming}
+\subsection{Dynamic Programming}
 
 \begin{lstlisting}[language=c]
 function changedp(V[n], A){
@@ -172,11 +153,11 @@ function changedp(V[n], A){
 
 In this algorithm, the running-time complexity is
 \begin{eqnarray*}
-T(n) = \Theta(nA), where n is the number of different coins and A is the amount needed to be changed.
+T(n) = \Theta(nA)
 \end{eqnarray*}
+where n is the number of different coins and A is the amount needed to be changed.
 
-
-\chapter{Proof for Dynamic Programming}
+\section{Proof for Dynamic Programming}
 
 The pseudo-code for Dynamic Programming is shown above in Chapter 2, Section 3.
 
@@ -199,15 +180,45 @@ T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
 
 2. The number of each coin cost is found.\\
 
+\ \ For
 \begin{eqnarray*}
-For\ \  T[v] = min\{T[v-V[i]] + 1\},\ T[0] = 0
+T[v] = min\{T[v - V[i]] + 1\},\ T[0] = 0
 \end{eqnarray*}
 
 \emph{Precondition:}
 
-1. v - V[i] is greater than or equal to 0
+v - V[i] is greater than or equal to 0.\\
 
-2. 
+\emph{Postcondition:}
+
+The minimum of T[v - V[i]] + 1 is found.\\
+
+\emph{Base Case:}
+
+T[0] = 0\\
+
+\emph{Inductive Hypothesis:}
+
+Assume T[v - V[i]] is the minimum of T[(v - V[i]) - V[j]].\\
+
+\emph{Inductive Step:}
+
+Show that T[n] is the minimum.
+
+-\ First, T[0] is 0, which is already the minimum.
+
+-\ Second, T[1] is calculated by using T[0], which is also the minimum.
+
+-\ Third, T[k] is calculated by using T[k - V[i]], where
+
+\ \ 1. T[k - V[i]] is now fulfill the precondition of T[v].
+
+\ \ 2. The postcondition of T[v] guarantees that T[k] is minimum.
+
+\emph{Termination:}
+
+
+
 
 
 
