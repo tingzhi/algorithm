@@ -24,25 +24,18 @@ def main():
         coins = ast.literal_eval(line)
         amount = ast.literal_eval(next(lines))
 
-        print "Test: %d" % (i + 1)
+        print "Set: %d" % (i + 1)
         print "coins: %s, amount: %d\n" % (coins, amount)
 
         print "---Greedy Algorithm---"
         change, count = changegreedy(coins, amount)
-        print "coins: %s, amount %d\n" % (change, count)
-
+        print change
+        print count
 
         print "---Dynamic Programming---"
         change, count = changedp(coins, amount)
-        print "coins: %s, amount %d\n" % (change, count)
-
-        """
-        print "---Brute Force Algorithm---"
-        change, count = changeslow(coins, amount)
-        for coin in change:
-            print "%d coins of %d value" % (coin['count'], coin['value'])
-        print "count: %d coins\n" % count
-        """
+        print change
+        print count
 
         print "---Brute Force Algorithm---"
         change, count = changeslow(coins, amount)
