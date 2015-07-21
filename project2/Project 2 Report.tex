@@ -60,7 +60,10 @@ For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would l
 
 Since we start to fill in the table from base case, for each step we could guarantee that the optimal number of coins we need for that particular change is found. So in the end, we could be sure that the number of coins we need for our target change is optimal as well.
 
+
 \section {Pseudo-Code and Theoretical Running-Time Analysis}
+
+
 \subsection {Brute Force Algorithm}
 
 \begin{lstlisting}[language=c]
@@ -86,7 +89,10 @@ function changeslow(V[n],A){
 	return min, Cmin[n]
 }
 \end{lstlisting}
+
+
 In this algorithm, the running-time complexity is
+
 \begin{eqnarray*}
 T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
 		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
@@ -104,9 +110,8 @@ T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
 		& = & (2^n-2)c\\
 		& = & \Theta(2^n)\\
 \end{eqnarray*}
+
 Note that the n is the value of the amount needed to be changed, but not the index number of the list.
-
-
 
 \subsection{Greedy Algorithm}
 
@@ -156,6 +161,7 @@ In this algorithm, the running-time complexity is
 T(n) = \Theta(nA)
 \end{eqnarray*}
 where n is the number of different coins and A is the amount needed to be changed.
+
 
 \section{Proof for Dynamic Programming}
 
@@ -222,14 +228,19 @@ Show that T[n] is the minimum.
 
 
 
+\chapter{Experimental Analysis}
 
-\chapter{Theoretical Run-time Analysis}
+\section{Situation 1}
 
-\section{Pseudo-Code}
-\subsection {Brute Force Algorithm}
+\section{Situation 2}
 
+\section{Situation 3}
 
+\section{Running Time Comparison}
 
+\section{Exploring Relationship Between Running Time and Number of Denominations}
+
+\section{Special Coins' Value Case}
 
 
 
