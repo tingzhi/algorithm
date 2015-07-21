@@ -42,9 +42,9 @@
 
 \section{Dynamic Programming Table Filling Logic}
 
-In this dynamic programming algorithm, its table is consisit of avaiable coins as column header and change as row header. The actual minimum number of coins for that particular change will be filled in the table accordingly. The base case of this table is $T[0]=0$, which means the first row will be filled with zeroes. For $T[1]$ we need to look up $T[1-V[i]]$ where $v[i]\leq 1$. Same logic applied to all the following cases.
+The table for the dynamic programming algorithm consists of avaiable coins as the column header and the amount of change as the row header. The minimum number of coins for that particular amount of change is filled into the cells of the table according to the algorithm. The base case of this table is $T[0]=0$, which means the first row will be filled with zeroes. For $T[1]$ we need to look up $T[1-V[i]]$ where $v[i]\leq 1$. The same logic applies to all the following cases.
 
-For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would look like the following.
+For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would look like the following:\\
 
 \begin{tabular}{|c|c|c|c|c|}
 	\hline & \multicolumn{4}{|c|}{Avaiable coins' value} \\
@@ -56,9 +56,9 @@ For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would l
 	\hline 4 & 4 & 2 & 2 & 2 \\ 
 	\hline 5 & 5 & 3 & 1 & 1 \\ 
 	\hline 
-\end{tabular} 
+\end{tabular}\\\\
 
-Since we start to fill in the table from base case, for each step we could guarantee that the optimal number of coins we need for that particular change is found. So in the end, we could be sure that the number of coins we need for our target change is optimal as well.
+Since the table is filled in from the base case, for each step it is possible to guarantee that the optimal number of coins needed for a particular amount of change is found based upon previously derived solutions. This allows the dynamic algorithm to arrive at the optimal solution to any target amount of change.
 
 
 \section {Pseudo-Code and Theoretical Running-Time Analysis}
@@ -90,7 +90,7 @@ function changeslow(V[n],A){
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is
+In this algorithm, the running-time complexity is given by:
 \begin{eqnarray*}
 T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
 		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
@@ -109,7 +109,7 @@ T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
 		& = & \Theta(2^n)\\
 \end{eqnarray*}
 
-Note that the n is the value of the amount needed to be changed, but not the index number of the list.
+Note that the $n$ is the target change amount; not the index number of the list.
 
 \subsection{Greedy Algorithm}
 
@@ -130,11 +130,11 @@ function changegreedy(V[n],A) {
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is
+In this algorithm, the running-time complexity is:
 \begin{eqnarray*}
 T(n) = \Theta(n)
 \end{eqnarray*}
- where n is the amount needed to be changed.
+ where $n$ is the target change amount.
 \subsection{Dynamic Programming}
 
 \begin{lstlisting}[language=c]
@@ -154,12 +154,12 @@ function changedp(V[n], A){
 }
 \end{lstlisting}
 
-In this algorithm, the running-time complexity is
+In this algorithm, the running-time complexity is:
 \begin{eqnarray*}
-T(n) = \Theta(nA)
+T(n) = \Theta(Cn)
 \end{eqnarray*}
 
-where n is the number of different coins and A is the amount needed to be changed.
+where $C$ is the number of different kinds of coins and $n$ is the target change amount.
 
 
 \section{Proof for Dynamic Programming}
@@ -169,18 +169,18 @@ The pseudo-code for Dynamic Programming is shown above in Section 1.2.3.\\
 
 As proved before, the running time for this method is
 \begin{eqnarray*}
-T(n)  =  \Theta(nA)
+T(n)  =  \Theta(Cn)
 \end{eqnarray*}
 
-where n is the number of different coins and A is the amount needed to be changed.
+where $C$ is the number of different kinds of coins and $n$ is the target change amount.\\
 
 In this programming method,\\
 
 \emph{Precondition:}
 
-1. Array V[n] is sorted, of which the minimum value is always 1.
+1. Array $V[n]$ is sorted, of which the minimum value is always 1.
  
-2. Number A that needed to be changed is a positive integer which is greater than 0.\\
+2. Number $v$ that needed to be turned into change is a positive integer which is greater than 0.\\
 
 \emph{Postcondition:}
 
@@ -195,46 +195,52 @@ T[v] = min\{T[v - V[i]] + 1\},\ T[0] = 0
 
 \emph{Precondition:}
 
-v - V[i] is greater than or equal to 0.\\
+$v - V[i]$ is greater than or equal to 0.\\
 
 \emph{Postcondition:}
 
-The minimum of T[v - V[i]] + 1 is found.\\
+The minimum of $T[v - V[i]] + 1$ is found.\\
 
 \emph{Base Case:}
 
-T[0] = 0\\
+$T[0] = 0$\\
 
 \emph{Inductive Hypothesis:}
 
-Assume T[v - V[i]] is the minimum of T[(v - V[i]) - V[j]].\\
+Assume $T[v - V[i]]$ is the minimum of $T[(v - V[i]) - V[j]]$.\\
 
 \emph{Inductive Step:}
 
-Show that T[n] is the minimum.
+Show that $T[n]$ is the minimum.
 
--\ First, T[0] is 0, which is already the minimum.
+-\ First, $T[0]$ is 0, which is already the minimum.
 
--\ Second, T[1] is calculated by using T[0], which is also the minimum.
+-\ Second, $T[1]$ is calculated by using $T[0]$, which is also the minimum.
 
--\ Third, T[k] is calculated by using T[k - V[i]], where
+-\ Third, $T[k]$ is calculated by using $T[k - V[i]]$, where
 
-\ \ 1. T[k - V[i]] is now fulfill the precondition of T[v].
+\ \ 1. $T[k - V[i]]$ is now fulfill the precondition of $T[v]$.
 
-\ \ 2. The postcondition of T[v] guarantees that T[k] is minimum.\\
+\ \ 2. The postcondition of $T[v]$ guarantees that $T[k]$ is minimum.\\
 
 \emph{Termination:}
 
-At termination, T[v] = T [v - V[i]]. Set T[k] = T[v - V[i]], Then T[k] = T[k - V[i]]. By the loop to choose the minimum, each k will terminate at several k - V[i] and choose the smallest value of T[k] + 1, where each T[k - V[i]] is already at its minimum value because all of the T[k] will depend all the way back on to T[0], which is 0. This loop will guarantee the T[v] gets its minimum.
+At termination, $T[v] = T [v - V[i]]$. Set $T[k] = T[v - V[i]]$, Then $T[k] = T[k - V[i]]$. By the loop to choose the minimum, each $k$ will terminate at several $k - V[i]$ and choose the smallest value of $T[k] + 1$, where each $T[k - V[i]]$ is already at its minimum value because all of the $T[k]$ will depend all the way back on to $T[0]$, which is 0. This loop will guarantee the $T[v]$ gets its minimum.
 
 
 \chapter{Experimental Analysis}
 
 \section{Situation 1}
 
+
 \section{Situation 2}
 
+
+
 \section{Situation 3}
+
+
+
 
 \section{Running Time Comparison}
 
@@ -242,7 +248,16 @@ At termination, T[v] = T [v - V[i]]. Set T[k] = T[v - V[i]], Then T[k] = T[k - V
 
 \section{Special Coins' Value Case}
 
+\ \ \ If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
 
+The reason is that every larger coin is a multiple of its lower level coin, so that when the number of lower level coin satisfy a number of p, it will count to the larger one. For instance, consider $p^2 = p*p$. If there are $(p-1)*p$ amount of money that needed to be changed, the result will be $p-1$ $p^1$ coins, which is the minimum cost. But when there are $p^2$ amount of money, the result will be 1 of $p^2$ coin. The same idea satisfy all of the larger coins. Therefore, if we use Dynamic Programming Method, it will choose the minimum number when the change approaches $p^i$. If we use Greedy Algorithm, we will consider the largest power of p, and then calculate the lower level power of p and so on. In this case, although the order of this algorithm is reversed from Dynamic Programming Method but the result would be the same because they all depend on the power of p. In this case, the result of coins cost will be the same.
 
+However, if we consider the running-time complexity, the Greedy Algorithm would be faster than Dynamic Programming Method. As we proved before, the running time for these two approaches are:
+\begin{eqnarray*}
+Dynamic Programming&:& \Theta(Cn)\\
+Greedy Algorithm&:& \Theta(n)\\
+\end{eqnarray*}
 
-\end{document}
+From this we can see that the Greedy Algorithm only depends on the amount of money needed to be changed, yet the Dynamic Programming depends on not only the amount, but also how many kinds of coins there are. Accordingly, the Greedy Algorithm would be faster in contrast to Dynamic Programming, especially when the amount of money is very large.
+
+\end{document} 
