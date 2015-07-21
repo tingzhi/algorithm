@@ -28,22 +28,24 @@ def main():
         print "coins: %s, amount: %d\n" % (coins, amount)
 
         print "---Greedy Algorithm---"
-        coins, count = changegreedy(coins, amount)
-        for coin in coins:
-            print "%d coins of %d value" % (coin['count'], coin['value'])
-        print "count: %d coins\n" % count
-
-        print "---Brute Force Algorithm---"
-        coins, count = changeslow(coins, amount)
-        for coin in coins:
+        change, count = changegreedy(coins, amount)
+        for coin in change:
             print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
 
         print "---Dynamic Programming---"
-        coins, count = changedp(coins, amount)
-        for coin in coins:
+        change, count = changedp(coins, amount)
+        for coin in change:
             print "%d coins of %d value" % (coin['count'], coin['value'])
         print "count: %d coins\n" % count
+
+        """
+        print "---Brute Force Algorithm---"
+        change, count = changeslow(coins, amount)
+        for coin in change:
+            print "%d coins of %d value" % (coin['count'], coin['value'])
+        print "count: %d coins\n" % count
+        """
     
 
 def changeslow(l, A):
@@ -87,13 +89,25 @@ def changegreedy(coins, amount):
         count = amount/i
         total += count
         amount = amount%i
-        change.append({'count':count, 'value':i})
+        change.append({'count': count, 'value': i})
 
-    coins.reverse()
     return change, total
 
 
-def changedp(l, A):
+def changedp(coins, amount):
+    coins.sort()
+    coins.reverse()
+    cache = {0: []}
+
+    print "cache[0]: %s, %d" % (cache[0], sum(cache[0]))
+
+    for i in range(1, amount):
+        print i
+
+    for i in coins:
+        print i
+
+    """
     n = len(l)
     c = [0]*n
     cc = [[0]*n]*(A+1)
@@ -120,6 +134,9 @@ def changedp(l, A):
             else:
                 cc[i][a] = cc[k][a]
     return cc[A], T[A]
+    """
+
+    return [], 0
 
 
 if __name__ == '__main__':
