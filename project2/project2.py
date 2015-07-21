@@ -85,6 +85,7 @@ def changegreedy(coins, amount):
         amount = amount % i
         change.append(count)
 
+    change.reverse()
     return change, total
 
 def changedp(coins, amount):
