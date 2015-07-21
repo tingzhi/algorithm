@@ -40,284 +40,99 @@
 \chapter{Theoretical Run-time Analysis}
 
 \section{Pseudo-Code}
-\subsection {Enumeration Algorithm}
+\subsection {Brute Force Algorithm}
 
 \begin{lstlisting}[language=c]
-function enumeration(a[n]) {
-	max = a[0];
-	for (i = 0; i < n; i++) {
-		for (j = i; j < n; j++) {
-			sum = sum(a[i:j]);
-			if (sum > max)
-				max = sum;
+function changeslow(V[n],A){
+	C[n] = 0
+	for (j = 0; j < n; j++){
+		if (A == V[j]){
+			m = 1
+			C[j] += 1
+			return m, C[n]
+	}
+	min = A
+	for (i = 1; i < A; i++){
+		m1, c1[n] = changeslow(V[n], i)
+		m2, c2[n] = changeslow(V[n], A - i)
+		m = m1 + m2
+		c[n] = c1[n] + c2[n]
+		if (min > m){
+			min = m
+			Cmin[n] = c[n]
 		}
 	}
+	return min, Cmin[n]
 }
 \end{lstlisting}
-
-In this algorithm, since sum = sum(a[i:j]) costs $\Theta(n)$ because potentially this sum is an [i to j] loop. So the running-time complexity is
-\begin{eqnarray*}
-T(n) = \Theta(n^3)
-\end{eqnarray*}
-
-\subsection{Better Enumeration Algorithm}
-
-\begin{lstlisting}[language=c]
-function beter_enumeration(a[n]) {
-	max = a[0];
-	for (i = 0; i < n; i++) {
-		sum = 0;
-		for (j = i; j < n; j++) {
-			sum = sum + a[j];
-			if (sum > max)
-				max = sum;
-		}
-	}
-	return max;
-}
-\end{lstlisting}
-
 In this algorithm, the running-time complexity is
 \begin{eqnarray*}
-T(n) = \Theta(n^2)
+T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
+		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
+T(1)	& = & c\\
+T(2) 	& = & 2T(1) + c\\
+T(3) 	& = & 2(1+2)T(1) + (1+2)c\\
+T(4) 	& = & 2(1+2+2(1+2))T(1) + (1+2+4)c\\
+	 	& = & (2+4)(1+2)T(1) + (1+2+4)c\\
+T(5) 	& = & (2+4+8)(1+2)T(1) + (1+2+4+8)c\\
+		& . & \\
+		& . & \\
+		& . & \\
+T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
+		& = & (2^{n-1}-2)T(1) + 2^{n-1}c\\
+		& = & (2^n-2)c\\
+		& = & \Theta(2^n)\\
 \end{eqnarray*}
 
-\subsection{Divide and Conquer Algorithm}
+
+
+\subsection{Greedy Algorithm}
 
 \begin{lstlisting}[language=c]
-function divide_n_conquer(a[n]) {
-	divide_n_conquer(a[n/2]);
-	divide_n_conquer(a[n/2]);
-	
-	/*right half method*/
-	sum = 0; rightmax = a[0];
-	for (i = 0; i < n; i++) {
-		sum = sum + a[i];
-		if (sum > rightmax)
-			rightmax = sum;
-	}
-	
-	/*left half method*/
-	sum = 0; leftmax = a[n];
-	for (i = n; i > 0; i--) {
-		sum = sum + a[i];
-		if (sum > leftmax)
-			leftmax = sum;
-	}
-	
-	/*merge together after finding the max*/
-	max = max(leftmax, rightmax, rightmax + leftmax);
-	return max;
-}
-\end{lstlisting}
-
-In this algorithm, the running-time complexity is
-\begin{eqnarray*}
-T(n) 	& = & 2T(n/2)+n\\
-		& = & 4T(n/4)+2n\\
-		& = & 8T(n/8)+3n\\
-		& = & ......\\
-		& = & nT(1)+nlg(n)\\
-		& = & \Theta(nlg(n))\\\\\\\\\\\\
-\end{eqnarray*}
-
-\subsection{Linear-time Algorithm}
-
-\begin{lstlisting}[language=c]
-function linear_time(a[n]) {
-	sum = max = 0;
-	for (i = 0; i < n; i++) {
-		sum = sum + a[i];
-		if (sum > 0) {
-			if (sum > max)
-				max = sum;
-		}
-		else
-			sum = 0;
-	}
-	return max;
-}
-\end{lstlisting}
-
-In this algorithm, the running-time complexity is
-\begin{eqnarray*}
-T(n) = \Theta(n)\\
-\end{eqnarray*}
-
-\section{Analysis of the Asymptotic Running-times}
-
-Accordingly, the list of the running time complexity is shown as follows.
-\begin{eqnarray*}
-Enumeration Algorithm&:& \Theta(n^3)\\
-Better Enumeration Algorithm&:& \Theta(n^2)\\
-Divide And Conquer Algorithm&:& \Theta(nlg(n))\\
-Linear-time Algorithm&:& \Theta(n)
-\end{eqnarray*}
-
-Compare with these four algorithms, we can see that for a large n, the Linear-time algorithm has the best running time complexity which is $\Theta(n)$, while the enumeration algorithm ($\Theta(n^3)$) is the worst.
-
-So the order for these algorithms from the best to the worst could be 
-\begin{eqnarray*}
-Linear-time > Divide And Conquer > Better Enumeration > Enumeration
-\end{eqnarray*}
-
-\newpage
-\section{Proof of Correctness}
-
-Divide and conquer algorithm
-
-\begin{lstlisting}[language=c,mathescape=true]
-/*
-Precondition: 
-Array A has at least one element between indices front and end. (front < end)
-Postcondition: 
-The maximum subarray of n elements is found. 
-*/
-
-divideAndConquer(A[], front, end)
-	if (front < end)
-		mid = $\lfloor$(front+end)/2$\rfloor$
-		left = divideAndConquer(A[], front, mid)
-		right = divideAndConquer(A[], mid+1, end)
-		comb = combination(A[], front, mid, end)		
-		//finding maximum subarray from mid to front and from mid to end.
-		return max(left, right, comb)
+function changegreedy(V[n],A) {
+	for (i = 0; i < n; i++){
 		
-/*
-For combination(A[], front, mid, end) function:
-Precondition: 
-A is an array and front, mid, and end are indices into the array such that front <= mid < end.
-Postcondition: 
-The maximum subarray combining a subarray from mid to front and a subarray from mid to end is found.
-*/
+
+}
 \end{lstlisting}
-\emph{Base Case:} 
-
-$n = 1$, n represents number of elements in the array A[ ]. A[ ] contains a single element, which will just return the value of the element. \\\\
-\emph{Inductive Hypothesis:} 
-
-Assume that DivideAndConquer correctly finds the maximum subarray of $n=1, 2,\cdots, k$ elements. \\\\
-\emph{Inductive Step:} 
-
-Show that DivideAndConquer will correctly finds the maximum subarray of $n= k+1$ elements. 
-
-First recursive call $n_1=(k+1)/2\leq k\Rightarrow $ Maximum subarray of \textit{A[front, mid]} is found.
-
-Second recursive call $n_2=(k+1)/2 \leq k \Rightarrow$ Maximum subarray of \textit{A[mid+1, end]} is found.
-
-Now \textit{A[ ]}, \textit{front}, \textit{mid}, \textit{end} fulfill the precondition of \textit{combination()} function.
-
-The postcondition of \textit{combination()} function guarantees that the maximum subarray from a suffix of the first half(\textit{A[front, mid]}) and a prefix of the second half(\textit{A[mid+1, end]}) is found.
-
-The final return guarantees that the maximum subarray of \textit{A[front, end]} is found. \\\\
-\emph{Termination:}
-
-We find that array size decreases with every recursive call. For the base case, there is one element in the array. The algorithm terminates in this case without making additional recursive calls.
 
 
-\chapter{Experimental Analysis}
 
-\section{Testing}
-
-We added our own testing array into MSS\_TestProblems.txt, then use that file as the input file to test the correctness of our four algorithms. For the testing array originally from MSS\_TestProblem.txt, we compared our results with MSS\_TestResults.txt. For our own testing array, we manually calculated the right answer and compared it with our algorithms output result. Since the MSS\_TestProblems.txt included array with only one element as well as other cases, this test set which combined our own testing array along with MSS\_TestProblems.txt could be used to thoroughly test all conditions for all four algorithms.
-
-\section {Calculated average running time for each input size}
-
-\begin{tabular}{|c|c|c|c|c|}
-	\hline  & \multicolumn{4}{|c|}{Average Time(ms)} \\ 
-	\hline Input Size & Enumeration & Better Enumeration & Divide and Conquer & Linear Time \\ 
-	\hline  100 & 6.75 & 0.95 & 0.60 & 0.05 \\ 
-	\hline  200 & 31.56 & 2.94 & 1.08 & 0.07 \\ 
-	\hline  300 & 86.59 & 5.90 & 1.54 & 0.09 \\ 
-	\hline  400 & 172.70 & 10.18 & 2.03 & 0.11 \\ 
-	\hline  500 & 320.44 & 15.93 & 2.61 & 0.14 \\ 
-	\hline  600 & 532.31 & 22.98 & 3.16 & 0.17 \\ 
-	\hline  900 & 1717.43 & 54.29 & 5.08 & 0.25 \\ 
-	\hline  1000 & 2337.74 & 64.09 & 5.45 & 0.26 \\ 
-	\hline  2000 & 18525.86 & 260.86 & 11.81 & 0.53 \\ 
-	\hline  3000 & 63472.74 & 592.01 & 17.89 & 0.79 \\ 
-	\hline  4000 & 161528.96 & 1147.83 & 27.37 & 1.21 \\ 
-	\hline  5000 & 317646.87 & 1745.07 & 32.03 & 1.29 \\
-	\hline 
-\end{tabular} 
-
-\section {Running time plot for all four algorithms}
-
-Figure 2.1 is the figures that we plot for running times as a function of input size n, with all data values included, versus the function model as the type of regression. The blue line showed in the graphs is the running time data we collected, and the red line in the graphs is the regression, which is the same as the running time complexity function $\Theta$, of which the result we analyzed previously. Namely, they are
-\begin{eqnarray*}
-Enumeration & v.s. & n^3\\
-Better Enumeration & v.s. & n^2\\
-Divide and Conquer & v.s. & nlgn\\
-Linear Time & v.s. & n
-\end{eqnarray*}
+\subsection{Dynamic Programming}
 
 
-\begin{figure}[!htbp]
-	\captionsetup{justification=centering,singlelinecheck=off}
-	\captionsetup[subfigure]{singlelinecheck=on}
-	%
-	\captionbox{Four algorithms running time plots v.s. regression function\label{fig:1}}[1.0\textwidth]{%
-		\includegraphics[width=0.50\textwidth]{enumeration.png}%
-		\includegraphics[width=0.50\textwidth]{better_enumeration.png}\\
-		\includegraphics[width=0.50\textwidth]{divide_n_conquer.png}%
-		\includegraphics[width=0.50\textwidth]{linear_time.png}%
-	}%
-\end{figure}
 
 
-\section{Discussion of discrepancies between experimental and theoretical running times}
-
-According to the figures, from comparing the experimental running times and the regression functions, we can see that they almost match each other. However, due to running environment and other certain effects, the running time for every run could be different. For instance, we can see from linear time plot that one run of the data values explodes, which is far higher than other value on the same size n. This condition could happen many times with unknown reason so that the average value of collected data could be variable. In this case, the experimental data would be always different from but around the theoretical running time value. Therefore, the experimental data is technically acceptable in contrast to the regression function theoretical running time. 
 
 
-\section{Largest input for each algorithm}
-
-As we discussed and plotted before, the regression model for the four algorithms are:
-\begin{eqnarray*}
-Enumeration Algorithm&:& n^3\\
-Better Enumeration Algorithm&:& n^2\\
-Divide And Conquer Algorithm&:& nlg(n)\\
-Linear-time Algorithm&:& n
-\end{eqnarray*}
-
-To find the largest input for each algorithm that can be solved in 10 minutes, we can simply let the regression function equal to 10 minutes = 600 seconds = 600000000 ms.
-
-Then we can get the largest n for each algorithm. The result is as follows.
-
-\begin{eqnarray*}
-Enumeration Algorithm&:& n = 843\\
-Better Enumeration Algorithm&:& n = 24495\\
-Divide And Conquer Algorithm&:& n = 2.44468\times10^7\\
-Linear-time Algorithm&:& n = 6\times10^8
-\end{eqnarray*}
-
-\section{Log-log plot}
-
-Figure 2.2 is the graphs that we plot for log-log plot as a function of input size n, with all data values included. In these four plots, the x axis represents the input size n, while the y axis represents the loglog value which represents the slope m for the function $x^m$.
-
-\begin{figure}[!htbp]
-	\captionsetup{justification=centering,singlelinecheck=off}
-	\captionsetup[subfigure]{singlelinecheck=on}
-	%
-	\captionbox{Log-Log Plots of the Four Algorithms \label{fig:2}}[1.0\textwidth]{%
-		\includegraphics[width=0.50\textwidth]{loglog_enumeration.png}%
-		\includegraphics[width=0.50\textwidth]{loglog_better_enumeration.png}
-		\includegraphics[width=0.50\textwidth]{loglog_divide_n_conquer.png}%
-		\includegraphics[width=0.50\textwidth]{loglog_linear_time.png}%
-	}%
-\end{figure}
 
 
-\section{Combined algorithms running time plot}
 
-Figure 2.3 presents the results of all four algorithms together on a single graph. It perfectly shows how the scale is different from each other. In this graph, the blue line represents Enumeration Algorithm ($\Theta(n^3)$), the red line represents Better Enumeration Algorithm ($\Theta(n^2)$), the green line represents Divide And Conquer Algorithm ($\Theta(nlg(n))$), and the orange line represents Linear-time Algorithm ($\Theta(n)$).
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=8cm]{combined.png}
-\caption{Combined algorithms running time}
-\label{fig3}
-\end{figure}
+\chapter{Theoretical Run-time Analysis}
+
+\section{Pseudo-Code}
+\subsection {Brute Force Algorithm}
+
+
+
+
+
+
+
+
+
+
+\chapter{Theoretical Run-time Analysis}
+
+\section{Pseudo-Code}
+\subsection {Brute Force Algorithm}
+
+
+
+
+
+
 
 
 \end{document}
