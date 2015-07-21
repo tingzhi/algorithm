@@ -1,0 +1,14 @@
+Algorithm Code
+How to use the project2.py:
+$ python project2.py <input file>
+
+Test Set Generator Code
+How to use the generator.py:
+$ python generator.py -t  // for timings out to timings.csv
+$ python generator.py -o  // for results out to screen
+$ python generator.py -s  // for results out to results.csv
+$ python generator.py -h  // for help menu explaining all options
+
+Statistical Analysis Code
+How to use the stat.r within R run-time environment:
+$ source(file="stat.r")
