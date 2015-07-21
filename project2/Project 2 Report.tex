@@ -165,14 +165,16 @@ where n is the number of different coins and A is the amount needed to be change
 
 \section{Proof for Dynamic Programming}
 
-The pseudo-code for Dynamic Programming is shown above in Chapter 2, Section 3.
 
-In this programming method, 
+The pseudo-code for Dynamic Programming is shown above in Chapter 2, Section 3.\\
+
+As proved before, the running time for this method is
 
 \begin{eqnarray*}
-T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
-		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
+T(n)  =  \Theta(2^n)\\
 \end{eqnarray*}
+
+In this programming method,\\
 
 \emph{Precondition:}
 
@@ -219,13 +221,11 @@ Show that T[n] is the minimum.
 
 \ \ 1. T[k - V[i]] is now fulfill the precondition of T[v].
 
-\ \ 2. The postcondition of T[v] guarantees that T[k] is minimum.
+\ \ 2. The postcondition of T[v] guarantees that T[k] is minimum.\\
 
 \emph{Termination:}
 
-
-
-
+At termination, T[v] = T [v - V[i]]. Set T[k] = T[v - V[i]], Then T[k] = T[k - V[i]]. By the loop to choose the minimum, each k will terminate at several k - V[i] and choose the smallest value of T[k] + 1, where each T[k - V[i]] is already at its minimum value because all of the T[k] will depend all the way back on to T[0], which is 0. This loop will guarantee the T[v] gets its minimum.
 
 
 \chapter{Experimental Analysis}
