@@ -59,7 +59,9 @@ For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would l
 
 Since we start to fill in the table from base case, for each step we could guarantee that the optimal number of coins we need for that particular change is found. So in the end, we could be sure that the number of coins we need for our target change is optimal as well.
 
-\section{Pseudo-Code for Three Algorithms}
+
+\section{Pseudo-Code and Theoretical Run-time Analysis}
+
 \subsection {Brute Force Algorithm}
 
 \begin{lstlisting}[language=c]
@@ -85,7 +87,9 @@ function changeslow(V[n],A){
 	return min, Cmin[n]
 }
 \end{lstlisting}
+
 In this algorithm, the running-time complexity is
+
 \begin{eqnarray*}
 T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
 		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
@@ -103,9 +107,8 @@ T(n) 	& = & (2+4+8+16+..+2^{n-2})(1+2)T(1) + (1+2+4+8+...+2^{n-2})c\\
 		& = & (2^n-2)c\\
 		& = & \Theta(2^n)\\
 \end{eqnarray*}
+
 Note that the n is the value of the amount needed to be changed, but not the index number of the list.
-
-
 
 \subsection{Greedy Algorithm}
 
@@ -156,6 +159,41 @@ T(n) = \Theta(nA), where n is the number of different coins and A is the amount 
 \end{eqnarray*}
 
 
+\section{Proof for Dynamic Programming}
+
+The pseudo-code for Dynamic Programming is shown above in Chapter 2, Section 3.
+
+In this programming method, 
+
+\begin{eqnarray*}
+T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
+		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
+\end{eqnarray*}
+
+\emph{Precondition:}
+
+1. Array V[n] is sorted, of which the minimum value is always 1.
+ 
+2. Number A that needed to be changed is a positive integer which is greater than 0.\\
+
+\emph{Postcondition:}
+
+1. The minimum number of coins cost is found.
+
+2. The number of each coin cost is found.\\
+
+\begin{eqnarray*}
+For\ \  T[v] = min\{T[v-V[i]] + 1\},\ T[0] = 0
+\end{eqnarray*}
+
+\emph{Precondition:}
+
+1. v - V[i] is greater than or equal to 0
+
+2. 
+
+
+
 \chapter{Experimental Analysis}
 
 \section{Situation 1}
@@ -169,7 +207,6 @@ T(n) = \Theta(nA), where n is the number of different coins and A is the amount 
 \section{Exploring Relationship Between Running Time and Number of Denominations}
 
 \section{Special Coins' Value Case}
-
 
 
 
