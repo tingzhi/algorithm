@@ -37,6 +37,7 @@
 
 \maketitle
 
+
 \chapter{Theoretical Run-time Analysis}
 
 \section{Dynamic Programming Table Filling Logic}
@@ -61,6 +62,25 @@ Since we start to fill in the table from base case, for each step we could guara
 
 \section{Pseudo-Code}
 \subsection {Brute Force Algorithm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Pseudo-Code and Theoretical Run-time Analysis}
+
+\section {Brute Force Algorithm}
 
 \begin{lstlisting}[language=c]
 function changeslow(V[n],A){
@@ -107,7 +127,7 @@ Note that the n is the value of the amount needed to be changed, but not the ind
 
 
 
-\subsection{Greedy Algorithm}
+\section{Greedy Algorithm}
 
 \begin{lstlisting}[language=c]
 function changegreedy(V[n],A) {
@@ -131,7 +151,7 @@ In this algorithm, the running-time complexity is
 T(n) = \Theta(n), where n is the amount needed to be changed.
 \end{eqnarray*}
 
-\subsection{Dynamic Programming}
+\section{Dynamic Programming}
 
 \begin{lstlisting}[language=c]
 function changedp(V[n], A){
@@ -156,27 +176,46 @@ T(n) = \Theta(nA), where n is the number of different coins and A is the amount 
 \end{eqnarray*}
 
 
+\chapter{Proof for Dynamic Programming}
+
+The pseudo-code for Dynamic Programming is shown above in Chapter 2, Section 3.
+
+In this programming method, 
+
+\begin{eqnarray*}
+T(n) 	& = & (T(1)+ T(n-1)) + (T(2) + T(n-2)) + ... + (T(n-1) + T(1)) + c\\
+		& = & 2(T(1) + T(2) + T(3) + ... + T(n-1)) + c\\
+\end{eqnarray*}
+
+\emph{Precondition:}
+
+1. Array V[n] is sorted, of which the minimum value is always 1.
+ 
+2. Number A that needed to be changed is a positive integer which is greater than 0.\\
+
+\emph{Postcondition:}
+
+1. The minimum number of coins cost is found.
+
+2. The number of each coin cost is found.\\
+
+\begin{eqnarray*}
+For\ \  T[v] = min\{T[v-V[i]] + 1\},\ T[0] = 0
+\end{eqnarray*}
+
+\emph{Precondition:}
+
+1. v - V[i] is greater than or equal to 0
+
+2. 
+
+
 
 
 \chapter{Theoretical Run-time Analysis}
 
 \section{Pseudo-Code}
 \subsection {Brute Force Algorithm}
-
-
-
-
-
-
-
-
-
-
-\chapter{Theoretical Run-time Analysis}
-
-\section{Pseudo-Code}
-\subsection {Brute Force Algorithm}
-
 
 
 
