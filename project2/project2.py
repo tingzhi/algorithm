@@ -40,12 +40,10 @@ def main():
         print change
         print count
 
-        """
         print "---Brute Force Algorithm---"
         change, count = changeslow(coins, amount)
         print change
         print count
-        """
 
         print "---Dynamic Programming---"
         change, count = changedp(coins, amount)
