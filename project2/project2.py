@@ -6,15 +6,16 @@ Date: 7/17/2015
 """
 
 import sys
-import re
 import ast
 import os
 
 
 def main():
     lines = []
-    infile = sys.argv[1]
+    infile = ""
+
     try:
+        infile = sys.argv[1]
         with open(infile) as f:
             lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
             lines = filter(None, lines)  # remove blank lines from list
@@ -58,21 +59,21 @@ def main():
 
 
 def changeslow(coins, amount):
-    min = amount
+    minimum = amount
     change = [0] * len(coins)
     if amount in coins:
         change[coins.index(amount)] += 1
         return change, 1
     else:
-        for i in range(1,amount):
+        for i in range(1, amount):
             change1, result1 = changeslow(coins, i)
             change2, result2 = changeslow(coins, amount - i)
             result = result1 + result2
-            for i in range(0,len(coins)):
-                change[i] = change1[i] + change2[i]
-            if min > result:
-                min = result
-    return change, min
+            for j in range(0, len(coins)):
+                change[j] = change1[j] + change2[j]
+            if minimum > result:
+                minimum = result
+    return change, minimum
 
 
 def changegreedy(coins, amount):
@@ -87,6 +88,7 @@ def changegreedy(coins, amount):
 
     change.reverse()
     return change, total
+
 
 def changedp(coins, amount):
     size = len(coins)
@@ -121,7 +123,6 @@ def changedp(coins, amount):
                 sub_coins[sub_amount][i] = sub_coins[k][i]
 
     return sub_coins[amount], sub_counts[amount]
-
 
 
 if __name__ == '__main__':
