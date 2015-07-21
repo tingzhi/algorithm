@@ -56,20 +56,33 @@ def main():
 
 
 def changeslow(coins, amount):
+    m = 0
+    n = len(coins)
+    change = [0]*n
     minimum = amount
-    change = [0] * len(coins)
-    if amount in coins:
-        change[coins.index(amount)] += 1
-        return change, 1
-    else:
+
+    if amount > 0:
+        for i in range(0, n):
+            if amount == coins[i]:
+                m += 1
+                change[i] += 1
+                return change, m
+
+        change = [amount] + [0]*(n-1)
+
         for i in range(1, amount):
-            change1, result1 = changeslow(coins, i)
-            change2, result2 = changeslow(coins, amount - i)
-            result = result1 + result2
-            for j in range(0, len(coins)):
-                change[j] = change1[j] + change2[j]
-            if minimum > result:
-                minimum = result
+            d = [0]*n
+            result1, m1 = changeslow(coins, i)
+            result2, m2 = changeslow(coins, amount-i)
+
+            for j in range(0, n):
+                d[j] = result1[j] + result2[j]
+            m = m1 + m2
+
+            if minimum > m:
+                minimum = m
+                change = d
+
     return change, minimum
 
 
