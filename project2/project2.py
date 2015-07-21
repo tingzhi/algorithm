@@ -8,23 +8,30 @@ Date: 7/17/2015
 import sys
 import re
 import ast
+import os
 
 
 def main():
     lines = []
+    infile = sys.argv[1]
     try:
-        with open(sys.argv[1]) as f:
+        with open(infile) as f:
             lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
             lines = filter(None, lines)  # remove blank lines from list
             lines = iter(lines)  # convert list to iterator to allow iterating over two lines at a time
     except IndexError:
-        print "Error: Missing value for filename. Please use command: python project2.py <filename>"
+        print "Error: Missing value for filename."
+        print "Please use command: python project2.py <filename>"
+
+    filename, extension = os.path.splitext(infile)
+    outfile = filename + "change" + extension
+    f = open(outfile, 'w')
 
     for i, line in enumerate(lines):
         coins = ast.literal_eval(line)
         amount = ast.literal_eval(next(lines))
 
-        print "Set: %d" % (i + 1)
+        print "\nSet: %d" % (i + 1)
         print "coins: %s, amount: %d\n" % (coins, amount)
 
         print "---Greedy Algorithm---"
@@ -32,15 +39,22 @@ def main():
         print change
         print count
 
+        """
+        print "---Brute Force Algorithm---"
+        change, count = changeslow(coins, amount)
+        print change
+        print count
+        """
+
         print "---Dynamic Programming---"
         change, count = changedp(coins, amount)
         print change
         print count
 
-        print "---Brute Force Algorithm---"
-        change, count = changeslow(coins, amount)
-        print change
-        print count
+        f.write(str(change) + "\n")
+        f.write(str(count) + "\n")
+
+    f.close()
 
 
 def changeslow(coins, amount):
@@ -59,36 +73,6 @@ def changeslow(coins, amount):
             if min > result:
                 min = result
     return change, min
-
-'''
-    m = 0
-    n = len(l)
-    c = [0]*n
-    minm = A
-    if A > 0:
-        for i in range(0,n):
-            if A == l[i]:
-                m += 1
-                c[i] += 1
-                return [c,m]
-
-        c = [A] + [0]*(n-1)
-        for i in range(1,A/2+1):
-            d = [0]*n
-            m = 0
-            result1 = changeslow(l,i)
-            for j in range(0,n):
-                d[j] += result1[0][j]
-            m += result1[1]
-            result2 = changeslow(l,A-i)
-            for j in range(0,n):
-                d[j] += result2[0][j]
-            m += result2[1]
-            if minm > m:
-                minm = m
-                c = d
-    return c, minm
-'''
 
 
 def changegreedy(coins, amount):
