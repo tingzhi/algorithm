@@ -1,7 +1,7 @@
 \documentclass[11pt]{scrreprt}
 \usepackage[utf8]{inputenc}
 
-\title{\textbf{Project 1 Report}}
+\title{\textbf{Project 2 Report}}
 \subtitle{CS325 Analysis of Algorithms, Summer 2015}
 \author{\textsf{\textbf{Project Group 1}}\\
 		\textsf{Tingzhi Li}\\
@@ -38,6 +38,26 @@
 \maketitle
 
 \chapter{Theoretical Run-time Analysis}
+
+\section{Dynamic Programming Table Filling Logic}
+
+In this dynamic programming algorithm, its table is consisit of avaiable coins as column header and change as row header. The actual minimum number of coins for that particular change will be filled in the table accordingly. The base case of this table is $T[0]=0$, which means the first row will be filled with zeroes. For $T[1]$ we need to look up $T[1-V[i]]$ where $v[i]\leq 1$. Same logic applied to all the following cases.
+
+For example, if our avaiable coins are [1,2,5,10], $A=5$. Then the table would look like the following.
+
+\begin{tabular}{|c|c|c|c|c|}
+	\hline & \multicolumn{4}{|c|}{Avaiable coins' value} \\
+	\hline Change & 1  & 1, 2 & 1, 2, 5 & 1, 2, 5, 10 \\ 
+	\hline 0 & 0 & 0 & 0 & 0 \\ 
+	\hline 1 & 1 & 1 & 1 & 1 \\ 
+	\hline 2 & 2 & 1 & 1 & 1 \\ 
+	\hline 3 & 3 & 2 & 2 & 2 \\ 
+	\hline 4 & 4 & 2 & 2 & 2 \\ 
+	\hline 5 & 5 & 3 & 1 & 1 \\ 
+	\hline 
+\end{tabular} 
+
+Since we start to fill in the table from base case, for each step we could guarantee that the optimal number of coins we need for that particular change is found. So in the end, we could be sure that the number of coins we need for our target change is optimal as well.
 
 \section{Pseudo-Code}
 \subsection {Brute Force Algorithm}
