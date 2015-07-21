@@ -6,3 +6,7 @@
 *.aux
 *.pdf
 *.pyc
+
+project2/.Rhistory
+
+project2/.RData
