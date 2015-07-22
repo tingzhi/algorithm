@@ -167,7 +167,7 @@ where $C$ is the number of different kinds of coins and $n$ is the target change
 
 The pseudo-code for Dynamic Programming is shown above in Section 1.2.3.\\
 
-As proved before, the running time for this method is
+As previously shown through a proof, the running time for this method is
 \begin{eqnarray*}
 T(n)  =  \Theta(Cn)
 \end{eqnarray*}
@@ -279,7 +279,7 @@ Figure~\ref{fig:p4_time}, \ref{fig:p5_v1_time}, \ref{fig:p5_v2_time}, and \ref{f
 
 The scale of time for the Greedy Algorithm in comparison to the Dynamic Programming method is so different that the obvious conclusion is that the Greedy Algorithm has much better performance across all values of $V$ and $A$. This is an oversimplification of the differences between these algorithms though, as we have previously shown that the Greedy Algorithm does not always arrive at the optimal answer. Therefore the tradeoff seems to be performance for accuracy when using the Greedy Algorithm.
 
-We did not run timings against the Brute Force or Divide and Conquer Algorithm because it simply could not calculate solutions in a reasonable time (less than 30 minutes) when working with $A>20$. Although this algorithm is guaranteed to derive the optimal answer, it cannot do so in a scalable manner.
+We did not run timings against the Brute Force or Divide and Conquer Algorithm implementation because it simply could not calculate solutions in a reasonable time (less than 30 minutes) when working with $A>20$. Although this algorithm is guaranteed to derive the optimal answer, it cannot do so in a scalable manner. With the running-time complexity of this algorithm proven to be $\Theta(2^n)$, this algorithm is unsuitable for solving this problem when the Greedy Algorithm or Dynamic Programming method are available.
 
 \section{Exploring Relationship Between Running Time and Number of Denominations}
 
@@ -289,9 +289,23 @@ The Greedy Algorithm must potentially search through all possible coins ($n$) in
 
 The Dynamic Programming method must calculate the minimum number of coins for each sub-problem ($i$) by comparing against all possible coins ($n = |V|$) where $V_i <= v$ and $v$ is the target value at that step. Since the number of sub-problems is determined by the number of coins (of value less than the target), $n$ directly factors into the overall run-time of this algorithm.
 
+This conclusion is also shown through figure~\ref{fig:p8} which shows that the Greedy Algorithm is indeed minimally affected by $n$, and the Dynamic Programming method is affected to a larger factor by $n$. 
+
+\begin{figure}[!htbp]
+	\captionsetup{justification=centering,singlelinecheck=off}
+	\captionsetup[subfigure]{singlelinecheck=on}
+	%
+	\captionbox{Denomination size $n$ vs. running time for Greedy \& Dynamic Programming algorithms (problem 8) 
+	\label{fig:p8}}[1.0\textwidth]
+	{%
+		\includegraphics[width=0.50\textwidth]{den1.png}%
+		\includegraphics[width=0.50\textwidth]{den2.png}
+	}%
+\end{figure}
+
 \section{Special Coins Value Case}
 
-If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
+\ \ \ If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
 
 The reason is that every larger coin is a multiple of its lower level coin, so that when the number of lower level coin satisfy a number of p, it will count to the larger one. For instance, consider $p^2 = p*p$. If there are $(p-1)*p$ amount of money that needed to be changed, the result will be $p-1$ $p^1$ coins, which is the minimum cost. But when there are $p^2$ amount of money, the result will be 1 of $p^2$ coin. The same idea satisfy all of the larger coins. Therefore, if we use Dynamic Programming Method, it will choose the minimum number when the change approaches $p^i$. If we use Greedy Algorithm, we will consider the largest power of p, and then calculate the lower level power of p and so on. In this case, although the order of this algorithm is reversed from Dynamic Programming Method but the result would be the same because they all depend on the power of p. In this case, the result of coins cost will be the same.
 
@@ -312,7 +326,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time1greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time1dp.png}
-		\includegraphics[width=0.7\textwidth]{time1.png}%
+		\includegraphics[width=1\textwidth]{time1.png}%
 	}%
 \end{figure}
 
@@ -325,7 +339,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time2_1greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time2_1dp.png}
-		\includegraphics[width=0.7\textwidth]{time2_1.png}%
+		\includegraphics[width=1\textwidth]{time2_1.png}%
 	}%
 \end{figure}
 
@@ -338,7 +352,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time2_2greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time2_2dp.png}
-		\includegraphics[width=0.7\textwidth]{time2_2.png}%
+		\includegraphics[width=1\textwidth]{time2_2.png}%
 	}%
 \end{figure}
 
@@ -351,7 +365,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time3greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time3dp.png}
-		\includegraphics[width=0.7\textwidth]{time3.png}%
+		\includegraphics[width=1\textwidth]{time3.png}%
 	}%
 \end{figure}
 
