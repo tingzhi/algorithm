@@ -287,7 +287,7 @@ The Dynamic Programming method must calculate the minimum number of coins for ea
 
 \section{Special Coins Value Case}
 
-\ \ \ If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
+If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
 
 The reason is that every larger coin is a multiple of its lower level coin, so that when the number of lower level coin satisfy a number of p, it will count to the larger one. For instance, consider $p^2 = p*p$. If there are $(p-1)*p$ amount of money that needed to be changed, the result will be $p-1$ $p^1$ coins, which is the minimum cost. But when there are $p^2$ amount of money, the result will be 1 of $p^2$ coin. The same idea satisfy all of the larger coins. Therefore, if we use Dynamic Programming Method, it will choose the minimum number when the change approaches $p^i$. If we use Greedy Algorithm, we will consider the largest power of p, and then calculate the lower level power of p and so on. In this case, although the order of this algorithm is reversed from Dynamic Programming Method but the result would be the same because they all depend on the power of p. In this case, the result of coins cost will be the same.
 
@@ -308,7 +308,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time1greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time1dp.png}
-		\includegraphics[width=1\textwidth]{time1.png}%
+		\includegraphics[width=0.7\textwidth]{time1.png}%
 	}%
 \end{figure}
 
@@ -321,7 +321,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time2_1greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time2_1dp.png}
-		\includegraphics[width=1\textwidth]{time2_1.png}%
+		\includegraphics[width=0.7\textwidth]{time2_1.png}%
 	}%
 \end{figure}
 
@@ -334,7 +334,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time2_2greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time2_2dp.png}
-		\includegraphics[width=1\textwidth]{time2_2.png}%
+		\includegraphics[width=0.7\textwidth]{time2_2.png}%
 	}%
 \end{figure}
 
@@ -347,7 +347,7 @@ From this we can see that the Greedy Algorithm only depends on the amount of mon
 	{%
 		\includegraphics[width=0.50\textwidth]{time3greedy.png}%
 		\includegraphics[width=0.50\textwidth]{time3dp.png}
-		\includegraphics[width=1\textwidth]{time3.png}%
+		\includegraphics[width=0.7\textwidth]{time3.png}%
 	}%
 \end{figure}
 
