@@ -232,21 +232,62 @@ At termination, $T[v] = T [v - V[i]]$. Set $T[k] = T[v - V[i]]$, Then $T[k] = T[
 
 \section{Situation 1}
 
+Figure~\ref{fig:p4} is the graph of the number of coins required (y-axis) to make change for $A$ (x-axis) for the Greedy and Dynamic Programming algorithms where $V = [1, 5, 10, 25, 50]$ and $A$ is values in $[2010, 2015, 2020, ..., 2200]$  (per problem 4 of the project instructions). Although the Greedy algorithm is not guaranteed to derive the minimum number of coins for a any given $A$, the specific set of coins ($V$) in this case allows it to be correct for all values of $A$.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=8cm]{situation1.png}
+\caption{Number of coins vs. target change values for Greedy \& Dynamic Programming algorithms (problem 4, set V)}
+\label{fig:p4}
+\end{figure}
 
 \section{Situation 2}
 
+Figure~\ref{fig:p5} is the graphs of the number of coins required (y-axis) to make change for $A$ (x-axis) for the Greedy and Dynamic Programming algorithms where $V_1 = [1, 2, 6, 12, 24, 48, 60]$, $V_2 = [1, 6, 13, 37, 150]$, and $A$ is values in $[2000, 2001, 2002, ..., 2200]$ (per problem 5 of the project instructions). Since the Greedy algorithm is not guaranteed to derive the minimum number of coins required for all values of $A$, the results show the number of coins differing between the two algorithms throughout the range of values for $A$.
+
+\begin{figure}[!htbp]
+	\captionsetup{justification=centering,singlelinecheck=off}
+	\captionsetup[subfigure]{singlelinecheck=on}
+	%
+	\captionbox{Number of coins vs. target change values for Greedy \& Dynamic Programming algorithms (problem 5, set V\textsubscript{1}; problem 5, set V\textsubscript{2}) 
+	\label{fig:p5}}[1.0\textwidth]
+	{%
+		\includegraphics[width=0.50\textwidth]{situation2_1.png}%
+		\includegraphics[width=0.50\textwidth]{situation2_2.png}
+	}%
+\end{figure}
 
 
 \section{Situation 3}
 
+Figure~\ref{fig:p6} is the graph of the number of coins required (y-axis) to make change for $A$ (x-axis) for the Greedy and Dynamic Programming algorithms where $V = [1, 2, 4, 6, 8, 10, 12, ..., 30]$ and $A$ is values in $[2000, 2001, 2002, ..., 2200]$ (per problem 6 of the project instructions). Although the Greedy algorithm is not guaranteed to derive the minimum number of coins for any given $A$, the specific set of coins ($V$) in this case allows it to be correct for all values of $A$.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=8cm]{situation3.png}
+\caption{Number of coins vs. target change values for Greedy \& Dynamic Programming algorithms (problem 6, set V)}
+\label{fig:p6}
+\end{figure}
 
 
 \section{Running Time Comparison}
 
+\begin{figure}[!htbp]
+	\captionsetup{justification=centering,singlelinecheck=off}
+	\captionsetup[subfigure]{singlelinecheck=on}
+	%
+	\captionbox{Time to completion (ms) vs. target change values for Greedy \& Dynamic Programming algorithms (problem 4, set V) 
+	\label{fig:p7}}[1.0\textwidth]
+	{%
+		\includegraphics[width=0.50\textwidth]{time1dp.png}%
+		\includegraphics[width=0.50\textwidth]{time1.png}
+		\includegraphics[width=1\textwidth]{time1.png}%
+	}%
+\end{figure}
+
 \section{Exploring Relationship Between Running Time and Number of Denominations}
 
-\section{Special Coins' Value Case}
+\section{Special Coins Value Case}
 
 \ \ \ If the coins have values that are powers of $p$, namely $V = [p^0 , p^1 , p^2 , ... , p^n]$, then the dynamic programming and greedy approaches would generate the same result as each other.\\
 
@@ -254,8 +295,8 @@ The reason is that every larger coin is a multiple of its lower level coin, so t
 
 However, if we consider the running-time complexity, the Greedy Algorithm would be faster than Dynamic Programming Method. As we proved before, the running time for these two approaches are:
 \begin{eqnarray*}
-Dynamic Programming&:& \Theta(Cn)\\
-Greedy Algorithm&:& \Theta(n)\\
+\mbox{Dynamic Programming}&:& \Theta(Cn)\\
+\mbox{Greedy Algorithm}&:& \Theta(n)\\
 \end{eqnarray*}
 
 From this we can see that the Greedy Algorithm only depends on the amount of money needed to be changed, yet the Dynamic Programming depends on not only the amount, but also how many kinds of coins there are. Accordingly, the Greedy Algorithm would be faster in contrast to Dynamic Programming, especially when the amount of money is very large.
