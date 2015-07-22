@@ -277,6 +277,10 @@ Figure~\ref{fig:p6} is the graph of the number of coins required (y-axis) to mak
 
 Figure~\ref{fig:p4_time}, \ref{fig:p5_v1_time}, \ref{fig:p5_v2_time}, and \ref{fig:p6_time} all present the individual timing graphs for both the Greedy Algorithm and Dynamic Programming, with their respective scales for time (ms), and a combined graph for comparision between both algorithms.
 
+The scale of time for the Greedy Algorithm in comparison to the Dynamic Programming method is so different that the obvious conclusion is that the Greedy Algorithm has much better performance across all values of $V$ and $A$. This is an oversimplification of the differences between these algorithms though, as we have previously shown that the Greedy Algorithm does not always arrive at the optimal answer. Therefore the tradeoff seems to be performance for accuracy when using the Greedy Algorithm.
+
+We did not run timings against the Brute Force or Divide and Conquer Algorithm because it simply could not calculate solutions in a reasonable time (less than 30 minutes) when working with $A>20$. Although this algorithm is guaranteed to derive the optimal answer, it cannot do so in a scalable manner.
+
 \section{Exploring Relationship Between Running Time and Number of Denominations}
 
 Based upon the data presented in section~\ref{sec:sit1}, section~\ref{sec:sit2}, section~\ref{sec:sit3}, and section~\ref{sec:timings}, we can experimentally deduce that the number of denominations ($n$) has a positive (increasing time) effect for determining the minimum number of coins to make change.
