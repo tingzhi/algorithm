@@ -1,3 +1,5 @@
+
+
 data <- read.csv(file="timing5_1.csv",head=TRUE,sep=",")
 
 y1 = data$timing[data$algorithm=="changegreedy"]
@@ -10,6 +12,12 @@ plot(y1 ~ x, data=df, type="p", pch=1, cex=0.5, col="blue", xlim=c(2000, 2200), 
 lines(y2 ~ x, data=df, type="p", pch=2, cex=0.8, col="red")
 
 legend(1995, 29.6, c("Change Greedy", "Change DP"), pch=c(1,2), col=c("blue","red"))
+
+fit1 <- lm(y1 ~ df$x)
+abline(fit1, col="blue")
+
+fit2 <- lm(y2 ~ df$x)
+abline(fit2, col="red")
 
 dev.copy(png, 'time2_1.png')
 dev.off()

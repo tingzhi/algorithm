@@ -11,6 +11,12 @@ lines(y2 ~ x, data=df, type="p", pch=2, cex=0.8, col="red")
 
 legend(1995, 31.5, c("Change Greedy", "Change DP"), pch=c(1,2), col=c("blue","red"))
 
+fit1 <- lm(y1 ~ df$x)
+abline(fit1, col="blue")
+
+fit2 <- lm(y2 ~ df$x)
+abline(fit2, col="red")
+
 dev.copy(png, 'time2_2.png')
 dev.off()
 
