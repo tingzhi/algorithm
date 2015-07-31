@@ -1,0 +1,42 @@
+  ST cost
+
+  Global optimal solution found.
+  Objective value:                              134.7601
+  Infeasibilities:                              0.000000
+  Total solver iterations:                             5
+  Elapsed runtime seconds:                          1.13
+
+  Model Class:                                        LP
+
+  Total variables:                      8
+  Nonlinear variables:                  0
+  Integer variables:                    0
+
+  Total constraints:                    8
+  Nonlinear constraints:                0
+
+  Total nonzeros:                      61
+  Nonlinear nonzeros:                   0
+
+
+
+                                Variable           Value        Reduced Cost
+                                      X1        0.000000            1.661564
+                                      X2        0.000000           0.4874735
+                                      X3        55.03435            0.000000
+                                      X4        0.000000            1.096895
+                                      X5        79.60861            0.000000
+                                      X6        2.942904            0.000000
+                                      X7        0.000000           0.6733286
+                                      X8        0.000000            12.01936
+
+                                     Row    Slack or Surplus      Dual Price
+                                       1        134.7601           -1.000000
+                                       2        0.000000           -28.76159
+                                       3        2.371741            0.000000
+                                       4        3.628259            0.000000
+                                       5       0.8274407            0.000000
+                                       6        68.58551            0.000000
+                                       7        0.000000          -0.5317967
+                                       8        0.000000            148.3319
+

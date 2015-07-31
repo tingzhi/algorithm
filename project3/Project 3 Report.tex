@@ -1,0 +1,222 @@
+\documentclass[11pt]{scrreprt}
+\usepackage[utf8]{inputenc}
+
+\title{\textbf{Project 3 Report}}
+\subtitle{CS325 Analysis of Algorithms, Summer 2015}
+\author{\textsf{\textbf{Project Group 1}}\\
+		\textsf{Tingzhi Li}\\
+		\textsf{Nicholas Nelson}\\
+		\textsf{Chunyang Zhang}}
+		
+\usepackage{graphicx}
+
+\usepackage{listings} %插入代码
+\usepackage{xcolor} %代码高亮
+
+\lstset{numbers=left, %设置行号位置
+	numberstyle=\tiny, %设置行号大小
+	keywordstyle=\color{blue}, %设置关键字颜色
+	commentstyle=\color[cmyk]{1,0,1,0}, %设置注释颜色
+	frame=single, %设置边框格式
+	escapeinside=``, %逃逸字符(1左面的键)，用于显示中文
+	breaklines, %自动折行
+	extendedchars=false, %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+	xleftmargin=2em,xrightmargin=2em, aboveskip=1em, %设置边距
+	tabsize=4, %设置tab空格数
+	showspaces=false %不显示空格
+}
+
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
+
+
+\date{}
+\begin{document}
+
+\maketitle
+
+
+\chapter{Transshipment Model}
+\section{Part A}
+\subsection{}
+Objective function
+
+Minimize
+
+$10x_{11}+15x_{12}+11x_{21}+8x_{22}+13x_{31}+8_x{32}+9x_{33}+14x_{42}+8x_{43}+5y_{1}1+6y_{12}+7y_{13}+10y_{14}+12y_{23}+8y_{24}+10y_{25}+14y_{26}+12y_{35}+12y_{36}+6y_{37}$
+
+where $x_{ij}$ represents number of refrigerators to be shipped plants $i$ to warehouses $j$ and $y_{jk}$ represents number of refrigerators to be shipped  from warehouse $j$ to retailer $k$.
+
+All constraints
+
+supply constraints
+
+$x_{11} + x_{12} <= 150$
+
+$x_{21} + x_{22} <= 450$
+
+$x_{31} + x_{32} + x_{33} <= 250$
+
+$x_{42} + x_{43} <= 150$
+
+retailer constraints
+
+$y_{11} >= 100$
+
+$y_{12} >= 150$
+
+$y_{13} + y_{23} >= 100$
+
+$y_{14} + y_{24} + y_{34} >= 200$
+
+$y_{25} + y_{35} >= 200$
+
+$y_{26} + y_{36} >= 150$
+
+$y_{37} >= 100$
+
+number of refrigerators shipped into one warehouse has to be equal to number of refrigerators shipped out from one warehouse
+
+$x_{11} + x_{21} + x_{31} - y_{11} - y_{12} - y_{13} - y_{14} = 0$
+
+$x_{12} + x_{22} + x_{32} + x_{42} - y_{23} - y_{24} - y_{25} - y_{26} = 0$
+
+$x_{33} + x_{43} - y_{34} - y_{35} - y_{36} - y_{37} = 0$
+
+
+
+\subsection{}
+Optimal solution
+
+Objective value: 17100  \\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+	\hline variables & $x_{11}$   &  $x_{12}$ & $x_{21}$ & $x_{22}$ & $x_{31}$ & $x_{32}$ & $x_{33}$ & $x_{42}$ & $x_{43}$      \\
+	\hline optimal value & 150  &  0 & 200 & 250 & 0 & 150 & 100 & 0 & 150            \\
+	\hline
+\end{tabular} \\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline variables & $y_{11}$ & $y_{12}$ & $y_{13}$ & $y_{14}$ & $y_{23}$ & $y_{24}$ & $y_{25}$ & $y_{26}$ & $y_{34}$ & $y_{35}$ & $y_{36}$ & $y_{37}$  \\
+	\hline optimal value & 	100 & 150 & 100 & 0 & 0 & 200 & 200 & 0 & 0 & 0 & 150 & 100 \\
+	 \hline
+\end{tabular} \\
+
+Lindo Code
+
+\begin{lstlisting}[language=c]
+min 10x11+15x12+11x21+8x22+13x31+8x32+9x33+14x42+8x43+5y11+6y12+7y13+10y14+12y23+8y24+10y25+14y26+14y34+12y35+12y36+6y37
+
+st
+	x11 + x12 <= 150
+	x21 + x22 <= 450
+	x31 + x32 + x33 <= 250
+	x42 + x43 <= 150
+
+	y11 >= 100
+	y12 >= 150
+	y13 + y23 >= 100
+	y14 + y24 + y34 >= 200
+	y25 + y35 >= 200
+	y26 + y36 >= 150
+	y37 >= 100
+
+	x11 + x21 + x31 - y11 - y12 - y13 - y14 = 0
+	x12 + x22 + x32 + x42 - y23 - y24 - y25 - y26 = 0
+	x33 + x43 - y34 - y35 - y36 - y37 = 0
+\end{lstlisting}
+
+\subsection{}
+Optimal shipping routes \\
+
+\begin{tabular}{|c|c|}
+	\hline From plants to warehouses & From warehouses to retailers \\
+	\hline $x_{11} = 150$ & $y_{11} = 100$ \\
+	\hline $x_{21} = 200$ &$y_{12} = 150$ \\
+	\hline $x_{22} = 250$ &$y_{13} = 100$ \\
+	\hline $x_{32} = 150$ &$y_{24} = 200$ \\
+	\hline $x_{33} = 100$ & $y_{25} = 200$  \\
+	\hline $x_{43} = 150$ & $y_{36} = 150$  \\
+	\hline & $y_{37} = 100$ \\
+	\hline
+\end{tabular} \\
+
+Minimum cost = \$17100
+
+\section{Part B}
+There is no optimal solution to this modified model. Is it not feasible to ship all the refrigerators to either warehouse 1 or 3 and then to the retailers without using warehouse 2. Even if $P_3$ and $P_4$ shipped all the fridges to $W_3$, the demands from $R_5$, $R_6$, and $R_7$ still couldn't be met because $P_3 + P_4 < R_5 + R_6 + R_7$.
+
+\section{Part C}
+In this situation, it is feasible.
+
+Optimal solution:
+
+\begin{tabular}{|c|c|}
+	\hline From plants to warehouses & From warehouses to retailers \\
+	\hline $x_{11} = 150$ & $y_{11} = 100$ \\
+	\hline $x_{21} = 350$ & $y_{12} = 150$ \\
+	\hline $x_{22} = 100$ & $y_{13} = 100$  \\
+	\hline $x_{33} = 250$ & $y_{14} = 150$  \\
+	\hline $x_{43} = 150$ & $y_{24} = 50$  \\
+	\hline 				  & $y_{25} = 50$ \\
+	\hline 				  & $y_{35} = 150$ \\
+	\hline 				  & $y_{36} = 150$ \\
+	\hline 				  & $y_{37} = 100$ \\
+	\hline
+\end{tabular} \\
+
+Minimum cost = \$18300
+
+\section{Part D}
+
+Objective function
+
+\begin{displaymath}
+\min \left(\sum_{i=1}^{n} \sum_{j=1}^{q} cp(i,j)x_{ij} + \sum_{j=1}^{q} \sum_{k=1}^{m} cw(j,k)y_{jk}\right)
+\end{displaymath}
+
+$x_{ij}=0 \textrm{ if } cp(i,j) \textrm{ is not applicable. } $
+
+$y_{jk}=0 \textrm{ if } cw(j,k) \textrm{ is not applicable.} $
+
+where $x_{ij}$ represents number of refrigerators to be shipped from plant $i$ to warehouse $j$ and $y_{jk}$ represents number of refrigerators to be shipped  from warehouse $j$ to retailer $k$.
+
+All constraints
+
+supply constraints
+
+\begin{displaymath}
+\sum_{j=1}^{q} x_{ij} \leq s_i \qquad\textrm{where } i=1,2,\cdots,n
+\end{displaymath}
+
+retailer constraints
+
+\begin{displaymath}
+\sum_{j=1}^{q} y_{jk} \leq d_k \qquad\textrm{where } k=1,2,\cdots,m
+\end{displaymath}
+
+number of refrigerators shipped into one warehouse has to be equal to number of refrigerators shipped out from one warehouse
+
+\begin{displaymath}
+\sum_{i=1}^{n} x_{ij} = \sum_{k=1}^{m} y_{jk} \qquad\textrm{where } j=1,2,\cdots,q
+\end{displaymath}
+
+\chapter{A mixture problem}
+
+\section{Part A}
+
+
+\section{Part B}
+\section{Part C}
+
+\chapter{Shortest path problems}
+
+\section{a}
+\section{b}
+\section{c}
+\section{d}
+
+
+\end{document} 

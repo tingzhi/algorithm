@@ -1,0 +1,42 @@
+  ST cal
+
+  Global optimal solution found.
+  Objective value:                              1.622657
+  Infeasibilities:                              0.000000
+  Total solver iterations:                             4
+  Elapsed runtime seconds:                          1.20
+
+  Model Class:                                        LP
+
+  Total variables:                      8
+  Nonlinear variables:                  0
+  Integer variables:                    0
+
+  Total constraints:                    8
+  Nonlinear constraints:                0
+
+  Total nonzeros:                      61
+  Nonlinear nonzeros:                   0
+
+
+
+                                Variable           Value        Reduced Cost
+                                      X1        0.000000           0.1002098E-01
+                                      X2        0.000000           0.3960251E-02
+                                      X3        76.19960            0.000000
+                                      X4        0.000000           0.5327411E-02
+                                      X5        16.89413            0.000000
+                                      X6        9.383033            0.000000
+                                      X7        88.02223            0.000000
+                                      X8        0.000000           0.8431896E-01
+
+                                     Row    Slack or Surplus      Dual Price
+                                       1        1.622657           -1.000000
+                                       2        0.000000          -0.1707874
+                                       3        0.000000           0.4222762E-01
+                                       4        6.000000            0.000000
+                                       5        24.44633            0.000000
+                                       6        61.18341            0.000000
+                                       7        0.000000          -0.2070503E-02
+                                       8        0.000000           0.2405332E-02
+

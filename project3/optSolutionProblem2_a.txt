@@ -1,0 +1,39 @@
+  Global optimal solution found.
+  Objective value:                              114.7541
+  Infeasibilities:                              0.000000
+  Total solver iterations:                             3
+  Elapsed runtime seconds:                          0.01
+
+  Model Class:                                        LP
+
+  Total variables:                      8
+  Nonlinear variables:                  0
+  Integer variables:                    0
+
+  Total constraints:                    7
+  Nonlinear constraints:                0
+
+  Total nonzeros:                      53
+  Nonlinear nonzeros:                   0
+
+
+
+                                Variable           Value        Reduced Cost
+                                      X1        0.000000           0.1690164
+                                      X2        58.54801            0.000000
+                                      X3        0.000000           0.1451366
+                                      X4        0.000000           0.3628962
+                                      X5        87.82201            0.000000
+                                      X6        0.000000            4.083880
+                                      X7        0.000000           0.9755191
+                                      X8        0.000000            8.864044
+
+                                     Row    Slack or Surplus      Dual Price
+                                       1        114.7541           -1.000000
+                                       2        0.000000           -7.650273
+                                       3        3.491803            0.000000
+                                       4        2.508197            0.000000
+                                       5       0.2224824E-01        0.000000
+                                       6        78.22014            0.000000
+                                       7        0.000000          -0.6010929E-01
+
