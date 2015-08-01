@@ -7,6 +7,7 @@
 \usepackage{caption}
 \usepackage{tabularx}
 \usepackage[labelformat=simple]{subcaption}
+\usepackage{amsmath}
 
 \renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
 
@@ -104,7 +105,6 @@ Objective value: 17100\\
 \end{tabular} \\
 
 Lindo Code
-
 \begin{lstlisting}[language=c]
 min 10x11+15x12+11x21+8x22+13x31+8x32+9x33+14x42+8x43+5y11+6y12+7y13+10y14+12y23+8y24+10y25+14y26+14y34+12y35+12y36+6y37
 ST
@@ -263,40 +263,95 @@ follows:
 
 \begin{itemize}
 	\item Minimize
-[$210x_{1}+160x_{2}+400x_{3}+410x_{4}+1200x_{5}+5850x_{6}+1640x_{7}+8840x_{8}$]
-where $x_{i}$ represents the weight (in 1000 gram/1 kgram units) for ingredient $i$.
-	\item Supply constraints:
+[$21x_{1}+16x_{2}+40x_{3}+41x_{4}+120x_{5}+585x_{6}+164x_{7}+884x_{8}$]
+where $x_{i}$ represents the weight (in kgram units) for ingredient $i$.
+	\item Constraints
 	\begin{enumerate}
-		\item $x_{11} + x_{12} <= 150$
-		\item $x_{21} + x_{22} <= 450$
-		\item $x_{31} + x_{32} + x_{33} <= 250$
-		\item $x_{42} + x_{43} <= 150$
-	\end{enumerate}
-	\item Retailer constraints:
-	\begin{enumerate}
-		\item $y_{11} >= 100$
-		\item $y_{12} >= 150$
-		\item $y_{13} + y_{23} >= 100$
-		\item $y_{14} + y_{24} + y_{34} >= 200$
-		\item $y_{25} + y_{35} >= 200$
-		\item $y_{26} + y_{36} >= 150$
-		\item $y_{37} >= 100$
-	\end{enumerate}
-	\item The number of refrigerators shipped into any individual 
-		warehouse has to be equal to the number of refrigerators 
-		shipped out from that warehouse, thus constrained by:
-	\begin{enumerate}
-		\item $x_{11} + x_{21} + x_{31} - y_{11} - y_{12} - y_{13} - y_{14} = 0$
-		\item $x_{12} + x_{22} + x_{32} + x_{42} - y_{23} - y_{24} - y_{25} - y_{26} = 0$
-		\item $x_{33} + x_{43} - y_{34} - y_{35} - y_{36} - y_{37} = 0$
+		\item At least 15 grams of protein:\\
+		$0.85x_{1}+1.62x_{2}+2.86x_{3}+0.93x_{4}+23.4x_{5}+16.00x_{6}+9.00x_{7} >= 15$
+		\item At least 2 grams of fat:\\
+		$0.33x_{1}+0.20x_{2}+0.39x_{3}+0.24x_{4}+48.7x_{5}+5.00x_{6}+2.6x_{7}+100.00x_{8} >= 2$
+		\item At most 8 grams of fat:\\
+		$0.33x_{1}+0.20x_{2}+0.39x_{3}+0.24x_{4}+48.7x_{5}+5.00x_{6}+2.6x_{7}+100.00x_{8} <= 8$
+		\item At least 4 grams of carbohydrates:\\
+		$4.64x_{1}+2.37x_{2}+3.63x_{3}+9.58x_{4}+15.00x_{5}+3.00x_{6}+27.0x_{7} >= 4$
+		\item At most 200 milligrams of sodium:\\
+		$9.00x_{1}+28.00x_{2}+65.00x_{3}+69.00x_{4}+3.80x_{5}+120.00x_{6}+78.00x_{7} <= 200$
+		\item At least 40\% leafy greens by mass:\\
+		$x_{2}+x_{3}-0.4x_{1}-0.4x_{2}-0.4x_{3}-0.4x_{4}-0.4x_{5}-0.4x_{6}-0.4x_{7}-0.4x_{8} >= 0$
 	\end{enumerate}
 \end{itemize}
 
 \subsection{ii. Optimal Solution and Linear Program}
+
+The optimal solution for this problem is as follows:\\
+
+Objective value: 114.7541\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline variables & $x_{1}$ & $x_{2}$ & $x_{3}$ & $x_{4}$ & $x_{5}$ & $x_{6}$ & $x_{7}$ & $x_{8}$ \\
+	\hline optimal value & 0 & 58.54801 & 0 & 0 & 0 & 87.82201 & 0 & 0 \\
+	\hline
+\end{tabular} \\
+
+{\it Note:} The units for the objective value are kcal and the variables are in grams.\\
+
+Lindo Code
+\begin{lstlisting}[basicstyle=\small,language=c]
+min 21x1+16x2+40x3+41x4+585x5+120x6+164x7+884x8
+ST
+	0.85x1 + 1.62x2 + 2.86x3 + 0.93x4 + 23.4x5 + 16.00x6 + 9.00x7 >= 15
+	
+	0.33x1 + 0.20x2 + 0.39x3 + 0.24x4 + 48.7x5 + 5.00x6 + 2.6x7 + 100.00x8 >= 2
+	
+	0.33x1 + 0.20x2 + 0.39x3 + 0.24x4 + 48.7x5 + 5.00x6 + 2.6x7 + 100.00x8 <= 8	
+	
+	4.64x1 + 2.37x2 + 3.63x3 + 9.58x4 + 15.00x5 + 3.00x6 + 27.0x7 >= 4
+	
+	9.00x1 + 28.00x2 + 65.00x3 + 69.00x4 + 3.80x5 + 120.00x6 + 78.00x7 <= 200
+	
+	x2 + x3 - 0.4x1 - 0.4x2 - 0.4x3 - 0.4x4 - 0.4x5 - 0.4x6 - 0.4x7 - 0.4x8 >= 0
+\end{lstlisting}
+
 \subsection{iii. Cost of Low Calorie Salad}
+The cost of the low calorie salad, based upon minimizing calories, is as follows:\\
+
+\begin{displaymath}
+({\$0.75 \over 100\text{g}})x_2 + ({\$2.15 \over 100\text{g}})x_6 = (\$0.0075 \times 58.54801\text{g}) + (\$0.0215 \times 87.82201\text{g}) = \$2.32728329
+\end{displaymath}
+
+Therefore, the cost of the low calorie salad is \$2.33.
 
 \section{Part B}
+Veronica realizes that it is also important to minimize the cost associated with the new salad. Unfortunately some of the ingredients can be expensive. Therefore, we must determine the combination of ingredients that minimizes cost.
 
+\subsection{i. Linear Formulation}
+The objective function and constraints for this problem are as 
+follows:
+
+\begin{itemize}
+	\item Minimize
+[$1.00x_{1}+0.75x_{2}+0.50x_{3}+0.50x_{4}+0.45x_{5}+2.15x_{6}+0.95x_{7}+2.00x_{8}$] where $x_{i}$ represents the cost (in dollars) per 100 grams of ingredient $i$.
+	\item Constraints
+	\begin{enumerate}
+		\item At least 15 grams of protein:\\
+		$0.85x_{1}+1.62x_{2}+2.86x_{3}+0.93x_{4}+23.4x_{5}+16.00x_{6}+9.00x_{7} >= 15$
+		\item At least 2 grams of fat:\\
+		$0.33x_{1}+0.20x_{2}+0.39x_{3}+0.24x_{4}+48.7x_{5}+5.00x_{6}+2.6x_{7}+100.00x_{8} >= 2$
+		\item At most 8 grams of fat:\\
+		$0.33x_{1}+0.20x_{2}+0.39x_{3}+0.24x_{4}+48.7x_{5}+5.00x_{6}+2.6x_{7}+100.00x_{8} <= 8$
+		\item At least 4 grams of carbohydrates:\\
+		$4.64x_{1}+2.37x_{2}+3.63x_{3}+9.58x_{4}+15.00x_{5}+3.00x_{6}+27.0x_{7} >= 4$
+		\item At most 200 milligrams of sodium:\\
+		$9.00x_{1}+28.00x_{2}+65.00x_{3}+69.00x_{4}+3.80x_{5}+120.00x_{6}+78.00x_{7} <= 200$
+		\item At least 40\% leafy greens by mass:\\
+		$x_{2}+x_{3}-0.4x_{1}-0.4x_{2}-0.4x_{3}-0.4x_{4}-0.4x_{5}-0.4x_{6}-0.4x_{7}-0.4x_{8} >= 0$
+	\end{enumerate}
+\end{itemize}
+
+
+\subsection{ii. Optimal Solution and Linear Program}
+\subsection{iii. Cost of Low Calorie Salad}
 
 \section{Part C}
 
