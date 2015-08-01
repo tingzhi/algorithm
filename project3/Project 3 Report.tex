@@ -302,10 +302,164 @@ where $x_{i}$ represents the weight (in 1000 gram/1 kgram units) for ingredient 
 
 \chapter{Shortest Path Problems}
 
-\section{a}
-\section{b}
-\section{c}
-\section{d}
+\section{Part a}
+In this question, our goal is to minimize the path from vertex $a$ to every other vertex. So the code in Lindo is written as follows:
+\begin{lstlisting}[language=c]
+max a+b+c+d+e+f+g+h+i+j+k+l+m
+st
+        a      = 0 
+        b - a <= 2
+        c - a <= 3
+        d - a <= 8
+        h - a <= 9
+        a - b <= 4
+        c - b <= 5
+        e - b <= 7
+        f - b <= 4
+        d - c <= 10
+        b - c <= 5
+        g - c <= 9
+        i - c <= 11
+        f - c <= 4
+        a - d <= 8
+        g - d <= 2
+        j - d <= 5
+        f - d <= 1
+        h - e <= 5
+        c - e <= 4
+        i - e <= 10
+        i - f <= 2
+        g - f <= 2
+        d - g <= 2
+        j - g <= 8
+        k - g <= 12
+        i - h <= 5
+        k - h <= 10
+        a - i <= 20
+        k - i <= 6
+        j - i <= 2
+        m - i <= 12
+        i - j <= 2
+        k - j <= 4
+        l - j <= 5
+        h - k <= 10
+        m - k <= 10
+        m - l <= 2
+\end{lstlisting}
 
+The reason that we maximize $a+b+c+d+e+f+g+h+i+j+k+l+m$ is that we want to get the shortest path for every vertex in one run so that we can get all we need in the final result.
+
+From this code we can get the optimal solution as shown in the following table.\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline vertex & $a$   &  $b$ & $c$ & $d$ & $e$ & $f$ & $g$ & $h$ & $i$  & $j$ & $k$ & $l$ & $m$   \\
+	\hline shortest path from $a$ & 0 & 2 & 3 & 8 & 9 & 6 & 8 & 9 & 8 & 10 & 14 & 15 & 17       \\
+	\hline
+\end{tabular} \\
+
+\section{Part b}
+Since there is no path for vertex $z$ from vertex $a$, there will be an error occurs when we run the program. And the code we run proves this.
+\begin{lstlisting}[language=c]
+max a+b+c+d+e+f+g+h+i+j+k+l+m+z
+st
+        a      = 0 
+        b - a <= 2
+        c - a <= 3
+        d - a <= 8
+        h - a <= 9
+        a - b <= 4
+        c - b <= 5
+        e - b <= 7
+        f - b <= 4
+        d - c <= 10
+        b - c <= 5
+        g - c <= 9
+        i - c <= 11
+        f - c <= 4
+        a - d <= 8
+        g - d <= 2
+        j - d <= 5
+        f - d <= 1
+        h - e <= 5
+        c - e <= 4
+        i - e <= 10
+        i - f <= 2
+        g - f <= 2
+        d - g <= 2
+        j - g <= 8
+        k - g <= 12
+        i - h <= 5
+        k - h <= 10
+        a - i <= 20
+        k - i <= 6
+        j - i <= 2
+        m - i <= 12
+        i - j <= 2
+        k - j <= 4
+        l - j <= 5
+        h - k <= 10
+        m - k <= 10
+        m - l <= 2
+\end{lstlisting}
+ After running this, we get unbounded solution. It makes sense in this code because we didn't even give any bound for $z$ so that it would definitely be unbounded, which means there is no shortest path for vertex $z$ from $a$.
+ 
+\section{Part c}
+To calculate the shortest path from every vertex to vertex $m$, we can simply reverse the bound in part $a)$. Which means, we reverse every path from one vertex to another, and calculate the shortest path from vertex $m$. For instance, if the path from $a$ to $b$ is 2, then we change it as from $b$ to $a$ is 2. In this case we can calculate the shortest path from every vertex to m in one run.
+
+We can write the code as follows:
+\begin{lstlisting}[language=c]
+max a+b+c+d+e+f+g+h+i+j+k+l
+st
+        m      = 0 
+        a - b <= 2
+        a - c <= 3
+        a - d <= 8
+        a - h <= 9
+        b - a <= 4
+        b - c <= 5
+        b - e <= 7
+        b - f <= 4
+        c - d <= 10
+        c - b <= 5
+        c - g <= 9
+        c - i <= 11
+        c - f <= 4
+        d - a <= 8
+        d - g <= 2
+        d - j <= 5
+        d - f <= 1
+        e - h <= 5
+        e - c <= 4
+        e - i <= 10
+        f - i <= 2
+        f - g <= 2
+        g - d <= 2
+        g - j <= 8
+        g - k <= 12
+        h - i <= 5
+        h - k <= 10
+        i - a <= 20
+        i - k <= 6
+        i - j <= 2
+        i - m <= 12
+        j - i <= 2
+        j - k <= 4
+        j - l <= 5
+        k - h <= 10
+        k - m <= 10
+        l - m <= 2
+\end{lstlisting}
+
+From this code we can get the optimal solution as shown in the following table.\\
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	\hline vertex & $a$   &  $b$ & $c$ & $d$ & $e$ & $f$ & $g$ & $h$ & $i$  & $j$ & $k$ & $l$ & $m$   \\
+	\hline shortest path to $m$ & 17 & 15 & 15 & 12 & 19 & 11 & 14 & 14 & 9 & 7 & 10 & 2 & 0 \\
+	\hline
+\end{tabular} \\
+
+We can see from this table that the shortest path from $a$ to $m$ is 17, which matches the result that we got in part $a)$. Therefore, this method works.
+
+\section{Part d}
+
+Because every path has to pass through vertex $i$, we can cut this question into 2 parts. The first part is to calculate the shortest path from every vertex to vertex $i$, using the similar method we used in part $c)$. The second part is to calculate 
 
 \end{document} 
