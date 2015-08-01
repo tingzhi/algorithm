@@ -1,17 +1,13 @@
 \documentclass[11pt]{scrreprt}
 \usepackage[utf8]{inputenc}
-
-\title{\textbf{Project 3 Report}}
-\subtitle{CS325 Analysis of Algorithms, Summer 2015}
-\author{\textsf{\textbf{Project Group 1}}\\
-		\textsf{Tingzhi Li}\\
-		\textsf{Nicholas Nelson}\\
-		\textsf{Chunyang Zhang}}
-		
 \usepackage{graphicx}
-
 \usepackage{listings} %插入代码
 \usepackage{xcolor} %代码高亮
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+
+\renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
 
 \lstset{numbers=left, %设置行号位置
 	numberstyle=\tiny, %设置行号大小
@@ -26,20 +22,21 @@
 	showspaces=false %不显示空格
 }
 
-%\usepackage[demo]{graphicx}
-\usepackage{caption}
-\usepackage[labelformat=simple]{subcaption}
-\renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
-
-
+\title{\textbf{Project 3 Report}}
+\subtitle{CS325 Analysis of Algorithms, Summer 2015}
+\author{\textsf{\textbf{Project Group 1}}\\
+		\textsf{Tingzhi Li}\\
+		\textsf{Nicholas Nelson}\\
+		\textsf{Chunyang Zhang}}
 \date{}
+
 \begin{document}
-
 \maketitle
-
 
 \chapter{Transshipment Model}
 \section{Part A}
+The transshipment model is an extension of the transportation model. In addition to the standard transportation model, there are now intermediate transshipment points added between the sources (plants) and destinations (retailers). Items being shipped from a Plant ($p_i$) must be shipped to a Warehouse ($w_j$) before being shipped to the Retailer ($r_k$). Each Plant will have an associated supply ($s_i$) and each Retailer will have a demand ($d_k$). The number of plants is $n$, number of warehouses is $q$ and the number of retailers is $m$. The edges $(i,j)$ from plant ($p_i$) to warehouse ($w_j$) have associated costs denoted $cp(j,k)$.
+
 \subsection{}
 Objective function
 
@@ -108,8 +105,7 @@ Lindo Code
 
 \begin{lstlisting}[language=c]
 min 10x11+15x12+11x21+8x22+13x31+8x32+9x33+14x42+8x43+5y11+6y12+7y13+10y14+12y23+8y24+10y25+14y26+14y34+12y35+12y36+6y37
-
-st
+ST
 	x11 + x12 <= 150
 	x21 + x22 <= 450
 	x31 + x32 + x33 <= 250
