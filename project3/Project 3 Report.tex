@@ -105,25 +105,26 @@ Objective value: 17100\\
 \end{tabular} \\
 
 Lindo Code
-\begin{lstlisting}[language=c]
+\begin{lstlisting}[basicstyle=\small,language=c]
 min 10x11+15x12+11x21+8x22+13x31+8x32+9x33+14x42+8x43+5y11+6y12+7y13+10y14+12y23+8y24+10y25+14y26+14y34+12y35+12y36+6y37
+
 ST
-	x11 + x12 <= 150
-	x21 + x22 <= 450
-	x31 + x32 + x33 <= 250
-	x42 + x43 <= 150
+x11+x12<=150
+x21+x22<=450
+x31+x32+x33<=250
+x42+x43<= 150
 
-	y11 >= 100
-	y12 >= 150
-	y13 + y23 >= 100
-	y14 + y24 + y34 >= 200
-	y25 + y35 >= 200
-	y26 + y36 >= 150
-	y37 >= 100
+y11>=100
+y12>=150
+y13+y23>=100
+y14+y24+y34>=200
+y25+y35>=200
+y26+y36>=150
+y37>=100
 
-	x11 + x21 + x31 - y11 - y12 - y13 - y14 = 0
-	x12 + x22 + x32 + x42 - y23 - y24 - y25 - y26 = 0
-	x33 + x43 - y34 - y35 - y36 - y37 = 0
+x11+x21+x31-y11-y12-y13-y14=0
+x12+x22+x32+x42-y23-y24-y25-y26=0
+x33+x43-y34-y35-y36-y37=0
 \end{lstlisting}
 
 \subsection{iii. Optimal Shipping Routes/Minimum Costs}
@@ -300,27 +301,22 @@ Lindo Code
 \begin{lstlisting}[basicstyle=\small,language=c]
 min 21x1+16x2+40x3+41x4+585x5+120x6+164x7+884x8
 ST
-	0.85x1 + 1.62x2 + 2.86x3 + 0.93x4 + 23.4x5 + 16.00x6 + 9.00x7 >= 15
-	
-	0.33x1 + 0.20x2 + 0.39x3 + 0.24x4 + 48.7x5 + 5.00x6 + 2.6x7 + 100.00x8 >= 2
-	
-	0.33x1 + 0.20x2 + 0.39x3 + 0.24x4 + 48.7x5 + 5.00x6 + 2.6x7 + 100.00x8 <= 8	
-	
-	4.64x1 + 2.37x2 + 3.63x3 + 9.58x4 + 15.00x5 + 3.00x6 + 27.0x7 >= 4
-	
-	9.00x1 + 28.00x2 + 65.00x3 + 69.00x4 + 3.80x5 + 120.00x6 + 78.00x7 <= 200
-	
-	x2 + x3 - 0.4x1 - 0.4x2 - 0.4x3 - 0.4x4 - 0.4x5 - 0.4x6 - 0.4x7 - 0.4x8 >= 0
+0.85x1+1.62x2+2.86x3+0.93x4+23.4x5+16.00x6+9.00x7 >= 15
+0.33x1+0.20x2+0.39x3+0.24x4+48.7x5+5.00x6+2.6x7+100.00x8 >= 2
+0.33x1+0.20x2+0.39x3+0.24x4+48.7x5+5.00x6+2.6x7+100.00x8 <= 8
+4.64x1+2.37x2+3.63x3+9.58x4+15.00x5+3.00x6+27.0x7 >= 4
+9.00x1+28.00x2+65.00x3+69.00x4+3.80x5+120.00x6+78.00x7 <= 200
+x2+x3-0.4x1-0.4x2-0.4x3-0.4x4-0.4x5-0.4x6-0.4x7-0.4x8 >= 0
 \end{lstlisting}
 
 \subsection{iii. Cost of Low Calorie Salad}
-The cost of the low calorie salad, based upon minimizing calories, is as follows:\\
+The cost of the low calorie salad, based upon minimizing calories, is as follows:
 
 \begin{displaymath}
 ({\$0.75 \over 100\text{g}})x_2 + ({\$2.15 \over 100\text{g}})x_6 = (\$0.0075 \times 58.54801\text{g}) + (\$0.0215 \times 87.82201\text{g}) = \$2.32728329
 \end{displaymath}
 
-Therefore, the cost of the low calorie salad is \$2.33.
+Therefore, the cost of the low calorie salad is approximately \$2.33.
 
 \section{Part B}
 Veronica realizes that it is also important to minimize the cost associated with the new salad. Unfortunately some of the ingredients can be expensive. Therefore, we must determine the combination of ingredients that minimizes cost.
@@ -351,7 +347,47 @@ follows:
 
 
 \subsection{ii. Optimal Solution and Linear Program}
-\subsection{iii. Cost of Low Calorie Salad}
+
+The optimal solution for this problem is as follows:\\
+
+Objective value: 1.554133\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline variables & $x_{1}$ & $x_{2}$ & $x_{3}$ & $x_{4}$ & $x_{5}$ & $x_{6}$ & $x_{7}$ & $x_{8}$ \\
+	\hline optimal value & 0 & 0 & 83.22983 & 0 & 9.608330 & 0 & 115.2364 & 0 \\
+	\hline
+\end{tabular} \\
+
+{\it Note:} The units for the objective value are dollars and  the variables are in grams.\\
+
+\pagebreak
+Lindo Code
+\begin{lstlisting}[basicstyle=\small,language=c]
+min 1.00x1+0.75x2+0.50x3+0.50x4+0.45x5+2.15x6+0.95x7+2.00x8
+ST
+0.85x1+1.62x2+2.86x3+0.93x4+23.4x5+16.00x6+9.00x7 >= 15
+0.33x1+0.20x2+0.39x3+0.24x4+48.7x5+5.00x6+2.6x7+100.00x8 >= 2
+0.33x1+0.20x2+0.39x3+0.24x4+48.7x5+5.00x6+2.6x7+100.00x8 <= 8
+4.64x1+2.37x2+3.63x3+9.58x4+15.00x5+3.00x6+27.0x7 >= 4
+9.00x1+28.00x2+65.00x3+69.00x4+3.80x5+120.00x6+78.00x7 <= 200
+x2+x3-0.4x1-0.4x2-0.4x3-0.4x4-0.4x5-0.4x6-0.4x7-0.4x8 >= 0
+\end{lstlisting}
+
+\subsection{iii. Calories of Low Cost Salad}
+
+The calories of the low cost salad, based upon minimizing costs, is as follows:
+
+\begin{displaymath}
+({40\text{ kcal} \over 100\text{g}})x_3 + ({585\text{ kcal} \over 100\text{g}})x_5 + ({164\text{ kcal} \over 100\text{g}})x_7 =
+\end{displaymath}
+\begin{displaymath}
+(0.4\text{ kcal} \times 83.22983\text{g}) + (5.85\text{ kcal} \times 9.608330\text{g}) + (1.64\text{ kcal} \times 115.2364\text{g}) =
+\end{displaymath}
+\begin{displaymath}
+278.4883585\text{ kcal}
+\end{displaymath}
+
+Therefore, the calories of the low cost salad are approximately 278.50 kcal.
 
 \section{Part C}
 
