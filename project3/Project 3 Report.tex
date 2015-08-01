@@ -5,6 +5,7 @@
 \usepackage{xcolor} %代码高亮
 %\usepackage[demo]{graphicx}
 \usepackage{caption}
+\usepackage{tabularx}
 \usepackage[labelformat=simple]{subcaption}
 
 \renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
@@ -74,11 +75,10 @@ refrigerators to be shipped  from warehouse $j$ to retailer $k$.
 		\item $y_{26} + y_{36} >= 150$
 		\item $y_{37} >= 100$
 	\end{enumerate}
-	\item Overall constraints:
-	\begin{enumerate}
-		\item The number of refrigerators shipped into any individual 
+	\item The number of refrigerators shipped into any individual 
 		warehouse has to be equal to the number of refrigerators 
-		shipped out from that warehouse, thus:
+		shipped out from that warehouse, thus constrained by:
+	\begin{enumerate}
 		\item $x_{11} + x_{21} + x_{31} - y_{11} - y_{12} - y_{13} - y_{14} = 0$
 		\item $x_{12} + x_{22} + x_{32} + x_{42} - y_{23} - y_{24} - y_{25} - y_{26} = 0$
 		\item $x_{33} + x_{43} - y_{34} - y_{35} - y_{36} - y_{37} = 0$
@@ -148,10 +148,10 @@ Due to old infrastructure, warehouse 2 is going to close eliminating
 all of the associated routes. Therefore, all calculations as to the
 optimal shipping route and minimized costs must be re-evaluated. The 
 feasability of shipping all refrigerators to either warehouse 1 or 3
-and then to the retailers without using warehouse 2 must is also
+and then to the retailers without using warehouse 2 must also be
 evaluated.
 
-\subsection{Conclusion}
+\subsection{Evaluation}
 Without warehouse 2, there is no optimal solution to the transshipment 
 model. It is not feasible to ship all refrigerators to either warehouse
 1 or 3 and then to the retailers without using warehouse 2. Even if 
@@ -160,9 +160,15 @@ the demands from $R_5$, $R_6$ and $R_7$ would not be met because
 $P_3 + P_4 < R_5 + R_6 + R_7$.
 
 \section{Part C}
-In this situation, it is feasible.
+Instead of closing warehouse 2, management has decided to keep a 
+portion of it open but limit shipments to 100 refrigerators per week. 
+The feasability of this model must be evaluated, and an optimal 
+solution determined.
 
-Optimal solution:
+\subsection{Evaluation}
+With warehouse 2 limited to 100 refrigerators per week, the model is
+feasible. The optimal shipping routes, based upon minimizing costs, 
+are as follows: \\
 
 \begin{tabular}{|c|c|}
 	\hline From plants to warehouses & From warehouses to retailers \\
@@ -181,43 +187,75 @@ Optimal solution:
 Minimum cost = \$18300
 
 \section{Part D}
+The generalized linear programming model for the transshipment problem 
+can be expressed using the following formulation, objective function,
+and constraints:\\
 
-Objective function
-
+Objective function:
 \begin{displaymath}
 \min \left(\sum_{i=1}^{n} \sum_{j=1}^{q} cp(i,j)x_{ij} + \sum_{j=1}^{q} \sum_{k=1}^{m} cw(j,k)y_{jk}\right)
 \end{displaymath}
 
-$x_{ij}=0 \textrm{ if } cp(i,j) \textrm{ is not applicable. } $
+$x_{ij}=0 \textrm{ if } cp(i,j) \textrm{ is not applicable, }$
 
-$y_{jk}=0 \textrm{ if } cw(j,k) \textrm{ is not applicable.} $
+$y_{jk}=0 \textrm{ if } cw(j,k) \textrm{ is not applicable,}$
 
-where $x_{ij}$ represents number of refrigerators to be shipped from plant $i$ to warehouse $j$ and $y_{jk}$ represents number of refrigerators to be shipped  from warehouse $j$ to retailer $k$.
+where $x_{ij}$ represents the number of refrigerators to be shipped 
+from plant $i$ to warehouse $j$ and $y_{jk}$ represents number of 
+refrigerators to be shipped from warehouse $j$ to retailer $k$.\\
 
-All constraints
+The constraints for this problem are as follows:
 
-supply constraints
+\begin{itemize}
+	\item Supply constraints:
+	\begin{displaymath}
+	\sum_{j=1}^{q} x_{ij} \leq s_i 
+	\qquad\textrm{where } i=1,2,\cdots,n
+	\end{displaymath}
+	\item Retailer constraints:
+	\begin{displaymath}
+	\sum_{j=1}^{q} y_{jk} \leq d_k 
+	\qquad\textrm{where } k=1,2,\cdots,m
+	\end{displaymath}
+	\item The number of refrigerators shipped into any individual 
+	warehouse has to be equal to the number of refrigerators 
+	shipped out from that warehouse, thus constrained by:
+	\begin{displaymath}
+	\sum_{i=1}^{n} x_{ij} = \sum_{k=1}^{m} y_{jk} 
+	\qquad\textrm{where } j=1,2,\cdots,q
+	\end{displaymath}
+\end{itemize}
 
-\begin{displaymath}
-\sum_{j=1}^{q} x_{ij} \leq s_i \qquad\textrm{where } i=1,2,\cdots,n
-\end{displaymath}
 
-retailer constraints
 
-\begin{displaymath}
-\sum_{j=1}^{q} y_{jk} \leq d_k \qquad\textrm{where } k=1,2,\cdots,m
-\end{displaymath}
 
-number of refrigerators shipped into one warehouse has to be equal to number of refrigerators shipped out from one warehouse
-
-\begin{displaymath}
-\sum_{i=1}^{n} x_{ij} = \sum_{k=1}^{m} y_{jk} \qquad\textrm{where } j=1,2,\cdots,q
-\end{displaymath}
-
-\chapter{A mixture problem}
+\chapter{A Mixture Problem}
 
 \section{Part A}
+Veronica the owner of Very Veggie Vegeria is creating a new 
+healthy salad that is low in calories but meets certain 
+nutritional requirements. A salad is any combination of the 
+following ingredients:\\
 
+Tomato, Lettuce, Spinach, Carrot, Smoked Tofu, Sunflower Seeds, Chickpeas,
+Oil\\
+
+Each salad must contain:
+
+\begin{itemize}
+	\item At least 15 grams of protein
+	\item At least 2 and at most 8 grams of fat
+	\item At least 4 grams of carbohydrates
+	\item At most 200 milligrams of sodium
+	\item At least 40\% leafy greens by mass
+\end{itemize}
+
+The nutritional contents of these ingredients (per 100 grams)
+and cost are:
+
+\begin{figure}[!htbp]
+	\includegraphics[width=1.0\textwidth]{nutritional.png}
+\end{figure}
 
 \section{Part B}
 \section{Part C}
