@@ -35,56 +35,57 @@
 
 \chapter{Transshipment Model}
 \section{Part A}
-The transshipment model is an extension of the transportation model. In addition to the standard transportation model, there are now intermediate transshipment points added between the sources (plants) and destinations (retailers). Items being shipped from a Plant ($p_i$) must be shipped to a Warehouse ($w_j$) before being shipped to the Retailer ($r_k$). Each Plant will have an associated supply ($s_i$) and each Retailer will have a demand ($d_k$). The number of plants is $n$, number of warehouses is $q$ and the number of retailers is $m$. The edges $(i,j)$ from plant ($p_i$) to warehouse ($w_j$) have associated costs denoted $cp(j,k)$.
+The transshipment model is an extension of the transportation model. 
+In addition to the standard transportation model, there are now 
+intermediate transshipment points added between the sources (plants) 
+and destinations (retailers). Items being shipped from a Plant 
+($p_i$) must be shipped to a Warehouse ($w_j$) before being shipped 
+to the Retailer ($r_k$). Each Plant will have an associated supply 
+($s_i$) and each Retailer will have a demand ($d_k$). The number of 
+plants is $n$, number of warehouses is $q$ and the number of 
+retailers is $m$. The edges $(i,j)$ from plant ($p_i$) to warehouse 
+($w_j$) have associated costs denoted $cp(j,k)$.
 
-\subsection{}
-Objective function
+\subsection{i. Linear Formulation}
 
-Minimize
+The objective function and constraints for this problem are as 
+follows:
 
-$10x_{11}+15x_{12}+11x_{21}+8x_{22}+13x_{31}+8_x{32}+9x_{33}+14x_{42}+8x_{43}+5y_{1}1+6y_{12}+7y_{13}+10y_{14}+12y_{23}+8y_{24}+10y_{25}+14y_{26}+12y_{35}+12y_{36}+6y_{37}$
+\begin{itemize}
+	\item Minimize
+[$10x_{11}+15x_{12}+11x_{21}+8x_{22}+13x_{31}+8_x{32}+9x_{33}+14x_{42}+8x_{43}+5y_{1}1+6y_{12}+7y_{13}+10y_{14}+12y_{23}+8y_{24}+10y_{25}+14y_{26}+12y_{35}+12y_{36}+6y_{37}$] 
+where $x_{ij}$ represents number of refrigerators to be shipped from 
+plant $i$ to warehouse $j$, and $y_{jk}$ represents number of 
+refrigerators to be shipped  from warehouse $j$ to retailer $k$.
+	\item Supply constraints:
+	\begin{enumerate}
+		\item $x_{11} + x_{12} <= 150$
+		\item $x_{21} + x_{22} <= 450$
+		\item $x_{31} + x_{32} + x_{33} <= 250$
+		\item $x_{42} + x_{43} <= 150$
+	\end{enumerate}
+	\item Retailer constraints:
+	\begin{enumerate}
+		\item $y_{11} >= 100$
+		\item $y_{12} >= 150$
+		\item $y_{13} + y_{23} >= 100$
+		\item $y_{14} + y_{24} + y_{34} >= 200$
+		\item $y_{25} + y_{35} >= 200$
+		\item $y_{26} + y_{36} >= 150$
+		\item $y_{37} >= 100$
+	\end{enumerate}
+	\item Overall constraints:
+	\begin{enumerate}
+		\item The number of refrigerators shipped into any individual 
+		warehouse has to be equal to the number of refrigerators 
+		shipped out from that warehouse, thus:
+		\item $x_{11} + x_{21} + x_{31} - y_{11} - y_{12} - y_{13} - y_{14} = 0$
+		\item $x_{12} + x_{22} + x_{32} + x_{42} - y_{23} - y_{24} - y_{25} - y_{26} = 0$
+		\item $x_{33} + x_{43} - y_{34} - y_{35} - y_{36} - y_{37} = 0$
+	\end{enumerate}
+\end{itemize}
 
-where $x_{ij}$ represents number of refrigerators to be shipped plants $i$ to warehouses $j$ and $y_{jk}$ represents number of refrigerators to be shipped  from warehouse $j$ to retailer $k$.
-
-All constraints
-
-supply constraints
-
-$x_{11} + x_{12} <= 150$
-
-$x_{21} + x_{22} <= 450$
-
-$x_{31} + x_{32} + x_{33} <= 250$
-
-$x_{42} + x_{43} <= 150$
-
-retailer constraints
-
-$y_{11} >= 100$
-
-$y_{12} >= 150$
-
-$y_{13} + y_{23} >= 100$
-
-$y_{14} + y_{24} + y_{34} >= 200$
-
-$y_{25} + y_{35} >= 200$
-
-$y_{26} + y_{36} >= 150$
-
-$y_{37} >= 100$
-
-number of refrigerators shipped into one warehouse has to be equal to number of refrigerators shipped out from one warehouse
-
-$x_{11} + x_{21} + x_{31} - y_{11} - y_{12} - y_{13} - y_{14} = 0$
-
-$x_{12} + x_{22} + x_{32} + x_{42} - y_{23} - y_{24} - y_{25} - y_{26} = 0$
-
-$x_{33} + x_{43} - y_{34} - y_{35} - y_{36} - y_{37} = 0$
-
-
-
-\subsection{}
+\subsection{Optimal Solution and Linear Program}
 Optimal solution
 
 Objective value: 17100  \\
