@@ -86,9 +86,10 @@ refrigerators to be shipped  from warehouse $j$ to retailer $k$.
 \end{itemize}
 
 \subsection{Optimal Solution and Linear Program}
-Optimal solution
 
-Objective value: 17100  \\
+The optimal solution for this problem is as follows:\\
+
+Objective value: 17100\\
 
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 	\hline variables & $x_{11}$   &  $x_{12}$ & $x_{21}$ & $x_{22}$ & $x_{31}$ & $x_{32}$ & $x_{33}$ & $x_{42}$ & $x_{43}$      \\
@@ -125,8 +126,8 @@ ST
 	x33 + x43 - y34 - y35 - y36 - y37 = 0
 \end{lstlisting}
 
-\subsection{}
-Optimal shipping routes \\
+\subsection{Optimal Shipping Routes/Minimum Costs}
+The optimal shipping routes, based upon minimizing costs, are as follows: \\
 
 \begin{tabular}{|c|c|}
 	\hline From plants to warehouses & From warehouses to retailers \\
@@ -140,10 +141,23 @@ Optimal shipping routes \\
 	\hline
 \end{tabular} \\
 
-Minimum cost = \$17100
+Minimum cost = \$17,100
 
 \section{Part B}
-There is no optimal solution to this modified model. Is it not feasible to ship all the refrigerators to either warehouse 1 or 3 and then to the retailers without using warehouse 2. Even if $P_3$ and $P_4$ shipped all the fridges to $W_3$, the demands from $R_5$, $R_6$, and $R_7$ still couldn't be met because $P_3 + P_4 < R_5 + R_6 + R_7$.
+Due to old infrastructure, warehouse 2 is going to close eliminating 
+all of the associated routes. Therefore, all calculations as to the
+optimal shipping route and minimized costs must be re-evaluated. The 
+feasability of shipping all refrigerators to either warehouse 1 or 3
+and then to the retailers without using warehouse 2 must is also
+evaluated.
+
+\subsection{Conclusion}
+Without warehouse 2, there is no optimal solution to the transshipment 
+model. It is not feasible to ship all refrigerators to either warehouse
+1 or 3 and then to the retailers without using warehouse 2. Even if 
+plants $P_3$ and $P_4$ shipped all refrigerators to warehouse $W_3$, 
+the demands from $R_5$, $R_6$ and $R_7$ would not be met because
+$P_3 + P_4 < R_5 + R_6 + R_7$.
 
 \section{Part C}
 In this situation, it is feasible.
