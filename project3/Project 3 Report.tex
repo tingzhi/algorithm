@@ -284,7 +284,6 @@ where $x_{i}$ represents the weight (in kgram units) for ingredient $i$.
 \end{itemize}
 
 \subsection{ii. Optimal Solution and Linear Program}
-
 The optimal solution for this problem is as follows:\\
 
 Objective value: 114.7541\\
@@ -347,7 +346,6 @@ follows:
 
 
 \subsection{ii. Optimal Solution and Linear Program}
-
 The optimal solution for this problem is as follows:\\
 
 Objective value: 1.554133\\
@@ -391,12 +389,62 @@ Therefore, the calories of the low cost salad are approximately 278.50 kcal.
 
 \section{Part C}
 
+\subsection{i. Possible Methods}
+We found the following list of possible methods to determine a solution that would meet all conditions and constraints:
+\begin{itemize}
+	\item Minimize calories, using the additional constraints that calories must be less than or equal to 250 kcal and cost must be less than or equal to \$2.00.
+	\item Minimize cost, using the additional constraints that calories must be less than or equal to 250 kcal and cost must be less than or equal to \$2.00.
+	\item Minimize the weight of ingredients, using the additional constraints that calories must be less than or equal to 250 kcal and cost must be less than or equal to \$2.00.
+\end{itemize}
+
+\subsection{ii. Results for Ingredients, Cost, and Calories}
+Using the optimization that minimizes weight of ingredients, the solution has the following results:\\
+
+Objective value: 1.336521\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+	\hline variables & $x_{1}$ & $x_{2}$ & $x_{3}$ & $x_{4}$ & $x_{5}$ & $x_{6}$ & $x_{7}$ & $x_{8}$ \\
+	\hline optimal value & 0 & 0 & 53.46083 & 0 & 8.654325 & 71.53693 & 0 & 0 \\
+	\hline
+\end{tabular} \\
+
+{\it Note:} The units for the objective value is total grams of all ingredients and the variables are in grams per ingredient.\\
+
+Thus we should select 53.46083g of Spinach, 8.654325g of Sunflower Seeds, and 71.53693g of Smoked Tofu. The resulting salad will have the following costs and calories:
+
+\begin{displaymath}
+({\$0.50 \over 100\text{g}})x_3 + ({\$0.45 \over 100\text{g}})x_5 + ({\$2.15 \over 100\text{g}})x_6 =
+\end{displaymath}
+\begin{displaymath}
+(\$0.0050 \times 53.46083\text{g}) + (\$0.0045 \times 8.654325\text{g}) + (\$0.0215 \times 71.53693\text{g}) =
+\end{displaymath}
+\begin{displaymath}
+\$1.844292608
+\end{displaymath}
+
+\begin{displaymath}
+({40\text{ kcal} \over 100\text{g}})x_3 + ({585\text{ kcal} \over 100\text{g}})x_5 + ({120\text{ kcal} \over 100\text{g}})x_6 =
+\end{displaymath}
+\begin{displaymath}
+(0.4\text{ kcal} \times 53.46083\text{g}) + (5.85\text{ kcal} \times 8.654325\text{g}) + (1.20\text{ kcal} \times 71.53693\text{g}) =
+\end{displaymath}
+\begin{displaymath}
+157.85644925\text{ kcal}
+\end{displaymath}
+
+Thus, the costs are reduced to \$1.84 and the calories are reduced to 157.86 kcal.
+
+\subsection{iii. Derived Solution}
+The minimizing weight of ingredients solution, which we selected for evaluation, was derived by determining that the objective was to minimize both cost and calories in equal parts, but that both of these factors are determined by the weight of ingredients. Since the weight of ingredients affects both cost and calories in the same manner, increased weight equates to increased costs and increased calories, we chose to minimize the weight.
+
+We also ran the minimizing cost and minimizing calories solutions in order to compare the results against our selected solution. The comparison showed us that optimizing for calories resulted in the absolute minimum number of calories possible, whereas the optimization for cost resulted in the absolute minimum for calories. Since the given problem says that we should optimize for both, and given the value comparisons for all three solutions, we determined that optimizing for weight of ingredients resulted in the most equitable solution.
+
 \chapter{Shortest Path Problems}
 
-\section{Part a}
-In this question, our goal is to minimize the path from vertex $a$ to every other vertex. So the code in Lindo can be written as follows:
+\section{Part A}\label{part3a}
+In this question, our goal is to minimize the path from vertex $a$ to every other vertex. So the code in Lindo is written as follows:
 \begin{lstlisting}[language=c]
-max a + b + c + d + e + f + g + h + i + j + k + l + m
+max a+b+c+d+e+f+g+h+i+j+k+l+m
 st
         a      = 0 
         b - a <= 2
@@ -438,7 +486,7 @@ st
         m - l <= 2
 \end{lstlisting}
 
-The reason that we maximize $a+b+c+d+e+f+g+h+i+j+k+l+m$ is that we want to get the shortest path for every vertex in one run so that we can get all we need in the final result.
+The reason that we maximize $a+b+c+d+e+f+g+h+i+j+k+l+m$ is that we want to get the shortest path for every vertex in one run so that we can get all we need in the final result.\\
 
 From this code we can get the optimal solution as shown in the following table.\\
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -447,10 +495,10 @@ From this code we can get the optimal solution as shown in the following table.\
 	\hline
 \end{tabular} \\
 
-\section{Part b}
-Since there is no path for vertex $z$ from vertex $a$, there will be an error occurs when we run the program. And the code we run proves this.
+\section{Part B}\label{part3b}
+Since there is no path from vertex $a$ to vertex $z$, there will be an error when we run the program. And the code we run proves this.
 \begin{lstlisting}[language=c]
-max a + b + c + d + e + f + g + h + i + j + k + l + m + z
+max a+b+c+d+e+f+g+h+i+j+k+l+m+z
 st
         a      = 0 
         b - a <= 2
@@ -491,14 +539,14 @@ st
         m - k <= 10
         m - l <= 2
 \end{lstlisting}
- After running this, we get unbounded solution. It makes sense in this code because we didn't even give any bound for $z$ so that it would definitely be unbounded, which means there is no shortest path for vertex $z$ from $a$.
+ After running this, we get an ``{\it unbounded solution}'' result. This result makes logical sense since no bounding constraints were defined for $z$ and thus it is by definition a completely unbounded variable. Thus, there is no shortest path from vertex $a$ from $z$.
  
-\section{Part c}
-To calculate the shortest path from every vertex to vertex $m$, we can simply reverse the bound in part $a)$. Which means, we reverse every path from one vertex to another, and calculate the shortest path from vertex $m$. For instance, if the path from $a$ to $b$ is 2, then we change it as from $b$ to $a$ is 2. In this case we can calculate the shortest path from every vertex to m in one run.
+\section{Part C}\label{part3c}
+To calculate the shortest path from any vertex $n$ to vertex $m$, we can simply reverse the bounds in Part~\ref{part3a}. Which means that we reverse every path from one vertex to another, and calculate the shortest path from vertex $m$. For instance, if the path from $a$ to $b$ is 2, then we reverse this to become the path from $b$ to $a$, which is still 2. In this case we can calculate the shortest path from every vertex $n$ to vertex $m$ in one run.
 
 We can write the code as follows:
 \begin{lstlisting}[language=c]
-max a + b + c + d + e + f + g + h + i + j + k + l + m
+max a+b+c+d+e+f+g+h+i+j+k+l
 st
         m      = 0 
         a - b <= 2
@@ -547,138 +595,10 @@ From this code we can get the optimal solution as shown in the following table.\
 	\hline
 \end{tabular} \\
 
-We can see from this table that the shortest path from $a$ to $m$ is 17, which matches the result that we got in part $a)$. Therefore, this method works.
+We can see from this table that the shortest path from $a$ to $m$ is 17, which matches the result that we got in Part~\ref{part3a}. Therefore, this method suffices for all requirements and constraints.
 
-\section{Part d}
+\section{Part D}
 
-Because every path has to pass through vertex $i$, we can cut this question into 2 parts. The first part is to calculate the shortest path from every vertex to vertex $i$, using the similar method we used in part $c)$. The second part is to calculate the shortest path from vertex $i$ to every other vertex. If there's any error when running the codes, then it means we cannot get there by passing through vertex $i$. 
-
-The code for the first part is written as follows:
-\begin{lstlisting}[language=c]
-max a + b + c + d + e + f + g + h + i + j + k
-st
-        i      = 0 
-        a - b <= 2
-        a - c <= 3
-        a - d <= 8
-        a - h <= 9
-        b - a <= 4
-        b - c <= 5
-        b - e <= 7
-        b - f <= 4
-        c - d <= 10
-        c - b <= 5
-        c - g <= 9
-        c - i <= 11
-        c - f <= 4
-        d - a <= 8
-        d - g <= 2
-        d - j <= 5
-        d - f <= 1
-        e - h <= 5
-        e - c <= 4
-        e - i <= 10
-        f - i <= 2
-        f - g <= 2
-        g - d <= 2
-        g - j <= 8
-        g - k <= 12
-        h - i <= 5
-        h - k <= 10
-        i - a <= 20
-        i - k <= 6
-        i - j <= 2
-        i - m <= 12
-        j - i <= 2
-        j - k <= 4
-        j - l <= 5
-        k - h <= 10
-        k - m <= 10
-        l - m <= 2
-\end{lstlisting}
-
-We can see that there is no vertex $l$ and $m$ in this maximizing code for the reason that if we add them in this code there would be an error, which means there is no path from $l$ or $m$ to vertex $i$.
-
-From this code we can get the optimal solution as shown in the following table.\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\hline vertex & $a$   &  $b$ & $c$ & $d$ & $e$ & $f$ & $g$ & $h$ & $i$  & $j$ & $k$ & $l$ & $m$   \\
-	\hline shortest path to $i$ & 8 & 6 & 6 & 3 & 10 & 2 & 5 & 5 & 0 & 2 & 15 & N/A & N/A \\
-	\hline
-\end{tabular} \\
-
-The code for the second part is written as follows:
-\begin{lstlisting}[language=c]
-max a + b + c + d +e + f + g + h + i + j + k + l + m
-st
-        i      = 0 
-        b - a <= 2
-        c - a <= 3
-        d - a <= 8
-        h - a <= 9
-        a - b <= 4
-        c - b <= 5
-        e - b <= 7
-        f - b <= 4
-        d - c <= 10
-        b - c <= 5
-        g - c <= 9
-        i - c <= 11
-        f - c <= 4
-        a - d <= 8
-        g - d <= 2
-        j - d <= 5
-        f - d <= 1
-        h - e <= 5
-        c - e <= 4
-        i - e <= 10
-        i - f <= 2
-        g - f <= 2
-        d - g <= 2
-        j - g <= 8
-        k - g <= 12
-        i - h <= 5
-        k - h <= 10
-        a - i <= 20
-        k - i <= 6
-        j - i <= 2
-        m - i <= 12
-        i - j <= 2
-        k - j <= 4
-        l - j <= 5
-        h - k <= 10
-        m - k <= 10
-        m - l <= 2
-\end{lstlisting}
-
-In contrast to the first part, we have vertex $l$ and $m$ here because there is a shortest path from $i$ to them so that we don't have to erase them.
-
-From this code we can get the optimal solution as shown in the following table.\\
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-	\hline vertex & $a$   &  $b$ & $c$ & $d$ & $e$ & $f$ & $g$ & $h$ & $i$  & $j$ & $k$ & $l$ & $m$   \\
-	\hline shortest path from $i$ & 20 & 22 & 23 & 28 & 29 & 26 & 28 & 16 & 0 & 2 & 6 & 7 & 9 \\
-	\hline
-\end{tabular} \\
-
-By adding these two matrices together, we can get the final result as follows:\\
-\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|X|X|X|X|X|}
-
-\hline  	& $a$ &  $b$ & $c$ & $d$ & $e$ & $f$ & $g$ & $h$ & $i$  & $j$ & $k$ & $l$ & $m$\\
-\hline $a$ &	28 &	30 &	31 &	36 &	37 &	34 &	36 &	24 &	8 &	10 &	14 &	15 &	17\\
-\hline $b$ &	26 &	28 &	29 &	34 &	35 &	32 &	34 &	22 &	6 &	8 &	12 &	13 &	15\\
-\hline $c$ &	26 &	28 &	29 &	34 &	35 &	32 &	34 &	22 &	6 &	8 &	12 &	13 &	15\\
-\hline $d$ &	23 &	25 &	26 &	31 &	32 &	29 &	31 &	19 &	3 &	5 &	9 &	10 &	12\\
-\hline $e$ &	30 &	32 &	33 &	38 &	39 &	36 &	38 &	26 &	10 &	12 &	16 &	17 &	19\\
-\hline $f$ &	22 &	24 &	25 &	30 &	31 &	28 &	30 &	18 &	2 &	4 &	8 &	9 &	11\\
-\hline $g$ &	25 &	27 &	28 &	33 &	34 &	31 &	33 &	21 &	5 &	7 &	11 &	12 &	14\\
-\hline $h$ &	25 &	27 &	28 &	33 &	34 &	31 &	33 &	21 &	5 &	7 &	11 &	12 &	14\\
-\hline $i$ &	20 &	22 &	23 &	28 &	29 &	26 &	28 &	16 &	0 &	2 &	6 &	7 &	9\\
-\hline $j$ &	22 &	24 &	25 &	30 &	31 &	28 &	30 &	18 &	2 &	4 &	8 &	9 &	11\\
-\hline $k$ &	35 &	37 &	38 &	43 &	44 &	41 &	43 &	31 &	15 &	17 &	21 &	22 &	24\\
-\hline $l$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$\\
-\hline $m$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$ &	$N/A$\\
-\hline
-\end{tabularx} \\
-
-where $N/A$ stands for there is no path.
+Because every path has to pass through vertex $i$, we can cut this question into 2 parts. The first part is to calculate the shortest path from every vertex $n$ to vertex $i$, using the similar method we used in Part~\ref{part3c}. The second part is to calculate 
 
 \end{document} 
