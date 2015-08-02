@@ -55,7 +55,7 @@ follows:
 
 \begin{itemize}
 	\item Minimize
-[$10x_{1,1}+15x_{1,2}+11x_{2,1}+8x_{2,2}+13x_{3,1}+8x_{3,2}+9x_{3,3}+14x_{4,2}+8x_{4,3}+5y_{1,1}+6y_{1,2}+7y_{1,3}+10y_{1,4}+12y_{2,3}+8y_{2,4}+10y_{2,5}+14y_{2,6}+12y_{3,5}+12y_{3,6}+6y_{3,7}$] 
+[$10x_{1,1}+15x_{1,2}+11x_{2,1}+8x_{2,2}+13x_{3,1}+8x_{3,2}+9x_{3,3}+14x_{4,2}+8x_{4,3}+5y_{1,1}+6y_{1,2}+7y_{1,3}+10y_{1,4}+12y_{2,3}+8y_{2,4}+10y_{2,5}+14y_{2,6}+14y_{3,4}+12y_{3,5}+12y_{3,6}+6y_{3,7}$] 
 where $x_{i,j}$ represents number of refrigerators to be shipped 
 from plant $i$ to warehouse $j$, and $y_{j,k}$ represents number of 
 refrigerators to be shipped  from warehouse $j$ to retailer $k$.
@@ -168,7 +168,7 @@ solution determined.
 
 \subsection{Evaluation}
 With warehouse 2 limited to 100 refrigerators per week, the model is
-feasible. The optimal shipping routes, based upon minimizing costs, 
+feasible. In contrast to the code we wrote in Part $A$, we only have to add one constrain line that $x_{1,2}$+$x_{2,2}$+$x_{3,2}$+$x_{4,2}$$ <= 100$. Then the optimal shipping routes, based upon minimizing costs, 
 are as follows: \\
 
 \begin{tabular}{|c|c|}
@@ -178,10 +178,10 @@ are as follows: \\
 	\hline $x_{2,2} = 100$ & $y_{1,3} = 100$  \\
 	\hline $x_{3,3} = 250$ & $y_{1,4} = 150$  \\
 	\hline $x_{4,3} = 150$ & $y_{2,4} = 50$  \\
-	\hline 				  & $y_{2,5} = 50$ \\
-	\hline 				  & $y_{3,5} = 150$ \\
-	\hline 				  & $y_{3,6} = 150$ \\
-	\hline 				  & $y_{3,7} = 100$ \\
+	\hline 				   & $y_{2,5} = 50$ \\
+	\hline 				   & $y_{3,5} = 150$ \\
+	\hline 				   & $y_{3,6} = 150$ \\
+	\hline 				   & $y_{3,7} = 100$ \\
 	\hline
 \end{tabular} \\
 
@@ -215,7 +215,7 @@ The constraints for this problem are as follows:
 	\end{displaymath}
 	\item Retailer constraints:
 	\begin{displaymath}
-	\sum_{j=1}^{q} y_{jk} \leq d_k 
+	\sum_{j=1}^{q} y_{jk} \geq d_k 
 	\qquad\textrm{where } k=1,2,\cdots,m
 	\end{displaymath}
 	\item The number of refrigerators shipped into any individual 
