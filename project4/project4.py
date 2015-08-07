@@ -1,6 +1,6 @@
 """
 CS325 - Summer 2015
-Project 2
+Project 4
 Name: Tingzhi Li, Nicholas Nelson & Chunyang Zhang
 Date: 7/20/2015
 """
@@ -17,29 +17,26 @@ def main():
     try:
         infile = sys.argv[1]
         with open(infile) as f:
+            #lines = [line for line in f]
             lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
             lines = filter(None, lines)  # remove blank lines from list
-            lines = iter(lines)  # convert list to iterator to allow iterating over two lines at a time
     except IndexError:
-        print "Error: Missing value for filename."
-        print "Please use command: python project4.py <filename>"
+            print "Error: Missing value for filename."
+            print "Please use command: python project4.py <filename>"
 
     outfile = infile + ".tour"
     f = open(outfile, 'w')
 
-    for i, line in enumerate(lines):
-        coins = ast.literal_eval(line)
-        amount = ast.literal_eval(next(lines))
+    cities = []
+    for line in lines:
+        splits = line.split(' ')
+        city = {'name': splits[0], 'x': splits[1], 'y': splits[2]}
+        cities.append(city)
 
-        print "\nSet: %d" % (i + 1)
-        print "coins: %s, amount: %d\n" % (coins, amount)
-
-        print "---Brute Force Algorithm---"
-        change, count = changeslow(coins, amount)
-        print change
-        print count
-
-        f.write(str(amount) + ":" + str(count) + "\n")
+    for city in cities:
+        print "name:", city['name'],
+        print "x:", city['x'],
+        print "y:", city['y']
 
     f.close()
 
