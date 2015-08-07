@@ -24,8 +24,8 @@ def main():
             print "Error: Missing value for filename."
             print "Please use command: python project4.py <filename>"
 
-    outfile = infile + ".tour"
-    f = open(outfile, 'w')
+    #outfile = infile + ".tour"
+    #f = open(outfile, 'w')
 
     cities = []
     for line in lines:
@@ -38,7 +38,7 @@ def main():
         print "x:", city['x'],
         print "y:", city['y']
 
-    f.close()
+    #f.close()
 
 
 def changeslow(coins, amount):
