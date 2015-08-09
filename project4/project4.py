@@ -8,7 +8,8 @@ Date: 7/20/2015
 import sys
 import ast
 import os
-from annealing import compute_distance
+from annealing import City
+from annealing import compute_distance_pairs
 from itertools import izip
 from itertools import tee
 
@@ -20,35 +21,27 @@ def main():
     try:
         infile = sys.argv[1]
         with open(infile) as f:
-            #lines = [line for line in f]
             lines = [line.rstrip() for line in f]  # create list of lines from file without newline characters
             lines = filter(None, lines)  # remove blank lines from list
+            lines = [line.split(' ') for line in lines]
     except IndexError:
-            print "Error: Missing value for filename."
-            print "Please use command: python project4.py <filename>"
+        print "Error: Missing value for filename."
+        print "Please use command: python project4.py <filename>"
+
+    cities = [City(line[0], line[1], line[2]) for line in lines]
+    compute_distance_pairs(cities)
+
+    for a, b in pairwise(cities):
+        print a
+        print b
+        print 'distance: %d' % (a.distance_to_city(b))
+        print ""
 
     #outfile = infile + ".tour"
     #f = open(outfile, 'w')
-
-    cities = []
-    for line in lines:
-        splits = line.split(' ')
-        city = {'index': splits[0], 'x': splits[1], 'y': splits[2]}
-        cities.append(city)
-
-    for city_x, city_y in pairwise(cities):
-        print "city:", city_x['index'],
-        print "x:", city_x['x'],
-        print "y:", city_x['y']
-
-        print "city:", city_y['index'],
-        print "x:", city_y['x'],
-        print "y:", city_y['y']
-
-        print "distance:", compute_distance(city_x['x'], city_y['x'], city_x['y'], city_y['y'])
-        print ""
-
+    # put code for processing and writing out to file here
     #f.close()
+
 
 def pairwise(iterable):
     a, b = tee(iterable)
