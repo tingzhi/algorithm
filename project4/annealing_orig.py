@@ -34,7 +34,7 @@ import math
 import random
 import time
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 
 distances_pair = []
@@ -223,6 +223,7 @@ def annealing(cities, temperature_begin=1.0e+300, temperature_end=.1, cooling_fa
             while temperature > temperature_end:
                 # compute the indices of the two cities to swap by random,
                 # but never touch the first city (it does not need to change)
+                #print 'range: %s' % range(len(cities_new) - 1)
                 index = random.sample(range(len(cities_new) - 1), 2)
                 index[0] += 1
                 index[1] += 1
@@ -324,6 +325,7 @@ if __name__ == '__main__':
     print 'Initial distance:     %8.0f km'  % distance_begin
     print 'Optimal distance:     %8.0f km'  % distance_end
 
+    """
     ax_map = plot_cities(cities, 1)
     ax_map.set_title('Initial tour on %d cities\nDistance: %.0f km' % (len(cities), distance_begin))
 
@@ -352,3 +354,4 @@ if __name__ == '__main__':
         plt.savefig('tsp_cities_c%(nb_cities)d_i%(nb_ite)d_f%(c_factor).4f_s%(t_start)g_e%(t_end).4f.%(format)s' % parameters, format=format)
         plt.figure(3)
         plt.savefig('tsp_distances_c%(nb_cities)d_i%(nb_ite)d_f%(c_factor).4f_s%(t_start)g_e%(t_end).4f.%(format)s' % parameters, format=format)
+    """
