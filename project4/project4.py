@@ -21,6 +21,7 @@ from itertools import tee
 
 def main():
     lines = []
+    infile = ''
     first_city = ''
     try:
         infile = sys.argv[1]
@@ -71,12 +72,12 @@ def main():
     for city in state:
         print("\t", city)
 
-    """
-    #outfile = infile + ".tour"
-    #f = open(outfile, 'w')
-    # put code for processing and writing out to file here
-    #f.close()
-    """
+    outfile = infile + ".tour"
+    f = open(outfile, 'w')
+    f.write(str(e) + '\n')
+    for city in state:
+        f.write(str(city) + '\n')
+    f.close()
 
 def pairwise(iterable):
     a, b = tee(iterable)

@@ -40,7 +40,7 @@ class Annealer(object):
     updates = 100
     copy_strategy = 'deepcopy'
     user_exit = False
-    save_state_on_exit = True
+    save_state_on_exit = False
 
     def __init__(self, initial_state=None, load_state=None):
         if initial_state:
