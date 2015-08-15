@@ -35,7 +35,27 @@
 \begin{document}
 \maketitle
 
-\chapter{Solution \& Algorithm}
+\chapter{Algorithm Idea}
+
+Simulated annealing optimization is the technique we choose to solve Traveling Salesman Problem. It is one of the classic way to find minimum value of a system. The term annealing originally comes from metallurgy. It is a technique that consist of heating and cooling the material in a controlled manner in order to reduce their defects. In computer science field, simulated annealing optimization mimics the metallurgy one. Basically, our algorithm has a starting temperature which is pretty high and slowly cools down to a ending temperature which is pretty low. The cooling process is done by using a variable \emph{temperature}, for each iteration the \emph{temerature} will be multiplied with a cooling factor that is between 0 and 1. The objective function of this algorithm is to find the global shorest distance that satisfy the requirement of TSP. The input of objective function is a sequence of cities salesman will visit. We start our algorithm with a random sequence. For each iteration, the algorithm randomly change the sequence and check if the new sequence yields a shorter traveling distance. If it does, keep the new sequence meaning update the variabl \emph{bestSequence}. If it does not, this algorithm will accept the new sequence at certain probability. This probability is computed based on the difference between the new distance and previous distance, and the temperature.
+The key concept here is as following:
+
+$d = cost_{new} - cost_{prev}$  
+
+if $d < 0$ or $e^{-d/temp} > random(0,1)$
+
+\quad $cost_{prev} = cost_{new}$
+
+In summary, applying annealing technique to TSP consists of following steps:
+
+\begin{itemize}
+	\item create a random visiting sequence for initialization
+	\item Randomly swap two cities in the sequence and compute the new distance
+	\item If the new distance is shorter than previous one, keep the new sequence
+	\item If the new distance is longer than previous one, keep the new sequence with certain probability
+	\item Update the temperature at each iteration until the temperature cools down to stopping temperature
+\end{itemize}
+
 \section{Overall Design}
 
 \section{Technical Specifications}
