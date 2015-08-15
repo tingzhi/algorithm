@@ -7,6 +7,7 @@
 \usepackage{caption}
 \usepackage{tabularx}
 \usepackage[labelformat=simple]{subcaption}
+\usepackage[leqno,fleqn,intlimits]{empheq}
 \usepackage{amsmath}
 
 \renewcommand\thesubfigure{(\alph{subfigure})} % see subcaption doc
@@ -40,11 +41,13 @@
 Simulated annealing optimization is the technique we choose to solve Traveling Salesman Problem. It is one of the classic way to find minimum value of a system. The term annealing originally comes from metallurgy. It is a technique that consist of heating and cooling the material in a controlled manner in order to reduce their defects. In computer science field, simulated annealing optimization mimics the metallurgy one. Basically, our algorithm has a starting temperature which is pretty high and slowly cools down to a ending temperature which is pretty low. The cooling process is done by using a variable \emph{temperature}, for each iteration the \emph{temerature} will be multiplied with a cooling factor that is between 0 and 1. The objective function of this algorithm is to find the global shorest distance that satisfy the requirement of TSP. The input of objective function is a sequence of cities salesman will visit. We start our algorithm with a random sequence. For each iteration, the algorithm randomly change the sequence and check if the new sequence yields a shorter traveling distance. If it does, keep the new sequence meaning update the variabl \emph{bestSequence}. If it does not, this algorithm will accept the new sequence at certain probability. This probability is computed based on the difference between the new distance and previous distance, and the temperature.
 The key concept here is as following:
 
-$d = cost_{new} - cost_{prev}$  
+\begin{empheq}{align*}
+	d &= cost_{new} - cost_{prev}\\
+	if &d < 0 \text{ or } e^{-d/temp} > \text{random}(0,1)\\
+	{}&cost_{prev} = cost_{new}\\
+\end{empheq}
 
-if $d < 0$ or $e^{-d/temp} > random(0,1)$
 
-\quad $cost_{prev} = cost_{new}$
 
 In summary, applying annealing technique to TSP consists of following steps:
 
@@ -56,25 +59,21 @@ In summary, applying annealing technique to TSP consists of following steps:
 	\item Update the temperature at each iteration until the temperature cools down to stopping temperature
 \end{itemize}
 
-Our implementation is based on the work of Matthew Perry and Richard J. Wagner at University of Michigan. Some of our understand of annealing technique is based on the article written by Emmanuel Goossaert called "Simulated annealing applied to the traveling salesman problem."		 
-
-\section{Overall Design}
-
-\section{Technical Specifications}
+Our implementation is based on the work of Matthew Perry and Richard J. Wagner at University of Michigan. Some of our understand of annealing technique is based on the article written by Emmanuel Goossaert called "Simulated annealing applied to the traveling salesman problem."
 
 \chapter{Tours \& Validation Timings}
 \section{Example Instance 1}
 
-\ \ \ The solution of the length is: $ $.
+The solution of the length is: $116458$.\\
 
-The time it took to obtain these tours is approximately: $10$ minutes.
+The time it took to obtain this tour was: $5$ minutes. We estimate that a solution similar to the tour provided with the assignment would take 10-12 minutes for our algorithm to obtain.
 
 
 \section{Example Instance 2}
 
-\ \ \ The solution of the length is: $15$.
+The solution of the length is: $4137$.\\
 
-The time it took to obtain these tours is: $15$ minutes.
+The time it took to obtain this tour was: $5$ minutes. We estimate that a solution similar to the tour provided with the assignment would take 15 minutes for our algorithm to obtain.
 
 
 \section{Example Instance 3}
