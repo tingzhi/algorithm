@@ -60,7 +60,7 @@ def main():
     # since our state is just a list, slice is the fastest way to copy
     tsp.copy_strategy = "slice"
 
-    auto_schedule = tsp.auto(minutes=5)
+    auto_schedule = tsp.auto(minutes=10)
     # {'tmin': ..., 'tmax': ..., 'steps': ...}
 
     tsp.set_schedule(auto_schedule)
